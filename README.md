@@ -1,6 +1,6 @@
 # jimdii
 
-Batsukh
+Batsukh(data schema hiine)
 
 Jamie Ochir
 
