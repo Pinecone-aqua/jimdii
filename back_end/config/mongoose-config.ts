@@ -4,12 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 mongoose
-  .connect()
+  .connect(`${process.env.MONGOOSE_CONNECT_KEY}`)
   .then(() => {
-    console.log("connected");
+    console.log("connected to mongoose");
   })
-  .catch(() => {
+  .catch((err) => {
     console.log("error");
   });
-
-export default mongoose.connection;
