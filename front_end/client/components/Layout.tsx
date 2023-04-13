@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React, { ReactNode } from "react";
+import Header from "./Header";
 
 type PropType = {
   children: ReactNode;
@@ -14,6 +15,7 @@ export default function Layout({ children }: PropType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="favicon.io" />
       </Head>
+      <Header />
       <main>{children}</main>
     </div>
   );
