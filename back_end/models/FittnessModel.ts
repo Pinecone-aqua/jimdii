@@ -89,10 +89,10 @@ const fitnessSchema = new mongoose.Schema<Fitness>(
       parking: Boolean,
     },
   },
-  { collection: "Fitness" },
+  { collection: "Gym" },
 );
 
-const Fitness = mongoose.model("Fitness", fitnessSchema, "Fitness");
+const Fitness = mongoose.model("Fitness", fitnessSchema, "Gym");
 Fitness.collection.createIndex({ "address.coord": "2dsphere" });
 
 export default Fitness;
