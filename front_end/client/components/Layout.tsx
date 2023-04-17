@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React, { ReactNode } from "react";
-import Banner from "./Banner";
+// import Banner from "./Banner";
 import Header from "./Header";
 
 type PropType = {
@@ -18,7 +18,7 @@ export default function Layout({ children }: PropType) {
       </Head>
 
       <Header />
-      <Banner />
+      {/* <Banner /> */}
       <main>{children}</main>
     </div>
   );
