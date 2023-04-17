@@ -8,7 +8,7 @@ interface User {
   };
   phone?: number;
   email: string;
-  password: String;
+  password: string;
   address?: {
     coord: number[];
   };

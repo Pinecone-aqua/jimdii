@@ -20,7 +20,6 @@ interface MembershipType {
 
 const MembershipSchema = new Schema<MembershipType>(
   {
-    _id: Schema.Types.ObjectId,
     fitness_id: String,
     user_id: String,
     active: Boolean,
@@ -34,6 +33,5 @@ const MembershipSchema = new Schema<MembershipType>(
 );
 
 const Membership = model<MembershipType>("Membership", MembershipSchema);
-// Membership.collection.createIndex({ "address.coord": "2dsphere" });
 
 export default Membership;
