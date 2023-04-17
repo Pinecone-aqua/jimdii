@@ -30,7 +30,7 @@ export default function Header(): JSX.Element {
             Холбоо барих
           </Link>
         </nav>
-        <Link href={`/Login`}>
+        <Link href={`/login`}>
           <div className="flex justify-between gap-[14px] text-[#4D9799]">
             <LoginLogo />
             <p>Log In</p>
