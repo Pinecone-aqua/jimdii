@@ -24,6 +24,7 @@ export default function Login() {
           firstname: e.target.firstname.value,
           lastname: e.target.lastname.value,
         },
+        // birth_date: ,
         gender: e.target.gender.value,
         email: e.target.email.value,
         password: e.target.password.value,
