@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { UserType } from "../util/types";
+import axios from "axios";
 
 export default function Login() {
   const [registerbtn, setRegisterBtn] = useState<boolean>(false);
@@ -23,10 +24,25 @@ export default function Login() {
           firstname: e.target.firstname.value,
           lastname: e.target.lastname.value,
         },
+        gender: e.target.gender.value,
         email: e.target.email.value,
         password: e.target.password.value,
       };
       console.log(register);
+      axios
+        .post("http://localhost:2000/user/register", register)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    } else {
+      const login = {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      };
+      console.log(login);
+      axios
+        .post("http://localhost:2000/user/login", login)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   }
 
