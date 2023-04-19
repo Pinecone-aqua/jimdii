@@ -10,17 +10,19 @@ export class UserService {
   constructor(@InjectModel('users') private readonly userModel: Model<User>) {}
 
   async checkUser(query) {
-    const { email, password } = query;
+    const { email, password } = JSON.parse(query.user);
     if (!(email || password)) return 'email or password is missing';
 
     const user = await this.userModel.findOne({ email: email });
 
     if (!user) return 'This user is not registered please register';
 
-    if (await bcrypt.compare(user.password, password)) {
+    if (await bcrypt.compare(password, user.password)) {
+      const result = { username: user.username, _id: user._id };
+      return result;
     }
 
-    return user;
+    return 'password is wrong';
   }
 
   async addUser(user) {

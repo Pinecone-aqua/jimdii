@@ -4,13 +4,15 @@ import axios from "axios";
 
 export default function Login() {
   const [registerbtn, setRegisterBtn] = useState<boolean>(false);
-  const [getPass, setGetPass] = useState<string>("");
-  const [getSecondPass, setGetSecondPass] = useState<string>("");
+  const [getFirstPass, setFirstPass] = useState<string>("");
+  const [getSecondPass, setSecondPass] = useState<string>("");
   const [confirmPass, setConfirmPass] = useState<boolean>(false);
 
   useEffect(() => {
-    getSecondPass == getPass ? setConfirmPass(true) : setConfirmPass(false);
-  }, [getSecondPass, getPass]);
+    getSecondPass == getFirstPass
+      ? setConfirmPass(true)
+      : setConfirmPass(false);
+  }, [getSecondPass, getFirstPass]);
 
   const btnStyle = " w-full h-20 bg-black text-white ";
   const inputStyle = "w-full p-1 text-black border-2 rounded-lg";
@@ -30,7 +32,7 @@ export default function Login() {
       };
       console.log(register);
       axios
-        .post("http://localhost:2000/user/register", register)
+        .post("http://localhost:7003/user/register", register)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     } else {
@@ -40,7 +42,7 @@ export default function Login() {
       };
       console.log(login);
       axios
-        .post("http://localhost:2000/user/login", login)
+        .get(`http://localhost:7003/user/login?user=${JSON.stringify(login)}`)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
@@ -129,7 +131,7 @@ export default function Login() {
                   placeholder="Password"
                   className={inputStyle}
                   name="password"
-                  onChange={(e) => setGetPass(e.target.value)}
+                  onChange={(e) => setFirstPass(e.target.value)}
                   required
                 />
                 <input
@@ -140,7 +142,7 @@ export default function Login() {
                       ? inputStyle
                       : "w-full p-1 text-black rounded-lg border-2 border-rose-500"
                   }`}
-                  onChange={(e) => setGetSecondPass(e.target.value)}
+                  onChange={(e) => setSecondPass(e.target.value)}
                   name="confirm"
                   required
                 />
