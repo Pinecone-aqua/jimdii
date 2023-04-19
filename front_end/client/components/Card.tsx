@@ -15,7 +15,7 @@ export default function Card(): JSX.Element {
             <p>45 min</p>
             <p>MNT 99</p>
             <button className="bg-cyan-500 w-[132px] h-[40px] my-9 text-black font-extralight">
-              Book Now
+              Бүргүүлэх
             </button>
           </div>
         </Link>
