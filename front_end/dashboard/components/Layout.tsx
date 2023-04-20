@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { ReactNode } from "react";
+import Sidemenu from "./Sidemenu";
 
 type PropType = {
   children: ReactNode;
@@ -14,8 +15,10 @@ export default function Layout({ children }: PropType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="favicon.io" />
       </Head>
-
-      <main>{children}</main>
+      <div className="w-full h-screen flex">
+        <Sidemenu />
+        <main className="w-5/6">{children}</main>
+      </div>
     </>
   );
 }
