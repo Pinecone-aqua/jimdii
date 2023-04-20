@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface UserType {
   username: {
     firstname: string;
@@ -53,4 +55,10 @@ export interface FitnessType {
     shower: boolean;
     parking: boolean;
   };
+}
+
+export interface PageType {
+  name: string;
+  url: string;
+  icon?: ReactNode;
 }
