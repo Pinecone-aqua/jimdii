@@ -1,4 +1,6 @@
 import { FiSearch, FiPlus } from "react-icons/fi";
+import { fitnesses } from "../utils/fitness.dummy";
+import FitnessCol from "@/components/FitnessCol";
 
 export default function Fitness() {
 	return (
@@ -23,7 +25,26 @@ export default function Fitness() {
 						<FiPlus /> Add Fitness
 					</button>
 				</div>
-				<div className="">a</div>
+				<div className="">
+					<table className="table-auto">
+						<thead>
+							<tr>
+								<th>Fitness Name</th>
+								<th>Members</th>
+								<th>...</th>
+								<th>...</th>
+							</tr>
+						</thead>
+						<tbody>
+							{fitnesses.map((fitness, i) => (
+								<FitnessCol
+									{...fitness}
+									key={i}
+								/>
+							))}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	);
