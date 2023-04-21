@@ -1,8 +1,7 @@
-import users from "../utils/user.dummy.json";
+import { users } from "../utils/user.dummy";
 
 export default function Users() {
-	const test = users.filter((user) => user._id);
-	console.log(test);
+  console.log(users);
 
-	return <div className="w-full h-full bg-neutral-500">users</div>;
+  return <div className="w-full h-full bg-neutral-500">users</div>;
 }
