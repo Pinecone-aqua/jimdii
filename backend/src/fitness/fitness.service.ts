@@ -20,8 +20,8 @@ export class FitnessService {
     console.log(fitness);
     return 'Successfully edited';
   }
-   async getFitness(_id: string): Promise<any> {
-    const fitness = await this.fitnessModel.findOne({_id}).limit(1);
+   async getFitness(name: string): Promise<any> {
+    const fitness = await this.fitnessModel.findOne({name}).limit(1);
     return fitness;
   }
   async getAllfitness(): Promise<any> {
@@ -29,7 +29,16 @@ export class FitnessService {
     return allFitness;
   }
   async deleteFitness(_id: string): Promise<any> {
-    return await this.fitnessModel.deleteOne({_id});
+    const result = await this.fitnessModel.deleteOne({_id});
+    return result;
   }
-  
+
+//   async createFitness(createFitnessInput: FitnessType): Promise<any>{
+//     const fitness = new Fitness(FitnessType)
+//     return await this.fitnessModel.create(fitness);
+//   }
+  async updateFitness (_id: string, updateFitnessInput: Fitness): Promise<any> {
+    const fitness = await this.fitnessModel.findByIdAndUpdate(_id, updateFitnessInput);
+    return fitness
+  }
 }
