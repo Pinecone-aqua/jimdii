@@ -17,7 +17,7 @@ export default function Layout({ children }: PropType) {
       </Head>
       <div className="w-full h-screen flex">
         <Sidemenu />
-        <main className="w-5/6">{children}</main>
+        <main className="w-full">{children}</main>
       </div>
     </>
   );
