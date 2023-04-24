@@ -1,4 +1,4 @@
-export class CreateFitnessDto {
+export interface FitnessType {
   name: string;
   description: string;
   image: string[];
