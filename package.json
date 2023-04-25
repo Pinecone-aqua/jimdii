@@ -3,3 +3,8 @@
     "sass": "^1.62.1"
   }
 }
+{
+  "dependencies": {
+    "buffer-to-stream": "^1.0.0"
+  }
+}

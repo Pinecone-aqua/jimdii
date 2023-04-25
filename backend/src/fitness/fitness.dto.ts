@@ -29,11 +29,7 @@ export class CreateFitnessDto {
     Saturday: string;
     Sunday: string;
   };
-  discount?: [
-    { name: string; discount: number },
-    { name: string; discount: number },
-    { name: string; discount: number },
-  ];
+  discount?: [{ name: string; discount: number }];
   spec: {
     wifi: boolean;
     shower: boolean;
