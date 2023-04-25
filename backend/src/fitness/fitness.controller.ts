@@ -1,11 +1,27 @@
-import express, { Request, Response } from 'express';
 import { FitnessService } from './fitness.service';
-import { Controller, Get, Query, Delete, Param, Patch, Body } from '@nestjs/common';
-import { CreateFitnessDto } from './fitness.dto';
+import {
+  Controller,
+  Get,
+  Query,
+  Delete,
+  Param,
+  Patch,
+  Body,
+  Post,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  BadRequestException,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Controller('fitness')
 export class FitnessController {
-  constructor(private readonly fitnessService: FitnessService) {}
+  constructor(
+    private readonly fitnessService: FitnessService,
+    private readonly cloudinary: CloudinaryService,
+  ) {}
   @Get('getfitness')
   async getFitness(@Query() query) {
     try {
@@ -25,19 +41,29 @@ export class FitnessController {
     }
   }
   @Delete(':_id')
-  async deleteFitness(@Param('_id') _id: string){
+  async deleteFitness(@Param('_id') _id: string) {
     const result = await this.fitnessService.deleteFitness(_id);
-    return result 
+    return result;
   }
   @Patch(':_id')
-  async updateProduct(
-    @Param('_id') id: string,
-    @Body() updateFitnessInput
-  ) {
+  async updateProduct(@Param('_id') id: string, @Body() updateFitnessInput) {
     const result = await this.fitnessService.updateFitness(
       id,
       updateFitnessInput,
     );
     return result;
+  }
+  @Post('test')
+  @UseInterceptors(FileInterceptor('file'))
+  async fileUpload(
+    @UploadedFile(new ParseFilePipe({}))
+    file: Express.Multer.File,
+  ) {
+    console.log(file);
+    if (file)
+      await this.cloudinary.uploadImage(file).catch(() => {
+        throw new BadRequestException('Invalid file type.');
+      });
+    return 'ok';
   }
 }

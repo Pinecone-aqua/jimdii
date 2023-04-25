@@ -134,7 +134,7 @@ export default function SingleGym(): JSX.Element {
             height="450"
             loading="lazy"
             className="h-[25vh] w-full"
-          ></iframe>
+          />
         </div>
       </div>
     </div>

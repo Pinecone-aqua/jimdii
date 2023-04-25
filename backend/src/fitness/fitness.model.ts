@@ -32,11 +32,7 @@ export class Fitness {
     Sunday: string;
   };
   @Prop({ type: Array })
-  discount: [
-    { name: string; discount: number },
-    { name: string; discount: number },
-    { name: string; discount: number },
-  ];
+  discount: [{ name: string; discount: number }];
   @Prop({ type: Object })
   spec: {
     wifi: boolean;
