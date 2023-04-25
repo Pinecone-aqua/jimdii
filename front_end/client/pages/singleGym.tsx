@@ -101,10 +101,7 @@ export default function SingleGym(): JSX.Element {
           </div>
           {/* Icon  */}
           <div className="flex justify-between">
-            <Link
-              href={`/`}
-              className="border border-black w-[50%]"
-            >
+            <Link href={`/`} className="border border-black w-[50%]">
               Бүртгүүлэх товч
             </Link>
             <Link
@@ -131,10 +128,15 @@ export default function SingleGym(): JSX.Element {
       <div className="flex justify-between mt-4">
         <div className="w-[57%]  bg-slate-200 h-[25vh]">Description</div>
         <div className="w-[40%] bg-slate-200">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.6157396292306!2d106.94065411232931!3d47.90512226719518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d96922a376aac73%3A0x77624a376ddadbea!2sGold&#39;s%20Gym!5e0!3m2!1smn!2smn!4v1682008315059!5m2!1smn!2smn" width="600" height="450"   loading="lazy" className="h-[25vh] w-full"></iframe>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.6157396292306!2d106.94065411232931!3d47.90512226719518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d96922a376aac73%3A0x77624a376ddadbea!2sGold&#39;s%20Gym!5e0!3m2!1smn!2smn!4v1682008315059!5m2!1smn!2smn"
+            width="600"
+            height="450"
+            loading="lazy"
+            className="h-[25vh] w-full"
+          />
         </div>
       </div>
-      
     </div>
   );
 }
