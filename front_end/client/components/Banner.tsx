@@ -1,12 +1,17 @@
 import React from "react";
-
 import MainLogo from "./subcomp/MainLogo";
+import MainResLogo from "./subcomp/MainResLogo";
 
 export default function Banner(): JSX.Element {
   return (
     <div className="bg-black h-[60vh] flex justify-center items-center">
       <div className="w-[50%]">
-        <MainLogo />
+        <div className="md:hidden">
+          <MainResLogo />
+        </div>
+        <div className="hidden md:inline">
+          <MainLogo />
+        </div>
         <h2 className="text-[30px] text-white my-[30px] font-extralight">
           Монголын анхны цахим фитнесс захиалга
         </h2>
