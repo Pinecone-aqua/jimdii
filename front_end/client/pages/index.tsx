@@ -17,7 +17,7 @@ export default function Home() {
       </div>
       <div className="bg-black">
         <h2 className="text-center text-3xl text-white">Ontsloh Gymuud</h2>
-        <div className="flex gap-5 justify-center py-10">
+        <div className="flex gap-5 justify-center flex-wrap py-10">
           {examples.map((example, index) => (
             <Card key={index} />
           ))}

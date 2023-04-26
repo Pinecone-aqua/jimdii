@@ -6,8 +6,8 @@ import { Dropdown } from "flowbite-react";
 
 export default function HeaderTest(): JSX.Element {
   return (
-    <header className="bg-slate-700 ">
-      <div className="md:w-[80%] mx-auto  flex items-center justify-between">
+    <header className="bg-slate-700 h-[8vh] flex items-center">
+      <div className="w-[80%] mx-auto  flex items-center justify-between">
         <Dropdown
           label="//"
           className="bg-slate-200 text-black"
@@ -56,7 +56,7 @@ export default function HeaderTest(): JSX.Element {
         <Link href={`/`}>
           <Logo />
         </Link>
-        <nav className="hidden lg:inline     text-white">
+        <nav className="hidden lg:flex  w-[70%] justify-between   text-white">
           <Link href={`/`} className="hover:text-[#4D9799]">
             Нүүр хуудас
           </Link>
@@ -77,7 +77,7 @@ export default function HeaderTest(): JSX.Element {
           </Link>
         </nav>
         <Link href={`/login`}>
-          <div className="flex justify-start gap-[14px] text-[#4D9799] w-[85px] md:w-[90px] m-0">
+          <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
             <LoginLogo />
             <p className="text-sm">Log In</p>
           </div>
