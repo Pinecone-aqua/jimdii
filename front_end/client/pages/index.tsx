@@ -1,26 +1,47 @@
+/* eslint-disable react/no-unescaped-entities */
+// import Banner from "@/components/Banner";
+
+// import Image from "next/image";
+
 import Card from "@/components/Card";
-import Image from "next/image";
 
 export default function Home() {
+  const examples = [1, 2, 3, 4];
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Card />
-      <a
-        className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        By{" "}
-        <Image
-          src="/vercel.svg"
-          alt="Vercel Logo"
-          className="dark:invert"
-          width={100}
-          height={24}
-          priority
-        />
-      </a>
+    <main>
+      <div className="text-center bg-main w-full text-sm sm:bg-tomato sm:text-2xl lg:bg-main lg:text-xl">
+        <p className="container mx-auto">
+          "Эхлэх хамгийн зөв цаг нь өчигдөр байсан. Харин дараагийн хамгийн зөв
+          цаг нь өнөөдөр юм."
+        </p>
+      </div>
+      <div className="bg-black">
+        <h2 className="text-center text-3xl text-white">Ontsloh Gymuud</h2>
+        <div className="flex gap-5 justify-center py-10">
+          {examples.map((example, index) => (
+            <Card key={index} />
+          ))}
+        </div>
+      </div>
+      <div>
+        <p>Tanii sonirhoj bui uilchilgee</p>
+      </div>
+      <div>
+        <p>Medee, Medeelel</p>
+      </div>
+      <div>
+        <p>Success stories</p>
+      </div>
+      <div>
+        <p>Holiday Sale</p>
+      </div>
+      <div>
+        <p>Partner</p>
+      </div>
+      <div>
+        <p>Download App</p>
+      </div>
+      {/* <Card /> */}
     </main>
   );
 }

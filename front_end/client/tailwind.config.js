@@ -14,6 +14,10 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         banner: "url('/img/banner.webp')",
       },
+      colors: {
+        tomato: "#ff2c06",
+        main: "#4D9799",
+      },
     },
   },
   plugins: [],
