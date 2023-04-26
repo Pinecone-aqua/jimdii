@@ -9,19 +9,16 @@ import {
   Body,
   Post,
   UseInterceptors,
-  UploadedFile,
   ParseFilePipe,
+  UploadedFiles,
   BadRequestException,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Controller('fitness')
 export class FitnessController {
-  constructor(
-    private readonly fitnessService: FitnessService,
-    private readonly cloudinary: CloudinaryService,
-  ) {}
+  constructor(private readonly fitnessService: FitnessService) {}
   @Get('getfitness')
   async getFitness(@Query() query) {
     try {
@@ -54,16 +51,15 @@ export class FitnessController {
     return result;
   }
   @Post('test')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'image' }]))
   async fileUpload(
-    @UploadedFile(new ParseFilePipe({}))
-    file: Express.Multer.File,
+    @UploadedFiles(new ParseFilePipe())
+    files: {
+      image?: Express.Multer.File[];
+    },
   ) {
-    console.log(file);
-    if (file)
-      await this.cloudinary.uploadImage(file).catch(() => {
-        throw new BadRequestException('Invalid file type.');
-      });
-    return 'ok';
+    console.log(files.image[0].buffer);
+    const result = await this.fitnessService.createNewFitness(files.image);
+    return result;
   }
 }

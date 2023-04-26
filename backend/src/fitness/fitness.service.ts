@@ -1,12 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Fitness } from './fitness.model';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class FitnessService {
   constructor(
     @InjectModel('fitness') private readonly fitnessModel: Model<Fitness>,
+    private readonly cloudinary: CloudinaryService,
   ) {}
   async addFitness(fitness) {
     await this.fitnessModel.create(fitness);
@@ -20,8 +22,8 @@ export class FitnessService {
     console.log(fitness);
     return 'Successfully edited';
   }
-   async getFitness(name: string): Promise<any> {
-    const fitness = await this.fitnessModel.findOne({name}).limit(1);
+  async getFitness(name: string): Promise<any> {
+    const fitness = await this.fitnessModel.findOne({ name }).limit(1);
     return fitness;
   }
   async getAllfitness(): Promise<any> {
@@ -29,16 +31,23 @@ export class FitnessService {
     return allFitness;
   }
   async deleteFitness(_id: string): Promise<any> {
-    const result = await this.fitnessModel.deleteOne({_id});
+    const result = await this.fitnessModel.deleteOne({ _id });
     return result;
   }
 
-//   async createFitness(createFitnessInput: FitnessType): Promise<any>{
-//     const fitness = new Fitness(FitnessType)
-//     return await this.fitnessModel.create(fitness);
-//   }
-  async updateFitness (_id: string, updateFitnessInput: Fitness): Promise<any> {
-    const fitness = await this.fitnessModel.findByIdAndUpdate(_id, updateFitnessInput);
-    return fitness
+  //   async createFitness(createFitnessInput: FitnessType): Promise<any>{
+  //     const fitness = new Fitness(FitnessType)
+  //     return await this.fitnessModel.create(fitness);
+  //   }
+  async updateFitness(_id: string, updateFitnessInput: Fitness): Promise<any> {
+    const fitness = await this.fitnessModel.findByIdAndUpdate(
+      _id,
+      updateFitnessInput,
+    );
+    return fitness;
+  }
+
+  async createNewFitness(files) {
+    files.map(async (file) => await this.cloudinary.uploadImage(file));
   }
 }
