@@ -11,7 +11,7 @@ import { FitnessModule } from './fitness/fitness.module';
       `mongodb+srv://${process.env.MONGOOSE_CONNECT_KEY}@cluster0.drwdfkp.mongodb.net/Fitness`,
     ),
     UserModule,
-    FitnessModule
+    FitnessModule,
   ],
   controllers: [],
   providers: [],

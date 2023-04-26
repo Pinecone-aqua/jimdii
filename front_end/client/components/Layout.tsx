@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 import React, { ReactNode } from "react";
 import Banner from "./Banner";
 // import Banner from "./Banner";
-import Header from "./Header";
+
+import HeaderTest from "./HeaderTest";
 
 type PropType = {
   children: ReactNode;
@@ -20,9 +21,9 @@ export default function Layout({ children }: PropType) {
         <link rel="icon" href="favicon.io" />
       </Head>
 
-      <Header />
-      {route == "/" && <Banner />}
+      <HeaderTest />
 
+      {route == "/" && <Banner />}
       <main>{children}</main>
     </div>
   );
