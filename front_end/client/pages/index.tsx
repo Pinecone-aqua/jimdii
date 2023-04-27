@@ -152,7 +152,6 @@ export default function Home(props: PropsType) {
 export async function getStaticProps() {
   const res = await axios.get(
     `http://localhost:7003/fitness/limitedFitness:limit`,
-
   );
   const fitness = await res.data;
   return {
