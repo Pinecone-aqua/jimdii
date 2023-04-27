@@ -16,7 +16,7 @@ export default function Home() {
         </p>
       </div>
       <div className="bg-black">
-        <h2 className="text-center text-3xl text-white">Ontsloh Gymuud</h2>
+        <h2 className="text-center text-3xl text-white">Онцлох жиймүүд</h2>
 
         <div className="flex gap-5 justify-center py-10">
           {examples.map((example, index) => (
