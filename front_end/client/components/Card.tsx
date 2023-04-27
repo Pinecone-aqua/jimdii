@@ -1,14 +1,15 @@
 import Link from "next/link";
 import React from "react";
 
-export default function Card(): JSX.Element {
+export default function Card({ photo }): JSX.Element {
+  console.log(photo);
   return (
     <div className="border border-white w-fit">
       <div className="flex justify-between ">
         <Link href={`singleGym`}>
           <div className="bg-black w-[300px] h-[550px] text-white p-5 font-extralight">
             <picture>
-              <img src="./musashi.webp" alt="CArd Pic" className="h-[50%]" />
+              <img src={photo} alt="Card Pic" className="h-[50%]" />
             </picture>
             <h2 className="text-2xl my-4">Cardio Fitness</h2>
             <p>Mon, Wed, Fri</p>
