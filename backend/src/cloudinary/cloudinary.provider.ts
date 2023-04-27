@@ -1,5 +1,5 @@
 import { v2 } from 'cloudinary';
-import { CLOUDINARY } from './constants';
+export const CLOUDINARY = 'Cloudinary';
 
 export const CloudinaryProvider = {
   provide: CLOUDINARY,
