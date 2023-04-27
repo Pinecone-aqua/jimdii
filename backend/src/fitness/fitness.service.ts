@@ -47,7 +47,19 @@ export class FitnessService {
     return fitness;
   }
 
-  async createNewFitness(files) {
-    files.map(async (file) => await this.cloudinary.uploadImage(file));
+  async createNewFitness(files, i) {
+    console.log(i);
+
+    const arr = [];
+    await files?.forEach(async (file) => {
+      return this.cloudinary.uploadImage(file).then(({ secure_url }) => {
+        console.log(secure_url);
+        return arr.push(secure_url);
+      });
+    });
+    if (arr.length == i) {
+      console.log(arr);
+      return arr;
+    }
   }
 }
