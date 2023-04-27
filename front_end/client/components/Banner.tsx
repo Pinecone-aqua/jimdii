@@ -1,18 +1,23 @@
 import React from "react";
-
 import MainLogo from "./subcomp/MainLogo";
+import MainResLogo from "./subcomp/MainResLogo";
 
 export default function Banner(): JSX.Element {
   return (
     <div className="bg-black h-[60vh] flex justify-center items-center">
       <div className="w-[50%]">
-        <MainLogo />
-        <h2 className="text-[30px] text-white my-[30px] font-extralight">
+        <div className="md:hidden">
+          <MainResLogo />
+        </div>
+        <div className="hidden md:inline">
+          <MainLogo />
+        </div>
+        <h2 className="text-[22px] sm:text-[28px] md:text-[30px] text-white my-[30px] font-extralight">
           Монголын анхны цахим фитнесс захиалга
         </h2>
 
         <div className="mb-3 xl:w-96">
-          <div className="relative mb-4 flex w-[100%] flex-wrap items-stretch">
+          <div className="relative mb-4 flex w-[100%] flex items-stretch">
             <input
               type="search"
               className="relative m-0 -mr-0.5 block w-[80%] min-w-0 flex-auto rounded-l border border-solid border-[#4D9799] bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-[#4D9799] focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,1,202)] focus:outline-none dark:border-[#4D9799] dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-[#4D9799]"
