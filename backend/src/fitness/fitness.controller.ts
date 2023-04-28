@@ -11,21 +11,24 @@ import {
   UseInterceptors,
   ParseFilePipe,
   UploadedFiles,
+  BadRequestException,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 
 @Controller('fitness')
 export class FitnessController {
   constructor(private readonly fitnessService: FitnessService) {}
-  @Get('getfitness')
-  async getFitness(@Query() query) {
+
+  @Get('getfitness:id')
+  async getFitness(@Param('id') id: string) {
     try {
-      const result = await this.fitnessService.getFitness(query);
+      const result = await this.fitnessService.getFitness(id);
       return result;
     } catch (err) {
       console.log(err);
     }
   }
+
   @Get('getAllFitness')
   async getAllfitness() {
     try {
@@ -35,21 +38,47 @@ export class FitnessController {
       console.log(err);
     }
   }
-  @Delete(':_id')
-  async deleteFitness(@Param('_id') _id: string) {
-    const result = await this.fitnessService.deleteFitness(_id);
+
+  @Get(':limit')
+  async getSomeFitness(@Param('limit') limit: string) {
+    try {
+      const num = Number(limit);
+      console.log(num);
+      const result = await this.fitnessService.getSomeFitness(num);
+      console.log(result.length);
+
+      if (result) {
+        if (result[0]) return result;
+        return { message: 'no more data to fetch' };
+      }
+      throw new BadRequestException('something went wrong');
+    } catch (err) {
+      throw new BadRequestException(err);
+    }
+  }
+
+  @Get('id')
+  async getAllId() {
+    return this.fitnessService.getAllId;
+  }
+
+  @Delete('delete:id')
+  async deleteFitness(@Param('id') id: string) {
+    const result = await this.fitnessService.deleteFitness(id);
     return result;
   }
-  @Patch(':_id')
-  async updateProduct(@Param('_id') id: string, @Body() updateFitnessInput) {
-    const result = await this.fitnessService.updateFitness(
-      id,
-      updateFitnessInput,
-    );
-    return result;
-  }
-  @Post('test')
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'image', maxCount: 5 }]))
+
+  // @Patch(':_id')
+  // async updateProduct(@Param('_id') id: string, @Body() updateFitnessInput) {
+  //   const result = await this.fitnessService.updateFitness(
+  //     id,
+  //     updateFitnessInput,
+  //   );
+  //   return result;
+  // }
+
+  @Post('addFitness')
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'image' }]))
   async fileUpload(
     @Body() body: { body: string },
     @UploadedFiles(new ParseFilePipe())
@@ -57,13 +86,18 @@ export class FitnessController {
       image?: Express.Multer.File[];
     },
   ) {
-    console.log(files.image[0].buffer);
-    console.log('body', JSON.parse(body.body).name);
+    try {
+      const req = JSON.parse(body.body);
+      console.log(files.image[0].buffer);
+      console.log('body', req.name);
 
-    const result = await this.fitnessService.createNewFitness(
-      files.image,
-      files.image.length,
-    );
-    if (result[0]) console.log(result);
+      const result = await this.fitnessService.addToCloudinary(
+        files.image,
+        files.image.length,
+      );
+      if (result.length === files.image.length) console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

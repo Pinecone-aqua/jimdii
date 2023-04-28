@@ -4,37 +4,45 @@ import { useRouter } from "next/router";
 import { MdDeleteOutline } from "react-icons/md";
 
 type PropType = {
-  fitness: FitnessType;
-  i: number;
+	fitness: FitnessType;
+	deleteHandler: (id: string) => void;
+	i: number;
 };
 
 export default function FitnessCol(props: PropType) {
-  const { fitness, i } = props;
-  const router = useRouter();
+	const { fitness, i, deleteHandler } = props;
+	const router = useRouter();
 
-  function deleteHandler() {
-    console.log("asd", fitness._id);
-    // axios.delete(`http://localhost:7070/fitness/delete${fitness._id}`);
-  }
+	function fitnessHandler() {
+		router.push(`/fitness/${fitness._id}`);
+	}
 
-  function fitnessHandler() {
-    router.push(`/fitness/${fitness._id}`);
-  }
-
-  return (
-    <tr className="odd:bg-gray-300 h-10">
-      <td scope="col" onClick={fitnessHandler}>
-        {i + 1}
-      </td>
-      <td scope="col" onClick={fitnessHandler}>
-        {fitness.name}
-      </td>
-      <td scope="col" onClick={fitnessHandler}>
-        ...
-      </td>
-      <td scope="col" className="text-center">
-        <MdDeleteOutline color="red" size={"1.5em"} onClick={deleteHandler} />
-      </td>
-    </tr>
-  );
+	return (
+		<tr className="odd:bg-gray-300 h-10">
+			<td
+				scope="col"
+				onClick={fitnessHandler}>
+				{i + 1}
+			</td>
+			<td
+				scope="col"
+				onClick={fitnessHandler}>
+				{fitness.name}
+			</td>
+			<td
+				scope="col"
+				onClick={fitnessHandler}>
+				...
+			</td>
+			<td
+				scope="col"
+				className="text-center">
+				<MdDeleteOutline
+					color="red"
+					size={"1.5em"}
+					onClick={() => deleteHandler(fitness._id)}
+				/>
+			</td>
+		</tr>
+	);
 }

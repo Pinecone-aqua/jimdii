@@ -58,3 +58,7 @@ export interface PageType {
 	url: string;
 	icon?: ReactNode;
 }
+
+export interface FitnessProp {
+	data: FitnessType | null;
+}

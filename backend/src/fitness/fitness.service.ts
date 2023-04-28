@@ -10,44 +10,43 @@ export class FitnessService {
     @InjectModel('fitness') private readonly fitnessModel: Model<Fitness>,
     private readonly cloudinary: CloudinaryService,
   ) {}
-  async addFitness(fitness) {
-    await this.fitnessModel.create(fitness);
-    console.log(fitness);
-    return 'Successfully created';
-  }
 
-  async editFitness(newFitness) {
-    console.log(newFitness);
-    const fitness = this.fitnessModel.find({ _id: newFitness._id });
-    console.log(fitness);
-    return 'Successfully edited';
-  }
-  async getFitness(name: string): Promise<any> {
-    const fitness = await this.fitnessModel.findOne({ name }).limit(1);
+  async getFitness(_id: string): Promise<any> {
+    const fitness = await this.fitnessModel.findOne({ _id });
     return fitness;
   }
+
+  async getSomeFitness(num: number) {
+    return await this.fitnessModel
+      .find()
+      .skip(num)
+      .limit(5)
+      .select({ name: 1, _id: 1 });
+  }
+
   async getAllfitness(): Promise<any> {
     const allFitness = await this.fitnessModel.find({});
     return allFitness;
   }
+
+  async getAllId(): Promise<any> {
+    return await this.fitnessModel.find().select({ _id: 1 });
+  }
+
   async deleteFitness(_id: string): Promise<any> {
     const result = await this.fitnessModel.deleteOne({ _id });
     return result;
   }
 
-  //   async createFitness(createFitnessInput: FitnessType): Promise<any>{
-  //     const fitness = new Fitness(FitnessType)
-  //     return await this.fitnessModel.create(fitness);
-  //   }
-  async updateFitness(_id: string, updateFitnessInput: Fitness): Promise<any> {
-    const fitness = await this.fitnessModel.findByIdAndUpdate(
-      _id,
-      updateFitnessInput,
-    );
-    return fitness;
-  }
+  // async updateFitness(_id: string, updateFitnessInput: Fitness): Promise<any> {
+  //   const fitness = await this.fitnessModel.findByIdAndUpdate(
+  //     _id,
+  //     updateFitnessInput,
+  //   );
+  //   return fitness;
+  // }
 
-  async createNewFitness(files, i: number) {
+  async addToCloudinary(files, i: number): Promise<any> {
     console.log(i);
 
     const arr = [];

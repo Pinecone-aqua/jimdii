@@ -14,17 +14,17 @@ export default function AddFitness(prop: PropType) {
 		e.preventDefault();
 
 		if (e.target.file.files) {
-			const imageFrom = new FormData();
+			const fitnessFrom = new FormData();
 			const files: File[] = e.target.file.files;
 			const test = {
 				name: e.target.title.value,
 			};
-			Array.from(files).forEach((file) => imageFrom.append("image", file));
-			imageFrom.append("body", JSON.stringify(test));
+			Array.from(files).forEach((file) => fitnessFrom.append("image", file));
+			fitnessFrom.append("body", JSON.stringify(test));
 
 			console.log(e.target.file.files);
 			axios
-				.post("http://localhost:7003/fitness/test", imageFrom)
+				.post("http://localhost:7003/fitness/addFitness", fitnessFrom)
 				.then((res) => console.log(res))
 				.catch((err) => console.log(err));
 		}
