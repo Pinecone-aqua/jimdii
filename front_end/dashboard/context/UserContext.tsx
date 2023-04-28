@@ -1,22 +1,47 @@
-import { UserType } from "@/utils/types";
-import { createContext, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { createContext, useContext } from "react";
 
 import { ReactNode } from "react";
 
 type PropType = {
-  children: ReactNode;
+	children: ReactNode;
 };
 
 type ContextType = {
-  user: UserType | null;
+	loginHandler: () => void;
+	logoutHandler: () => void;
 };
 
-const UserContext = createContext<ContextType>({ user: null });
+const UserContext = createContext<ContextType>({} as ContextType);
 
 export default function UserProvider({ children }: PropType) {
-  const [user, serUser] = useState<UserType | null>(null);
+	const router = useRouter();
 
-  return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
-  );
+	function loginHandler() {
+		try {
+			axios
+				.get("http://localhost:7003/google/login")
+				.then((res) => {
+					router.push(res.data);
+				})
+				.catch((err) => console.log(err));
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	function logoutHandler() {
+		localStorage.removeItem("currentUser");
+	}
+
+	return (
+		<UserContext.Provider value={{ loginHandler, logoutHandler }}>
+			{children}
+		</UserContext.Provider>
+	);
+}
+
+export function useUser() {
+	return useContext(UserContext);
 }
