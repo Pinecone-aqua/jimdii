@@ -11,10 +11,8 @@ import {
   UseInterceptors,
   ParseFilePipe,
   UploadedFiles,
-  BadRequestException,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Controller('fitness')
 export class FitnessController {
@@ -51,15 +49,21 @@ export class FitnessController {
     return result;
   }
   @Post('test')
-  @UseInterceptors(FileFieldsInterceptor([{ name: 'image' }]))
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'image', maxCount: 5 }]))
   async fileUpload(
+    @Body() body: { body: string },
     @UploadedFiles(new ParseFilePipe())
     files: {
       image?: Express.Multer.File[];
     },
   ) {
     console.log(files.image[0].buffer);
-    const result = await this.fitnessService.createNewFitness(files.image);
-    return result;
+    console.log('body', JSON.parse(body.body).name);
+
+    const result = await this.fitnessService.createNewFitness(
+      files.image,
+      files.image.length,
+    );
+    if (result[0]) console.log(result);
   }
 }

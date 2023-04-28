@@ -1,45 +1,15 @@
-import { Dropdown } from "flowbite-react";
-import Link from "next/link";
 import React from "react";
-import LoginLogo from "./subcomp/LoginLogo";
+import Link from "next/link";
 import Logo from "./subcomp/Logo";
+import LoginLogo from "./subcomp/LoginLogo";
+import { Dropdown } from "flowbite-react";
 
-export default function Header(): JSX.Element {
+export default function HeaderTest(): JSX.Element {
   return (
-    <header className="h-[140px] flex items-center bg-slate-700">
-      <div className="w-[100%] m-auto flex justify-between items-center">
-        <Link href={`/`}>
-          <Logo />
-        </Link>
-        <nav className=" flex justify-between text-white font-light invisible md:visible ">
-          <Link href={`/`} className="hover:text-[#4D9799]">
-            Нүүр хуудас
-          </Link>
-          <Link href={`/gymOrder`} className="hover:text-[#4D9799] ">
-            Gym захиалах
-          </Link>
-          <Link href={`/map`} className="hover:text-[#4D9799]">
-            Газрын зураг
-          </Link>
-          <Link href={`/membership`} className="hover:text-[#4D9799]">
-            Гишүүнчлэл
-          </Link>
-          <Link href={`/aboutUs`} className="hover:text-[#4D9799]">
-            Бидний тухай
-          </Link>
-          <Link href={`/contact`} className="hover:text-[#4D9799]">
-            Холбоо барих
-          </Link>
-        </nav>
-        <Link href={`/login`}>
-          <div className="flex justify-between gap-[14px] text-[#4D9799]">
-            <LoginLogo />
-            <p>Log In</p>
-          </div>
-        </Link>
-
+    <header className="bg-slate-700 h-[8vh] flex items-center">
+      <div className="w-[80%] mx-auto  flex items-center justify-between">
         <Dropdown
-          label="DD svg"
+          label="//"
           className="bg-slate-200 text-black"
           id="headerDropdown"
           arrowIcon={false}
@@ -83,7 +53,35 @@ export default function Header(): JSX.Element {
           <Dropdown.Divider />
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
-        {/* Dropdown */}
+        <Link href={`/`}>
+          <Logo />
+        </Link>
+        <nav className="hidden lg:flex  w-[70%] justify-between   text-white">
+          <Link href={`/`} className="hover:text-[#4D9799]">
+            Нүүр хуудас
+          </Link>
+          <Link href={`/gymOrder`} className="hover:text-[#4D9799]">
+            Gym захиалах
+          </Link>
+          <Link href={`/map`} className="hover:text-[#4D9799]">
+            Газрын зураг
+          </Link>
+          <Link href={`/membership`} className="hover:text-[#4D9799]">
+            Гишүүнчлэл
+          </Link>
+          <Link href={`/aboutUs`} className="hover:text-[#4D9799]">
+            Бидний тухай
+          </Link>
+          <Link href={`/contact`} className="hover:text-[#4D9799]">
+            Холбоо барих
+          </Link>
+        </nav>
+        <Link href={`/login`}>
+          <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+            <LoginLogo />
+            <p className="text-sm">Log In</p>
+          </div>
+        </Link>
       </div>
     </header>
   );

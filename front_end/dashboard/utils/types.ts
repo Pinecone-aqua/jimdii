@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
 export interface UserType {
+	_id: string;
 	username: {
 		firstname: string;
 		lastname: string;
 	};
-	email: string;
 	role: string;
 }
 
