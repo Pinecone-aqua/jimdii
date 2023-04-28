@@ -1,8 +1,9 @@
+import AllCard from "@/components/AllCard";
 import React from "react";
 
 export default function allFitness(): JSX.Element {
   return (
-    <div className="bg-slate-700">
+    <div className="bg-slate-700 h-full">
       <div className="w-[60%] mx-auto  h-[50vh] sm:h-[40vh]">
         <div className="text-white">
           <h2 className="text-center text-[30px] sm:text-[38px] pt-[50px]">
@@ -77,6 +78,13 @@ export default function allFitness(): JSX.Element {
             </div>
           </div>
         </div>
+      </div>
+      <div className="w-[60%] mx-auto  ">
+        <AllCard />
+        <AllCard />
+        <AllCard />
+
+        <AllCard />
       </div>
     </div>
   );
