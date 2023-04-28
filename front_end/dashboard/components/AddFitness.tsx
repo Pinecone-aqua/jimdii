@@ -12,17 +12,21 @@ export default function AddFitness(prop: PropType) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(e: any) {
     e.preventDefault();
-    // const imageArr = [];
+
     if (e.target.file.files) {
       const imageFrom = new FormData();
       const files: File[] = e.target.file.files;
+      const test = {
+        name: e.target.title.value,
+      };
       Array.from(files).forEach((file) => imageFrom.append("image", file));
+      imageFrom.append("body", JSON.stringify(test));
 
-      // imageFrom.append("name", e.target.title.value);
       console.log(e.target.file.files);
       axios
         .post("http://localhost:7003/fitness/test", imageFrom)
-        .then((res) => console.log(res));
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   }
 

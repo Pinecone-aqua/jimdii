@@ -13,8 +13,6 @@ import {
   UploadedFiles,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { rejects } from 'assert';
-import { resolve } from 'path';
 
 @Controller('fitness')
 export class FitnessController {
@@ -53,19 +51,19 @@ export class FitnessController {
   @Post('test')
   @UseInterceptors(FileFieldsInterceptor([{ name: 'image', maxCount: 5 }]))
   async fileUpload(
+    @Body() body: { body: string },
     @UploadedFiles(new ParseFilePipe())
     files: {
       image?: Express.Multer.File[];
     },
   ) {
     console.log(files.image[0].buffer);
+    console.log('body', JSON.parse(body.body).name);
 
     const result = await this.fitnessService.createNewFitness(
       files.image,
       files.image.length,
     );
-    if (result) {
-      console.log(result);
-    }
+    if (result[0]) console.log(result);
   }
 }
