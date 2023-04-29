@@ -15,7 +15,7 @@ export default function Header(): JSX.Element {
           <Link href={`/`} className="hover:text-[#4D9799]">
             Нүүр хуудас
           </Link>
-          <Link href={`/gymOrder`} className="hover:text-[#4D9799] ">
+          <Link href={`/allFitness`} className="hover:text-[#4D9799] ">
             Gym захиалах
           </Link>
           <Link href={`/map`} className="hover:text-[#4D9799]">
@@ -56,7 +56,7 @@ export default function Header(): JSX.Element {
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            <Link href={`/gymOrder`} className="hover:text-[#4D9799]">
+            <Link href={`/allFitness`} className="hover:text-[#4D9799]">
               Gym захиалах
             </Link>
           </Dropdown.Item>

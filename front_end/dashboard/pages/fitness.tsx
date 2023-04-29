@@ -1,8 +1,50 @@
 import { FiSearch, FiPlus } from "react-icons/fi";
+// import { fitnesses } from "../utils/fitness.dummy";
+import FitnessCol from "@/components/FitnessCol";
+import { useState } from "react";
+import AddFitness from "@/components/AddFitness";
+import axios from "axios";
+import { FitnessType } from "@/utils/types";
 
-export default function Fitness() {
+export default function Fitness(props: { fitness: FitnessType[] }) {
+	const { fitness } = props;
+	const [fitnesses, setFitnesses] = useState(fitness);
+	const [addFitness, setAddFitness] = useState(false);
+	const [showLoadMore, setShowLoadMore] = useState(true);
+
+	console.log(fitnesses);
+
+	if (!fitnesses[0]) return <>loading</>;
+
+	function loadMore() {
+		try {
+			if (fitnesses.length % 5 !== 0) return setShowLoadMore(false);
+
+			axios
+				.get(`http://localhost:7003/fitness/${fitnesses.length}`)
+				.then(({ data }) =>
+					data.message
+						? setShowLoadMore(false)
+						: setFitnesses([...fitnesses, ...data])
+				);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	function deleteHandler(id: string) {
+		console.log("asd", id);
+		axios
+			.delete(`http://localhost:7003/fitness/delete${id}`)
+			.then(() =>
+				setFitnesses((fitnesses) =>
+					fitnesses.filter((fitness) => fitness._id !== id)
+				)
+			);
+	}
+
 	return (
-		<div className="w-full h-full bg-green-950 p-3">
+		<>
 			<div className="bg-white h-full">
 				<div className="w-full flex align-center justify-between px-6 py-4">
 					<form className="flex w-1/2 ">
@@ -19,12 +61,50 @@ export default function Fitness() {
 							Search
 						</button>
 					</form>
-					<button className="bg-red-950 px-4 rounded-2xl text-white flex items-center">
+					<button
+						className="bg-red-950 px-4 rounded-2xl text-white flex items-center"
+						onClick={() => setAddFitness(true)}>
 						<FiPlus /> Add Fitness
 					</button>
+					{addFitness && <AddFitness setAddFitness={setAddFitness} />}
 				</div>
-				<div className="">a</div>
+				<div>
+					<table className="table-auto text-left w-full border-2 ">
+						<thead>
+							<tr className="h-20">
+								<th scope="col">No</th>
+								<th scope="col">Fitness Name</th>
+								<th scope="col">Members</th>
+								<th scope="col">Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							{fitnesses.map((fitness, i) => (
+								<FitnessCol
+									fitness={fitness}
+									deleteHandler={deleteHandler}
+									i={i}
+									key={i}
+								/>
+							))}
+						</tbody>
+					</table>
+					{showLoadMore && <button onClick={loadMore}>Load more</button>}
+				</div>
 			</div>
-		</div>
+		</>
 	);
+}
+
+export async function getStaticProps() {
+	try {
+		const res = await axios.get("http://localhost:7003/fitness/0");
+		return {
+			props: {
+				fitness: res.data,
+			},
+		};
+	} catch (err) {
+		console.log(err);
+	}
 }
