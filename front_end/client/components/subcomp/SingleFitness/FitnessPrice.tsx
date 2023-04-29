@@ -5,12 +5,12 @@ interface PropsType {
 }
 
 export default function FitnessPrice({ price }: PropsType) {
-	const priceStyle = "flex justify-between mx-3 my-1 border-[1px] p-1";
-	const spanStyle = "w-1/3 border-r-[1px] pr-1 mr-1";
+	const priceStyle = "flex justify-between mx-3 ";
+	const spanStyle = "w-3/5 lg:w-1/3 border-r-[1px] border-black pr-1 mr-1";
 
 	return (
-		<div className="w-full lg:w-1/2 md:border-[1px] md:my-4 lg:border-none p-2 lg:text-sm text-base rounded-lg">
-			Үнэ:
+		<div className="w-full lg:w-1/2 md:border-[1px] md:my-4 lg:border-none p-2 rounded-lg">
+			<p className="text-lg font-bold">Үнэ:</p>
 			{price.onetime && (
 				<div className={priceStyle}>
 					<span className={spanStyle}>Хоног</span>

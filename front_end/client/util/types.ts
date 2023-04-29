@@ -40,3 +40,5 @@ export interface ContactType {
 	phoneNumber: number;
 	social: string[];
 }
+
+// export interface SpecType {}

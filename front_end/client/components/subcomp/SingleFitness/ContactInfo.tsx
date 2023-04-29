@@ -6,7 +6,7 @@ interface PropsType {
 
 export default function ContactInfo({ contact }: PropsType) {
 	return (
-		<div className="flex md:flex-col ">
+		<div className="flex md:flex-col">
 			<div className="flex gap-2">
 				<span>Утас:</span>
 				{contact.phoneNumber}
