@@ -52,8 +52,8 @@ export default function HeaderTest(): JSX.Element {
         <Link href={`/`}>
           <Logo />
         </Link>
-        <nav className="hidden lg:flex  w-[50%] justify-between   text-white">
-          <div className="w-[70%] flex justify-between">
+        <nav className="hidden lg:flex  w-1/2 justify-between   text-white">
+          <div className="w-[70%] flex gap-[30px]">
             <Link href={`/`} className="hover:text-[#4D9799]">
               Нүүр хуудас
             </Link>
@@ -68,7 +68,7 @@ export default function HeaderTest(): JSX.Element {
             </Link>
           </div>
         </nav>
-        <div className="flex justify-between w-[20%]">
+        <div className="flex gap-[20px]">
           <Link href={`/login`} className="flex items-center">
             <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
               <LoginLogo />
