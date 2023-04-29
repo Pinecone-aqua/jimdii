@@ -3,7 +3,11 @@
 
 // import Image from "next/image";
 
+// import Banner from "@/components/Banner";
 import Card from "@/components/Card";
+import Logo from "@/components/subcomp/Logo";
+import Service from "@/components/subcomp/Service";
+// import "../styles/index.css";
 
 export default function Home() {
   const examples = [1, 2, 3, 4];
@@ -11,8 +15,30 @@ export default function Home() {
 
   return (
     <main className="text-white">
-      <section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl">
-        <p className="container mx-auto w-3/4 text-white">
+      <div className="relative z-30 py-40 pl-60">
+        <Logo />
+        <p className="text-3xl">Монголын анхны цахим фитнесс захиалга</p>
+        <div className="py-20">
+          <button className="bg-white text-black">Үйлчилгээний тухай</button>
+          <button className="bg-main">Захиалах</button>
+        </div>
+      </div>
+
+      <div id="pattern">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          // id="pattern"
+          className="rope"
+        >
+          <source src="./rope.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl h-72 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
+        <p className="container mx-auto w-3/4 text-white ">
           "Эхлэх хамгийн зөв цаг нь өчигдөр байсан. Харин дараагийн хамгийн зөв
           цаг нь өнөөдөр юм."
         </p>
@@ -32,33 +58,7 @@ export default function Home() {
         </div>
         <button className="bg-main">Бүх жийм үзэх</button>
       </section>
-      <section className="bg-gray-500 flex flex-col items-center py-10">
-        <h2 className="text-3xl text-white">Таны сонирхож буй үйлчилгээ</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-          neque, fugiat similique velit reprehenderit explicabo eaque non nulla
-          deserunt dolor.
-        </p>
-        <div className="h-[600px] flex items-center gap-60">
-          <div className="relative">
-            <span className="text-main text-9xl font-bold">1</span>
-            <p className="absolute top-12 left-[-30px] whitespace-nowrap">
-              Жиймны мэдээлэл
-            </p>
-          </div>
-          <div className="relative">
-            <span className="text-main text-9xl font-bold">2</span>
-            <p className="absolute top-12 left-[-45px] whitespace-nowrap">
-              Хувийн дасгалжуулагч
-            </p>
-          </div>
-          <div className="relative">
-            <span className="text-main text-9xl font-bold">3</span>
-            <p className="absolute top-12 left-0 text-center">Гишүүнчлэл</p>
-          </div>
-        </div>
-        <button className="bg-main text-black ">Дэлгэрэнгүй</button>
-      </section>
+      <Service />
       <section className="bg-black flex flex-col items-center py-10">
         <h2 className="text-3xl text-white">Мэдээ мэдээлэл</h2>
         <p className="text-white">
@@ -74,19 +74,58 @@ export default function Home() {
         </div>
         <button className="bg-main">Бүх жийм үзэх</button>
       </section>
-      <div>
-        <p>Success stories</p>
-      </div>
-      <div>
-        <p>Holiday Sale</p>
-      </div>
-      <div>
-        <p>Partner</p>
-      </div>
-      <div>
-        <p>Download App</p>
-      </div>
-      {/* <Card /> */}
+      <section className="text-black flex">
+        <div className="bg-black w-1/2">Here goes the background</div>
+        <div className="bg-main w-1/2 text-center">
+          <h2 className="text-5xl font-bold">Success Stories</h2>
+          <div className="mt-10">
+            <p>"In just 6 months of training with Michael I lost 38 pounds"</p>
+            <p>JACK</p>
+            <p>January 10, 2035</p>
+          </div>
+          <div className="mt-10">
+            <p>"In just 6 months of training with Michael I lost 38 pounds"</p>
+            <p>JACK</p>
+            <p>January 10, 2035</p>
+          </div>
+          <div className="mt-10">
+            <p>"In just 6 months of training with Michael I lost 38 pounds"</p>
+            <p>JACK</p>
+            <p>January 10, 2035</p>
+          </div>
+        </div>
+      </section>
+      <section className="text-black flex">
+        <div className="w-1/3 bg-gray-600">Here goes the background</div>
+        <div className="w-2/3 bg-black text-white pl-60 py-20">
+          <h2>Holiday Sale</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+            aliquam est tempore expedita! Commodi, neque debitis. Veritatis
+            magnam consequatur nostrum.
+          </p>
+          <button className="bg-main">Shop Now</button>
+        </div>
+      </section>
+      <section className="bg-white text-black flex justify-center items-center py-40 gap-10">
+        <div className="border-r-2 border-black h-[100px]">
+          <p className="text-6xl font-bold px-10">Partners</p>
+        </div>
+        <div className="flex gap-3">
+          <div className="bg-main h-[120px] w-[120px] flex justify-center items-center">
+            <p className="text-lg font-bold">Naadam</p>
+          </div>
+          <div className="bg-main h-[120px] w-[120px] flex justify-center items-center">
+            <p className="text-lg font-bold">Gold's Gym</p>
+          </div>
+          <div className="bg-main h-[120px] w-[120px] flex justify-center items-center">
+            <p className="text-lg font-bold">Olympus</p>
+          </div>
+          <div className="bg-main h-[120px] w-[120px] flex justify-center items-center">
+            <p className="text-lg font-bold">Uran Gan</p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

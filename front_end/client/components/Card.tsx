@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-export default function Card({ photo }): JSX.Element {
-  console.log(photo);
+export default function Card({ photo }: { photo: string }): JSX.Element {
   return (
     <div className="border border-white w-fit">
       <div className="flex justify-between ">
