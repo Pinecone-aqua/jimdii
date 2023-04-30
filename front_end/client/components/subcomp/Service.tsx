@@ -36,7 +36,7 @@ export default function Service(): JSX.Element {
             <p className="absolute top-12 left-0 text-center">Гишүүнчлэл</p>
           </div>
         </div>
-        <button className="bg-main text-black ">Дэлгэрэнгүй</button>
+        <button className="mainButton">Дэлгэрэнгүй</button>
       </section>
     </div>
   );
