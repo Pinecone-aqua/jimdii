@@ -18,9 +18,9 @@ export default function Home() {
       <div className="relative z-30 py-40 pl-60">
         <Logo />
         <p className="text-3xl">Монголын анхны цахим фитнесс захиалга</p>
-        <div className="py-20">
-          <button className="bg-white text-black">Үйлчилгээний тухай</button>
-          <button className="bg-main">Захиалах</button>
+        <div className="py-20 flex gap-5">
+          <button className="secondaryButton">Үйлчилгээний тухай</button>
+          <button className="mainButton">Захиалах</button>
         </div>
       </div>
 
@@ -53,10 +53,10 @@ export default function Home() {
 
         <div className="flex gap-5 justify-center py-10">
           {examples.map((example, index) => (
-            <Card key={index} photo={"./musashi.webp"} />
+            <Card key={index} photo={"./gym.jpg"} />
           ))}
         </div>
-        <button className="bg-main">Бүх жийм үзэх</button>
+        <button className="mainButton">Бүх жийм үзэх</button>
       </section>
       <Service />
       <section className="bg-black flex flex-col items-center py-10">
@@ -72,11 +72,15 @@ export default function Home() {
             <Card key={index} photo={"./titanic.jpeg"} />
           ))}
         </div>
-        <button className="bg-main">Бүх жийм үзэх</button>
+        <button className="mainButton">Бүх мэдээ үзэх</button>
       </section>
-      <section className="text-black flex">
-        <div className="bg-black w-1/2">Here goes the background</div>
-        <div className="bg-main w-1/2 text-center">
+      <section className="text-black flex h-[500px]">
+        <div className="w-1/2">
+          <picture>
+            <img src="./trainer.png" alt="" className="h-full w-full" />
+          </picture>
+        </div>
+        <div className="bg-main w-1/2 text-center flex flex-col items-center justify-center">
           <h2 className="text-5xl font-bold">Success Stories</h2>
           <div className="mt-10">
             <p>"In just 6 months of training with Michael I lost 38 pounds"</p>
@@ -95,8 +99,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="text-black flex">
-        <div className="w-1/3 bg-gray-600">Here goes the background</div>
+      <section className="text-black flex h-[400px]">
+        <div className="w-1/3">
+          <picture>
+            <img src="./sale.png" alt="" className="cover h-full w-auto" />
+          </picture>
+        </div>
         <div className="w-2/3 bg-black text-white pl-60 py-20">
           <h2>Holiday Sale</h2>
           <p>
