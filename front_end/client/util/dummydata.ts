@@ -586,3 +586,5 @@ export const Fitnesses = [
 		},
 	},
 ];
+
+export const User = {};
