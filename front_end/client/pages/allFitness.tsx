@@ -79,12 +79,11 @@ export default function allFitness(): JSX.Element {
           </div>
         </div>
       </div>
-      <div className="w-[60%] mx-auto  ">
+      <div className="w-[60%] mx-auto lg:bg-black  ">
         <AllCard />
         <AllCard />
         <AllCard />
-
-        <AllCard />
+        
       </div>
     </div>
   );
