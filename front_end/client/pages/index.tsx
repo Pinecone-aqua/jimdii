@@ -24,17 +24,19 @@ export default function Home() {
         </div>
       </div>
 
-      <div id="pattern">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          // id="pattern"
-          className="rope"
-        >
-          <source src="./rope.mp4" type="video/mp4" />
-        </video>
+      <div className="relative">
+        <div id="pattern">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            // id="pattern"
+            className="rope"
+          >
+            <source src="./rope.mp4" type="video/mp4" />
+          </video>
+        </div>
       </div>
 
       <section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl h-72 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
@@ -77,7 +79,11 @@ export default function Home() {
       <section className="text-black flex h-[500px]">
         <div className="w-1/2">
           <picture>
-            <img src="./trainer.png" alt="" className="h-full w-full" />
+            <img
+              src="./trainer.png"
+              alt=""
+              className="object-cover h-full w-full"
+            />
           </picture>
         </div>
         <div className="bg-main w-1/2 text-center flex flex-col items-center justify-center">
@@ -102,7 +108,11 @@ export default function Home() {
       <section className="text-black flex h-[400px]">
         <div className="w-1/3">
           <picture>
-            <img src="./sale.png" alt="" className="cover h-full w-auto" />
+            <img
+              src="./sale.png"
+              alt=""
+              className="cover h-full w-full object-cover"
+            />
           </picture>
         </div>
         <div className="w-2/3 bg-black text-white pl-60 py-20">
