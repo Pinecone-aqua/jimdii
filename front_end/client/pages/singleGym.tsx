@@ -8,7 +8,7 @@ import Timetable from "@/components/subcomp/SingleFitness/Timetable";
 import FitnessPrice from "@/components/subcomp/SingleFitness/FitnessPrice";
 import Discount from "@/components/subcomp/SingleFitness/Discount";
 import ContactInfo from "@/components/subcomp/SingleFitness/ContactInfo";
-import Link from "next/link";
+// import Link from "next/link";
 import Spec from "@/components/subcomp/SingleFitness/Spec";
 import {
   Modal,
