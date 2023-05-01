@@ -3,8 +3,8 @@ import React from "react";
 export default function Logo(): JSX.Element {
   return (
     <svg
-      width="150"
-      height="70"
+      width="400"
+      height="100"
       viewBox="0 0 201 50"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
