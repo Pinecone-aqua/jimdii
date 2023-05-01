@@ -3,6 +3,7 @@ import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { FitnessModule } from './fitness/fitness.module';
+import { MembershipModule } from './membership/membership.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { FitnessModule } from './fitness/fitness.module';
     ),
     UserModule,
     FitnessModule,
+    MembershipModule,
   ],
   controllers: [],
   providers: [],

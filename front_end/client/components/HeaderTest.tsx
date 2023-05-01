@@ -6,7 +6,7 @@ import { Dropdown } from "flowbite-react";
 
 export default function HeaderTest(): JSX.Element {
   return (
-    <header className="bg-slate-700 h-[8vh] flex items-center">
+    <header className="bg-none sticky top-0 z-20 h-[8vh] flex items-center">
       <div className="w-[80%] mx-auto  flex items-center justify-between">
         <Dropdown
           label="//"
