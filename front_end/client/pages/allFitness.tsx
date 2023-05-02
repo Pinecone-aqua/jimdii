@@ -3,7 +3,7 @@ import React from "react";
 
 export default function allFitness(): JSX.Element {
   return (
-    <div className="bg-slate-700 h-full">
+    <div className=" h-full allFitness">
       <div className="w-[60%] mx-auto  h-[50vh] sm:h-[40vh]">
         <div className="text-white">
           <h2 className="text-center text-[30px] sm:text-[38px] pt-[50px]">
@@ -29,7 +29,7 @@ export default function allFitness(): JSX.Element {
             <select
               name="districts"
               id="districts"
-              className="h-full w-[100%] bg-slate-700 text-white"
+              className="h-full w-[100%] bg-transparent text-white"
             >
               <option value="Бүх дүүрэг/сум..." className="w-[50%]">
                 Бүх дүүрэг/сум...
@@ -83,7 +83,6 @@ export default function allFitness(): JSX.Element {
         <AllCard />
         <AllCard />
         <AllCard />
-        
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ export default function Login() {
   }
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center loginPage">
       <div className="w-[400px] h-[500px] border-2 p-2 bg-balck rounded-xl">
         <div className="w-full h-full bg-white rounded-xl">
           <div className="w-full flex gap-1 ">
