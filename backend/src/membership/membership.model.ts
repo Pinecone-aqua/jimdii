@@ -10,7 +10,7 @@ export class Membership {
   isPayment: boolean;
   @Prop()
   price: number;
-  @Prop()
+  @Prop({ type: Object })
   discount: {
     name: string;
     discount: number;
