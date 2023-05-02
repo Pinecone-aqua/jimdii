@@ -1,16 +1,16 @@
 import React from "react";
 import Link from "next/link";
-import Logo from "./subcomp/Logo";
 import LoginLogo from "./subcomp/LoginLogo";
 import { Dropdown } from "flowbite-react";
+import MainResLogo from "./subcomp/MainResLogo";
 
 export default function HeaderTest(): JSX.Element {
   return (
-    <header className="bg-none sticky top-0 z-20 h-[8vh] flex items-center">
+    <header className="bg-none sticky top-0 z-20 h-[10vh] flex items-center">
       <div className="w-[80%] mx-auto  flex items-center justify-between">
         <Dropdown
           label="//"
-          className="bg-slate-200 text-black"
+          className="bg-transparent text-black"
           id="headerDropdown"
           arrowIcon={false}
         >
@@ -42,7 +42,7 @@ export default function HeaderTest(): JSX.Element {
           </Dropdown.Item>
           <Dropdown.Item>
             <Link href={`/signUpGym`} className="hover:text-[#4D9799]">
-            Gym-ээ бүртгүүлэх
+              Gym-ээ бүртгүүлэх
             </Link>
           </Dropdown.Item>
 
@@ -50,7 +50,7 @@ export default function HeaderTest(): JSX.Element {
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
         <Link href={`/`}>
-          <Logo />
+          <MainResLogo />
         </Link>
         <nav className="hidden lg:flex  w-1/2 justify-between   text-white">
           <div className="w-[70%] flex gap-[30px]">
@@ -76,7 +76,9 @@ export default function HeaderTest(): JSX.Element {
             </div>
           </Link>
           <Link href={`/signUpGym`} className="hidden lg:flex">
-            <button className="bg-[#4D9799] h-[40px] w-[155px]">Gym-ээ бүртгүүлэх</button>
+            <button className="bg-[#4D9799] h-[40px] w-[155px]">
+              Gym-ээ бүртгүүлэх
+            </button>
           </Link>
         </div>
       </div>
