@@ -45,7 +45,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("../public/membership.png") rgba(0, 0, 0, 0.626);
+  background: url("../public/trainer.png") rgba(0, 0, 0, 0.626);
   background-blend-mode: multiply;
   // mix-blend-mode: multiply;
   // background-blend-mode: multiply;
@@ -64,11 +64,70 @@
 //   background-size: cover;
 //   filter: grayscale(100%);
 // }
+.registerPage::before {
+  z-index: -1;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../public/membership.png") rgba(0, 0, 0, 0.626);
+  background-blend-mode: multiply;
+  // mix-blend-mode: multiply;
+  // background-blend-mode: multiply;
 
+  // mix-blend-mode: multiply;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  // filter: grayscale(100%);
+  filter: opacity(100%);
+}
+.allFitness::before {
+  z-index: -1;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../public/gym.jpg") rgba(0, 0, 0, 0.626);
+  background-blend-mode: multiply;
+  // mix-blend-mode: multiply;
+  // background-blend-mode: multiply;
+
+  // mix-blend-mode: multiply;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  // filter: grayscale(100%);
+  filter: opacity(100%);
+}
 .offer {
   background-color: black;
   border: 1px solid white;
   height: 600px;
   width: 300px;
   text-align: center;
+}
+.loginPage::before {
+  z-index: -1;
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../public/membership.png") rgba(0, 0, 0, 0.626);
+  background-blend-mode: multiply;
+  // mix-blend-mode: multiply;
+  // background-blend-mode: multiply;
+
+  // mix-blend-mode: multiply;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  // filter: grayscale(100%);
+  filter: opacity(100%);
 }

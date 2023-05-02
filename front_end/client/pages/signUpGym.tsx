@@ -43,7 +43,7 @@ export default function signUpGym(): JSX.Element {
         parking: e.target.specParking.value,
       },
       contact: {
-        phone_number: e.target.phonenumber.value,
+        phonenumber: e.target.phonenumber.value,
         social: e.target.social.value,
       },
     };
@@ -56,7 +56,7 @@ export default function signUpGym(): JSX.Element {
   }
 
   return (
-    <div className="w-full h-fit bg-slate-300">
+    <div className="w-full h-fit registerPage">
       <div className="w-[50%] mx-auto py-[35px]">
         <div className="flex">
           <div className="hidden lg:inline w-[50%] rounded-l-lg">
@@ -198,7 +198,6 @@ export default function signUpGym(): JSX.Element {
                 </div>
               </label>
               <label>
-                
                 <div>
                   <h3>УТАСНЫ ДУГААР :</h3>
                   <input
@@ -208,14 +207,22 @@ export default function signUpGym(): JSX.Element {
                     className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
                   />
                   <h3>СОШИАЛ :</h3>
-                  <input type="url" name="social" placeholder="Social Link" className="text-white w-full bg-slate-700 border rounded-lg p-[5px]" />
+                  <input
+                    type="url"
+                    name="social"
+                    placeholder="Social Link"
+                    className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
+                  />
                 </div>
               </label>
               {/* <label>
                    Image: 
                     <input type="file" name="Upload Images" multiple placeholder="Image" required/>
                 </label> */}
-              <button type="submit" className="bg-[#4D9799] my-[20px] p-[15px] w-full rounded-lg">
+              <button
+                type="submit"
+                className="bg-[#4D9799] my-[20px] p-[15px] w-full rounded-lg"
+              >
                 Add New Gym
               </button>
             </form>
