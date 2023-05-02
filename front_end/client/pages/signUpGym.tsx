@@ -1,17 +1,12 @@
 import MainLogo from "@/components/subcomp/MainLogo";
+import { FitnessType } from "@/util/types";
 import React from "react";
 
 export default function signUpGym(): JSX.Element {
-  interface FitnessType {
-    name: string;
-    description: string;
-    price: number;
-  }
-
   function submitHandler(e: any) {
     e.preventDefault();
 
-    const newFitness = {
+    const newFitness: FitnessType = {
       name: e.target.name.value,
       description: e.target.description.value,
       price: {
@@ -20,7 +15,7 @@ export default function signUpGym(): JSX.Element {
       },
       address: {
         district: e.target.districts.value,
-        descripton: e.target.addressDescription.value,
+        description: e.target.addressDescription.value,
       },
       timetable: {
         Monday: e.target.workDay.value,
@@ -36,6 +31,14 @@ export default function signUpGym(): JSX.Element {
           name: e.target.discountName.value,
           discount: e.target.discountPer.value,
         },
+        {
+          name: e.target.discountName.value,
+          discount: e.target.discountPer.value,
+        },
+        {
+          name: e.target.discountName.value,
+          discount: e.target.discountPer.value,
+        },
       ],
       spec: {
         wifi: e.target.specWifi.value,
@@ -43,9 +46,11 @@ export default function signUpGym(): JSX.Element {
         parking: e.target.specParking.value,
       },
       contact: {
-        phonenumber: e.target.phonenumber.value,
+        // eslint-disable-next-line camelcase
+        phone_number: e.target.phonenumber.value,
         social: e.target.social.value,
       },
+      image: [""],
     };
     console.log(newFitness);
     // fetch("http://localhost:3030/fitness/addFitness", {
@@ -176,7 +181,7 @@ export default function signUpGym(): JSX.Element {
                 <div>
                   Хөнгөлөлтийн хувь:
                   <input
-                    type="text"
+                    type="number"
                     name="discountPer"
                     placeholder="Discount Percentage"
                     className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
@@ -202,7 +207,7 @@ export default function signUpGym(): JSX.Element {
                   <h3>УТАСНЫ ДУГААР :</h3>
                   <input
                     type="number"
-                    name="phonenumber"
+                    name="phone_number"
                     placeholder="Phone Number"
                     className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
                   />
