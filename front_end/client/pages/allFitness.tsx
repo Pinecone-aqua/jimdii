@@ -1,7 +1,15 @@
 import AllCard from "@/components/AllCard";
+import { FitnessType } from "@/util/types";
+import axios from "axios";
 import React from "react";
 
-export default function allFitness(): JSX.Element {
+interface Proptype {
+  fitnesses: FitnessType[];
+}
+
+export default function allFitness(props: Proptype): JSX.Element {
+  const { fitnesses } = props;
+
   return (
     <div className=" h-full allFitness">
       <div className="w-[60%] mx-auto  h-[50vh] sm:h-[40vh]">
@@ -80,10 +88,20 @@ export default function allFitness(): JSX.Element {
         </div>
       </div>
       <div className="w-[60%] mx-auto lg:bg-black  ">
-        <AllCard />
-        <AllCard />
-        <AllCard />
+        {fitnesses.map((fitness: FitnessType, index: number) => (
+          <AllCard fitness={fitness} key={index} />
+        ))}
       </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const res = await axios.get(`http://localhost:7003/fitness/getAllfitness`);
+  const fitnesses = await res.data;
+  return {
+    props: {
+      fitnesses,
+    },
+  };
 }

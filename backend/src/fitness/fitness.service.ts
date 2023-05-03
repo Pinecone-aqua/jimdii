@@ -20,12 +20,14 @@ export class FitnessService {
     return await this.fitnessModel
       .find()
       .skip(num)
-      .limit(5)
-      .select({ name: 1, _id: 1 });
+      .limit(4)
+      .select({ name: 1, _id: 1, image: 1, price: 1 });
   }
 
   async getAllfitness(): Promise<any> {
-    const allFitness = await this.fitnessModel.find({});
+    const allFitness = await this.fitnessModel
+      .find({})
+      .select({ _id: 1, name: 1, image: 1, price: 1 });
     return allFitness;
   }
 
