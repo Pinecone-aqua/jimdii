@@ -1,15 +1,24 @@
 import Head from "next/head";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 // import Banner from "./Banner";
 
 import HeaderTest from "./HeaderTest";
+import jwtDecode from "jwt-decode";
 
 type PropType = {
   children: ReactNode;
 };
 
 export default function Layout({ children }: PropType) {
+  const [user, setUser] = useState();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const token: any = Cookies.get("token");
+
+  useEffect(() => {
+    if (token) setUser(jwtDecode(token));
+  }, [token]);
   return (
     <div>
       <Head>
@@ -19,7 +28,7 @@ export default function Layout({ children }: PropType) {
         <link rel="icon" href="favicon.io" />
       </Head>
 
-      <HeaderTest />
+      <HeaderTest user={user} setUser={setUser} />
       <main>{children}</main>
     </div>
   );

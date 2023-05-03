@@ -1,13 +1,37 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from "react";
 import Link from "next/link";
 import LoginLogo from "./subcomp/LoginLogo";
 import { Dropdown } from "flowbite-react";
 import MainResLogo from "./subcomp/MainResLogo";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { FaGoogle } from "react-icons/fa";
+import Cookies from "js-cookie";
 
-export default function HeaderTest(): JSX.Element {
+interface HeaderType {
+  user: any;
+  setUser: (arg: any) => void;
+}
+
+export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
+  const router = useRouter();
+  user && console.log(user);
+
+  // function loginHandler(e: any) {
+  //   e.preventDefault();
+  //   console.log(e.target.userName.value);
+  //   console.log(e.target.password.value);
+  // }
+  function googleLoginHandler() {
+    axios.get("http://localhost:7003/google-login").then((res) => {
+      router.push(res.data);
+    });
+  }
   return (
     <header className="bg-none sticky top-0 z-20 h-[10vh] flex items-center">
-      <div className="w-[80%] mx-auto  flex items-center justify-between">
+      <div className="container mx-auto  flex items-center justify-between">
         <Dropdown
           label="//"
           className="bg-transparent text-black"
@@ -68,13 +92,56 @@ export default function HeaderTest(): JSX.Element {
             </Link>
           </div>
         </nav>
-        <div className="flex gap-[20px]">
-          <Link href={`/login`} className="flex items-center">
+        <div className="w-1/3 flex justify-between">
+          {/* <Link href={`/login`} className="flex items-center">
             <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
               <LoginLogo />
               <p className="text-sm">Log In</p>
             </div>
-          </Link>
+          </Link> */}
+          {user ? (
+            <div className="flex items-center w-1/2 justify-between">
+              <Link
+                href={`/#`}
+                className="flex w-1/2 items-center justify-between"
+              >
+                <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+                  <picture>
+                    <img className="w-[100px]" src={user.image} alt="" />
+                  </picture>
+                  <p className="text-sm">Hi {user.name}</p>
+                </div>
+              </Link>
+              <div>
+                <div
+                  className="cursor-pointer text-main"
+                  onClick={() => {
+                    Cookies.remove("token");
+                    setUser("");
+                  }}
+                >
+                  logout
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex gap-5">
+              <Link href={`/login`} className="flex items-center">
+                <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+                  <LoginLogo />
+                  <p className="text-sm">Log In</p>
+                </div>
+              </Link>
+              <button
+                onClick={googleLoginHandler}
+                className="mainButton flex items-center relative"
+              >
+                <FaGoogle className="absolute left-5" />
+                <span>Google Login</span>
+              </button>
+            </div>
+          )}
+
           <Link href={`/signUpGym`} className="hidden lg:flex">
             <button className="bg-[#4D9799] h-[40px] w-[155px]">
               Gym-ээ бүртгүүлэх

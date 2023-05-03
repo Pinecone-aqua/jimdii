@@ -13,6 +13,7 @@ import { getGoogleUserInfo } from './getGoogleUserInfo';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { User } from 'src/user/user.model';
+import * as moment from 'moment';
 
 @Controller()
 export class GoogleLoginController {
@@ -56,12 +57,12 @@ export class GoogleLoginController {
       const userInput: User = {
         email: profile.email,
         username: profile.name,
-        profile_img: null,
+        profile_img: profile.picture,
         password: null,
         address: null,
         gender: null,
         birth_date: null,
-        created_date: null,
+        created_date: moment().format('LLLL'),
         phone: null,
         role: 'CLIENT',
       };
@@ -72,7 +73,8 @@ export class GoogleLoginController {
       name: user.username,
       email: user.email,
       role: user.role,
-      phoneNumber: user?.phone,
+      phone: user?.phone,
+      image: user?.profile_img,
     };
     const token = this.jwtService.sign(payload);
     res
