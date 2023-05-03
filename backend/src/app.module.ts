@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { FitnessModule } from './fitness/fitness.module';
 import { MembershipModule } from './membership/membership.module';
+import { GoogleLoginModule } from './google-login/google-login.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { MembershipModule } from './membership/membership.module';
     UserModule,
     FitnessModule,
     MembershipModule,
+    GoogleLoginModule,
   ],
   controllers: [],
   providers: [],
