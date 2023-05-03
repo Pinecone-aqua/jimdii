@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Service(): JSX.Element {
   return (
     <div className="relative parallax">
@@ -19,22 +21,29 @@ export default function Service(): JSX.Element {
           deserunt dolor.
         </p>
         <div className="h-[600px] flex items-center gap-60">
-          <div className="relative">
-            <span className="text-main text-9xl font-bold">1</span>
-            <p className="absolute top-12 left-[-30px] whitespace-nowrap">
-              Жиймны мэдээлэл
-            </p>
-          </div>
-          <div className="relative">
-            <span className="text-main text-9xl font-bold">2</span>
-            <p className="absolute top-12 left-[-45px] whitespace-nowrap">
-              Хувийн дасгалжуулагч
-            </p>
-          </div>
-          <div className="relative">
-            <span className="text-main text-9xl font-bold">3</span>
-            <p className="absolute top-12 left-0 text-center">Гишүүнчлэл</p>
-          </div>
+          <Link href={`allFitness`}>
+            <div className="relative">
+              <span className="text-main text-9xl font-bold">1</span>
+
+              <p className="absolute top-12 left-[-30px] whitespace-nowrap">
+                Жиймны мэдээлэл
+              </p>
+            </div>
+          </Link>
+          <Link href={`personalTrainer`}>
+            <div className="relative">
+              <span className="text-main text-9xl font-bold">2</span>
+              <p className="absolute top-12 left-[-45px] whitespace-nowrap">
+                Хувийн дасгалжуулагч
+              </p>
+            </div>
+          </Link>
+          <Link href={`membership`}>
+            <div className="relative">
+              <span className="text-main text-9xl font-bold">3</span>
+              <p className="absolute top-12 left-0 text-center">Гишүүнчлэл</p>
+            </div>
+          </Link>
         </div>
         <button className="mainButton">Дэлгэрэнгүй</button>
       </section>

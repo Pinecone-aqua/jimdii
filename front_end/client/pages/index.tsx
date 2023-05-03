@@ -7,11 +7,15 @@
 import Card from "@/components/Card";
 import Logo from "@/components/subcomp/Logo";
 import Service from "@/components/subcomp/Service";
+import { FitnessType } from "@/util/types";
+import axios from "axios";
 // import "../styles/index.css";
 
-export default function Home() {
-  const examples = [1, 2, 3, 4];
-  // const photo = "./titanic.jpeg";
+interface PropsType {
+  fitness: FitnessType[];
+}
+export default function Home(props: PropsType) {
+  const { fitness } = props;
 
   return (
     <main className="text-white">
@@ -47,15 +51,10 @@ export default function Home() {
       </section>
       <section className="bg-black flex flex-col items-center py-10">
         <h2 className="text-3xl text-white">Онцлох жиймүүд</h2>
-        <p className="text-white">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime
-          necessitatibus dolore ad doloribus recusandae fugit quis, itaque harum
-          nihil dolorum.
-        </p>
 
         <div className="flex gap-5 justify-center py-10">
-          {examples.map((example, index) => (
-            <Card key={index} photo={"./gym.jpg"} />
+          {fitness.map((fitness: FitnessType, index: number) => (
+            <Card fitness={fitness} key={index} />
           ))}
         </div>
         <button className="mainButton">Бүх жийм үзэх</button>
@@ -70,8 +69,8 @@ export default function Home() {
         </p>
 
         <div className="flex gap-5 justify-center py-10">
-          {examples.map((example, index) => (
-            <Card key={index} photo={"./titanic.jpeg"} />
+          {fitness.map((fitness: FitnessType, index: number) => (
+            <Card fitness={fitness} key={index} />
           ))}
         </div>
         <button className="mainButton">Бүх мэдээ үзэх</button>
@@ -146,4 +145,14 @@ export default function Home() {
       </section>
     </main>
   );
+}
+
+export async function getStaticProps() {
+  const res = await axios.get(`http://localhost:7003/fitness/:limit`);
+  const fitness = await res.data;
+  return {
+    props: {
+      fitness,
+    },
+  };
 }
