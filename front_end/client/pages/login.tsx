@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { UserType } from "../util/types";
 import axios from "axios";
+import Link from "next/link";
+import { FaGoogle } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const [registerbtn, setRegisterBtn] = useState<boolean>(false);
   const [getFirstPass, setFirstPass] = useState<string>("");
   const [getSecondPass, setSecondPass] = useState<string>("");
   const [confirmPass, setConfirmPass] = useState<boolean>(false);
-
+  const [signBtn, setsignBtn] = useState<boolean>(false);
+  const router = useRouter();
   useEffect(() => {
     getSecondPass == getFirstPass
       ? setConfirmPass(true)
@@ -48,9 +52,175 @@ export default function Login() {
     }
   }
 
+  function googleLoginHandler() {
+    axios.get("http://localhost:7003/google-login").then((res) => {
+      router.push(res.data);
+    });
+  }
+
   return (
-    <div className="h-screen flex justify-center items-center loginPage">
-      <div className="w-[400px] h-[500px] border-2 p-2 bg-balck rounded-xl">
+    <div className="h-full  loginPage">
+      {/* start new design */}
+      <div className="w-full flex justify-end flex-row">
+        <Link href={`/`}>
+          <button className="text-2xl text-white mr-[20px]">X</button>
+        </Link>
+      </div>
+
+      <div className="flex justify-center items-center h-[80vh]">
+        <form
+          onSubmit={(e) =>
+            confirmPass ? submitHandler(e) : e.preventDefault()
+          }
+          className="flex flex-col justify-between gap-2 items-center pt-10 p-3 w-[400px]"
+        >
+          {!signBtn ? (
+            <div>
+              <div className="flex justify-center items-center">
+                <h2 className="text-[60px] leading-[48px] font-bold my-[10px] text-white">
+                  Sign Up
+                </h2>
+              </div>
+
+              <div className="flex w-full justify-center  gap-[5px]  items-center my-[10px] text-white">
+                <p>Already a member?</p>
+                <button
+                  className="text-[#4D9799]"
+                  onClick={() => setsignBtn(true)}
+                >
+                  Log In
+                </button>
+              </div>
+              {/* start here */}
+
+              <>
+                <p className="flex justify-between gap-2">
+                  <input
+                    type="text"
+                    placeholder="Firstname"
+                    className={inputStyle}
+                    name="firstname"
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Lastname"
+                    className={inputStyle}
+                    name="lastname"
+                    required
+                  />
+                </p>
+
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className={inputStyle}
+                  name="email"
+                  required
+                />
+                <select className={`${inputStyle}`} name="gender" required>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                <input
+                  type="text"
+                  placeholder="Password"
+                  className={inputStyle}
+                  name="password"
+                  onChange={(e) => setFirstPass(e.target.value)}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Confirm password"
+                  className={` ${
+                    confirmPass
+                      ? inputStyle
+                      : "w-full p-1 text-black rounded-lg border-2 border-rose-500"
+                  }`}
+                  onChange={(e) => setSecondPass(e.target.value)}
+                  name="confirm"
+                  required
+                />
+                
+              </>
+              <button
+                type="submit"
+                className={`w-4/6 border-2 bg-green-300 p-2 rounded-lg text-black m-4`}
+              >
+                {!registerbtn ? "Register" : "Login"}
+              </button>
+
+              <div className="flex justify-center items-center my-[5px] text-white">
+                <span>Or</span>
+              </div>
+              <button
+                onClick={googleLoginHandler}
+                className="signbutton flex items-center relative"
+              >
+                <FaGoogle className="absolute left-5" />
+                <div className="flex justify-center w-full">
+                  <span>Sign Up with Google</span>
+                </div>
+              </button>
+            </div>
+          ) : (
+            <div>
+              <div className="flex justify-center items-center">
+                <h2 className="text-[60px] leading-[48px] font-bold my-[10px] text-white">
+                  Login
+                </h2>
+              </div>
+
+              <div className="flex w-full justify-center  gap-[5px]  items-center my-[10px] text-white ">
+                <p>New to this site?</p>
+                <button
+                  className="text-[#4D9799]"
+                  onClick={() => setsignBtn(false)}
+                >
+                  Sign Up
+                </button>
+              </div>
+              <>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className={inputStyle}
+                  name="email"
+                />
+                <input
+                  type="text"
+                  placeholder="Password"
+                  className={inputStyle}
+                  name="password"
+                />
+              </>
+              <button
+                type="submit"
+                className={`w-4/6 border-2 bg-green-300 p-2 rounded-lg text-black m-4`}
+              >
+                {registerbtn ? "Register" : "Login"}
+              </button>
+              <div className="flex justify-center items-center my-[5px] text-white">
+                <span>Or </span>
+              </div>
+
+              <button
+                onClick={googleLoginHandler}
+                className="signbutton flex items-center relative"
+              >
+                <FaGoogle className="absolute left-5" />
+                <div className="flex justify-center w-full">
+                  <span>Sign Up with Google</span>
+                </div>
+              </button>
+            </div>
+          )}
+        </form>
+      </div>
+      {/* new design */}
+      {/* <div className="w-[400px] h-[500px] border-2 p-2 bg-balck rounded-xl">
         <div className="w-full h-full bg-white rounded-xl">
           <div className="w-full flex gap-1 ">
             <button
@@ -156,7 +326,7 @@ export default function Login() {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -47,7 +47,7 @@ export default function signUpGym(): JSX.Element {
       },
       contact: {
         // eslint-disable-next-line camelcase
-        phone_number: e.target.phonenumber.value,
+        phonenumber: e.target.phonenumber.value,
         social: e.target.social.value,
       },
       image: [""],
@@ -207,7 +207,7 @@ export default function signUpGym(): JSX.Element {
                   <h3>УТАСНЫ ДУГААР :</h3>
                   <input
                     type="number"
-                    name="phone_number"
+                    name="phonenumber"
                     placeholder="Phone Number"
                     className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
                   />
