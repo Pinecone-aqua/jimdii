@@ -13,7 +13,7 @@ export default function signUp(): JSX.Element {
     });
   }
   return (
-    <div className="bg-black text-white w-full h-[100vh] ">
+    <div className="bg-black text-white w-full h-full signUpPage ">
       <div className="w-full flex justify-end">
         <Link href={`/`}>
         <button className="text-2xl mr-[20px]">X</button>
@@ -35,25 +35,33 @@ export default function signUp(): JSX.Element {
             className="signbutton flex items-center relative"
           >
             <FaGoogle className="absolute left-5" />
-            <span>Sign Up with Google</span>
+            <div className="flex justify-center w-full">
+              <span>Sign Up with Google</span>
+            </div>
+            
           </button>
           <button
             onClick={googleLoginHandler}
-            className="signFBbutton  flex items-center relative"
+            className="signFBbutton  flex items-center relative "
           >
             <FaGoogle className="absolute left-5" />
-            <span>Sign Up with Facebook</span>
+            <div className="flex justify-center w-full">
+              <span className="text-white">Sign Up with Facebook</span>
+            </div>
+            
           </button>
           <div className="flex justify-center items-center my-[5px]">
             <span>Or</span>
           </div>
-          
+          <Link href={`/login`}>
           <button
             className="border w-[320px] h-[40px] flex justify-center items-center"
           >
             
             <span>Sign Up with email</span>
           </button>
+          </Link>
+          
         </div>) : (<div>
             <div className="flex justify-center items-center">
                  <h2 className="text-[60px] leading-[48px] font-bold my-[10px]">Login</h2>
@@ -68,14 +76,20 @@ export default function signUp(): JSX.Element {
             className="signbutton flex items-center relative"
           >
             <FaGoogle className="absolute left-5" />
-            <span>Login with Google</span>
+            <div className="flex justify-center w-full">
+               <span>Login with Google</span>
+            </div>
+           
           </button>
           <button
             onClick={googleLoginHandler}
             className="signFBbutton flex items-center relative"
           >
             <FaGoogle className="absolute left-5" />
-            <span>Login with Facebook</span>
+            <div className="flex justify-center w-full">
+              <span className="text-white">Login with Facebook</span>
+            </div>
+            
           </button>
           <div className="flex justify-center items-center my-[5px]">
             <span>Or </span>
