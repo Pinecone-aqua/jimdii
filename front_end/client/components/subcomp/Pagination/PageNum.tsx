@@ -5,16 +5,13 @@ interface PropsType {
 
 export default function PageNum(props: PropsType) {
   const { page, currentPage } = props;
-  console.log(page);
-  console.log("current", currentPage);
 
+  const activePage = "bg-main ";
+  const inActiveage =
+    "bg-none border-[1px] p-3 flex justify-center items-center box-content min-w-[10px] h-7 hover:opacity-70";
   return (
     <div
-      className={`${
-        page === currentPage
-          ? "bg-green-200 border-2 p-3 flex justify-center items-center text-black"
-          : "bg-none border-2 p-3 flex justify-center items-center"
-      }`}
+      className={page === currentPage ? activePage + inActiveage : inActiveage}
     >
       {page}
     </div>
