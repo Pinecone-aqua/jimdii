@@ -126,7 +126,7 @@ export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
             </div>
           ) : (
             <div className="flex gap-5">
-              <Link href={`/login`} className="flex items-center">
+              <Link href={`/signUp`} className="flex items-center">
                 <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
                   <LoginLogo />
                   <p className="text-sm">Log In</p>
