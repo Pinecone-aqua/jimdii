@@ -78,7 +78,7 @@ export default function signUp(): JSX.Element {
             <span>Login with Facebook</span>
           </button>
           <div className="flex justify-center items-center my-[5px]">
-            <span>Or</span>
+            <span>Or </span>
           </div>
           
           <Link href={`/login`}>
