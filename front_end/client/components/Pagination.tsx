@@ -1,40 +1,176 @@
 import { useEffect, useState } from "react";
 import PageNum from "./subcomp/Pagination/PageNum";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { BsThreeDots } from "react-icons/bs";
 
 export default function Pagination() {
+  const router = useRouter();
   const [lastPageNum, setLastPageNum] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const testPageNum = 101;
+
+  const testPageNum = 31;
 
   useEffect(() => {
     setLastPageNum(Math.ceil(testPageNum / 10));
-  }, [testPageNum]);
+    if (router.query.page) {
+      const pageNum = Number(router.query.page);
+      if (!(pageNum > 0 && pageNum <= lastPageNum)) router.push("1");
+      setCurrentPage(pageNum);
+      console.log(pageNum);
+    }
+  }, [router, lastPageNum]);
 
   return (
-    <div className="flex gap-3 h-10 m-5">
-      {currentPage > 1 && (
-        <Link href={"test"} onClick={() => setCurrentPage(currentPage - 1)}>
-          <PageNum page={"Өмнөх"} currentPage={currentPage} />
-        </Link>
-      )}
-      <Link href={"test"} onClick={() => setCurrentPage(currentPage)}>
-        <PageNum page={currentPage} currentPage={currentPage} />
-      </Link>
-      <Link href={"test"} onClick={() => setCurrentPage(currentPage + 1)}>
-        <PageNum page={currentPage + 1} currentPage={currentPage} />
-      </Link>
-      <Link href={"test"} onClick={() => setCurrentPage(currentPage + 2)}>
-        <PageNum page={currentPage + 2} currentPage={currentPage} />
-      </Link>
-      {lastPageNum > currentPage + 2 && (
-        <>
-          <p className="">...</p>
-          <Link href={"test"} onClick={() => setCurrentPage(lastPageNum)}>
-            <PageNum page={lastPageNum} currentPage={currentPage} />
-          </Link>
-        </>
-      )}
+    <div className="flex justify-center items-center m-2 text-xs">
+      <div className="flex items-end gap-2 w-1/3">
+        {lastPageNum > 1 && (
+          <>
+            <div className="flex gap-2 min-w-1/5">
+              {currentPage > 1 && (
+                <Link
+                  href={`${currentPage - 1}`}
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                >
+                  <PageNum page={"Өмнөх"} currentPage={currentPage} />
+                </Link>
+              )}
+
+              {lastPageNum > 3 && currentPage > 1 && lastPageNum > 2 && (
+                <>
+                  <Link href={`1`} onClick={() => setCurrentPage(1)}>
+                    <PageNum page={1} currentPage={currentPage} />
+                  </Link>
+                </>
+              )}
+            </div>
+            {currentPage > 3 && <BsThreeDots />}
+            <div className="flex gap-2 min-w-1/5">
+              {lastPageNum > 4 && currentPage == 3 && (
+                <Link href={`2`} onClick={() => setCurrentPage(2)}>
+                  <PageNum page={2} currentPage={currentPage} />
+                </Link>
+              )}
+              {lastPageNum > 2 && (
+                <Link
+                  href={`${
+                    currentPage < lastPageNum - 1
+                      ? currentPage > +3
+                        ? currentPage - 1
+                        : currentPage
+                      : lastPageNum - 2
+                  }`}
+                  onClick={() =>
+                    setCurrentPage(
+                      currentPage < lastPageNum - 1
+                        ? currentPage > +3
+                          ? currentPage - 1
+                          : currentPage
+                        : lastPageNum - 2
+                    )
+                  }
+                >
+                  <PageNum
+                    page={
+                      currentPage < lastPageNum - 1
+                        ? currentPage > +3
+                          ? currentPage - 1
+                          : currentPage
+                        : lastPageNum - 2
+                    }
+                    currentPage={currentPage}
+                  />
+                </Link>
+              )}
+              <Link
+                href={`${
+                  currentPage < lastPageNum - 1
+                    ? currentPage > +3
+                      ? currentPage
+                      : currentPage + 1
+                    : lastPageNum - 1
+                }`}
+                onClick={() =>
+                  setCurrentPage(
+                    currentPage < lastPageNum - 1
+                      ? currentPage > +3
+                        ? currentPage
+                        : currentPage + 1
+                      : lastPageNum - 1
+                  )
+                }
+              >
+                <PageNum
+                  page={
+                    currentPage < lastPageNum - 1
+                      ? currentPage > +3
+                        ? currentPage
+                        : currentPage + 1
+                      : lastPageNum - 1
+                  }
+                  currentPage={currentPage}
+                />
+              </Link>
+              {lastPageNum >= 5 && currentPage === 3 ? null : (
+                <Link
+                  href={`${
+                    currentPage < lastPageNum - 1
+                      ? currentPage > +3
+                        ? currentPage + 1
+                        : currentPage + 2
+                      : lastPageNum
+                  }`}
+                  onClick={() =>
+                    setCurrentPage(
+                      currentPage < lastPageNum - 1
+                        ? currentPage > +3
+                          ? currentPage + 1
+                          : currentPage + 2
+                        : lastPageNum
+                    )
+                  }
+                >
+                  <PageNum
+                    page={
+                      currentPage < lastPageNum - 1
+                        ? currentPage > +3
+                          ? currentPage + 1
+                          : currentPage + 2
+                        : lastPageNum
+                    }
+                    currentPage={currentPage}
+                  />
+                </Link>
+              )}
+            </div>
+            {lastPageNum > currentPage + 2 && <BsThreeDots />}
+            <div className="flex gap-2 min-w-1/5">
+              {" "}
+              {lastPageNum >= 4 &&
+                currentPage != 2 &&
+                lastPageNum > currentPage + 1 &&
+                lastPageNum > 2 && (
+                  <>
+                    <Link
+                      href={`${lastPageNum}`}
+                      onClick={() => setCurrentPage(lastPageNum)}
+                    >
+                      <PageNum page={lastPageNum} currentPage={currentPage} />
+                    </Link>
+                  </>
+                )}
+              {currentPage < lastPageNum && (
+                <Link
+                  href={`${currentPage + 1}`}
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                >
+                  <PageNum page={"Дараах"} currentPage={currentPage} />
+                </Link>
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
