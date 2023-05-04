@@ -17,7 +17,7 @@ interface HeaderType {
 
 export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
   const router = useRouter();
-  user && console.log(user);
+  // user && console.log(user);
 
   // function loginHandler(e: any) {
   //   e.preventDefault();
@@ -132,7 +132,6 @@ export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
                   <p className="text-sm">Log In</p>
                 </div>
               </Link>
-              
             </div>
           )}
 
