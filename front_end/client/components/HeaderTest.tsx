@@ -92,7 +92,7 @@ export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
             </Link>
           </div>
         </nav>
-        <div className="w-1/3 flex justify-between">
+        <div className="w-1/4 flex justify-between items-center">
           {/* <Link href={`/login`} className="flex items-center">
             <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
               <LoginLogo />
@@ -132,13 +132,7 @@ export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
                   <p className="text-sm">Log In</p>
                 </div>
               </Link>
-              <button
-                onClick={googleLoginHandler}
-                className="mainButton flex items-center relative"
-              >
-                <FaGoogle className="absolute left-5" />
-                <span>Google Login</span>
-              </button>
+              
             </div>
           )}
 

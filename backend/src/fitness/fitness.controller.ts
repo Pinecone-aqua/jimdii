@@ -29,17 +29,19 @@ export class FitnessController {
     }
   }
 
-  @Get('getAllFitness')
-  async getAllfitness() {
+  @Get('getAllFitness:page')
+  async getAllfitness(@Param('page') page: string) {
     try {
-      const result = await this.fitnessService.getAllfitness();
+      console.log(page);
+
+      const result = await this.fitnessService.getAllfitness(page);
       return result;
     } catch (err) {
       console.log(err);
     }
   }
 
-  @Get(':limit')
+  @Get('limitedFitness:limit')
   async getSomeFitness(@Param('limit') limit: string) {
     try {
       const num = Number(limit);
@@ -59,7 +61,13 @@ export class FitnessController {
 
   @Get('id')
   async getAllId() {
-    return this.fitnessService.getAllId;
+    return this.fitnessService.getAllId();
+  }
+
+  @Get('pages')
+  async getPages() {
+    const result = this.fitnessService.getPages();
+    return result;
   }
 
   @Delete('delete:id')
