@@ -118,6 +118,7 @@ export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
                   <p className="text-sm">Log In</p>
                 </div>
               </Link>
+
             </div>
           )}
 
