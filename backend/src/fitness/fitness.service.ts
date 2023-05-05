@@ -24,15 +24,27 @@ export class FitnessService {
       .select({ name: 1, _id: 1, image: 1, price: 1 });
   }
 
-  async getAllfitness(): Promise<any> {
+  async getAllfitness(page: string): Promise<any> {
+    const num = Number(page);
     const allFitness = await this.fitnessModel
       .find({})
-      .select({ _id: 1, name: 1, image: 1, price: 1 });
+      .select({ _id: 1, name: 1, image: 1, price: 1 })
+      .skip((num - 1) * 10)
+      .limit(10);
     return allFitness;
   }
 
   async getAllId(): Promise<any> {
     return await this.fitnessModel.find().select({ _id: 1 });
+  }
+
+  async getPages(): Promise<any> {
+    const pages = [];
+    const result = await this.fitnessModel.find();
+    for (let i = 1; i <= Math.ceil(result.length / 10); i++) {
+      pages.push(i.toString());
+    }
+    return pages;
   }
 
   async deleteFitness(_id: string): Promise<any> {
