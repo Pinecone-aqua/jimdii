@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 
 import HeaderTest from "./HeaderTest";
 import jwtDecode from "jwt-decode";
+import { useRouter } from "next/router";
 
 type PropType = {
   children: ReactNode;
@@ -15,6 +16,11 @@ export default function Layout({ children }: PropType) {
   const [user, setUser] = useState();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const token: any = Cookies.get("token");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.asPath === "/allFitness") router.push("allFitness/1");
+  }, [router]);
 
   useEffect(() => {
     if (token) setUser(jwtDecode(token));

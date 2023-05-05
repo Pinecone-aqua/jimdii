@@ -5,9 +5,6 @@ import Link from "next/link";
 import LoginLogo from "./subcomp/LoginLogo";
 import { Dropdown } from "flowbite-react";
 import MainResLogo from "./subcomp/MainResLogo";
-import axios from "axios";
-import { useRouter } from "next/router";
-import { FaGoogle } from "react-icons/fa";
 import Cookies from "js-cookie";
 
 interface HeaderType {
@@ -16,19 +13,8 @@ interface HeaderType {
 }
 
 export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
-  const router = useRouter();
   user && console.log(user);
 
-  // function loginHandler(e: any) {
-  //   e.preventDefault();
-  //   console.log(e.target.userName.value);
-  //   console.log(e.target.password.value);
-  // }
-  function googleLoginHandler() {
-    axios.get("http://localhost:7003/google-login").then((res) => {
-      router.push(res.data);
-    });
-  }
   return (
     <header className="bg-none sticky top-0 z-20 h-[10vh] flex items-center">
       <div className="container mx-auto  flex items-center justify-between">
@@ -81,7 +67,7 @@ export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
             <Link href={`/`} className="hover:text-[#4D9799]">
               Нүүр хуудас
             </Link>
-            <Link href={`/allFitness`} className="hover:text-[#4D9799]">
+            <Link href={`/allFitness/1`} className="hover:text-[#4D9799]">
               Gym захиалах
             </Link>
             <Link href={`/map`} className="hover:text-[#4D9799]">
@@ -132,7 +118,6 @@ export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
                   <p className="text-sm">Log In</p>
                 </div>
               </Link>
-              
             </div>
           )}
 
