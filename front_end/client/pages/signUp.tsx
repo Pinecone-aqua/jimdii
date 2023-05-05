@@ -16,7 +16,8 @@ export default function signUp(): JSX.Element {
     <div className="bg-black text-white w-full h-full signUpPage ">
       <div className="w-full flex justify-end">
         <Link href={`/`}>
-          <button className="text-2xl mr-[20px]">X</button>
+
+        <button className="text-2xl mr-[20px]">X</button>
         </Link>
       </div>
       <div className="flex justify-center items-center h-[80vh]">

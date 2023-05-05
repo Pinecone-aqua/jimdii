@@ -13,8 +13,9 @@ interface HeaderType {
 }
 
 export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
-  // const router = useRouter();
-  // user && console.log(user);
+
+  user && console.log(user);
+
 
   return (
     <header className="bg-none sticky top-0 z-20 h-[10vh] flex items-center">
