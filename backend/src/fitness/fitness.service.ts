@@ -29,7 +29,7 @@ export class FitnessService {
     const allFitness = await this.fitnessModel
       .find({})
       .select({ _id: 1, name: 1, image: 1, price: 1 })
-      .skip(num * 10)
+      .skip((num - 1) * 10)
       .limit(10);
     return allFitness;
   }
