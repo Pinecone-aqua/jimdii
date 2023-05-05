@@ -15,36 +15,36 @@ export interface UserType {
 }
 
 export interface FitnessType {
-	_id?: string;
-	name: string;
-	description?: string;
-	image: string[];
-	price?: {
-		oneMonth: number;
-		threeMonth?: number;
-		onetime?: number;
-		year?: number;
-	};
-	address?: {
-		district:
-			| "Bayangol"
-			| "Sukhbaatar"
-			| "Khan-uul"
-			| "Songino-Khairkhan"
-			| "Bayanzurkh"
-			| "Chingeltei"
-			| "Baganuur";
-		description: string;
-		coord?: number[];
-	};
-	timetable?: TimetableType;
-	discount?: DiscountType[];
-	spec?: {
-		wifi: boolean;
-		shower: boolean;
-		parking: boolean;
-	};
-	contact?: ContactType;
+  _id?: string;
+  name: string;
+  description?: string;
+  image: string[];
+  price?: {
+    oneMonth: number;
+    threeMonth?: number;
+    onetime: number;
+    year?: number;
+  };
+  address?: {
+    district:
+      | "Bayangol"
+      | "Sukhbaatar"
+      | "Khan-uul"
+      | "Songino-Khairkhan"
+      | "Bayanzurkh"
+      | "Chingeltei"
+      | "Baganuur";
+    description: string;
+    coord?: number[];
+  };
+  timetable?: TimetableType;
+  discount?: DiscountType[];
+  spec?: {
+    wifi: boolean;
+    shower: boolean;
+    parking: boolean;
+  };
+  contact?: ContactType;
 }
 export interface TimetableType {
 	Monday: string;
@@ -70,6 +70,7 @@ export interface DiscountType {
 }
 
 export interface ContactType {
+
 	phonenumber?: number;
 	social?: string[];
 }
@@ -80,6 +81,7 @@ export interface FitnessProp {
 
 export interface AllFitnessProp {
 	data: FitnessType[];
+
 }
 
 // export interface SpecType {}

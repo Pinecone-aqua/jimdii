@@ -13,7 +13,9 @@ interface HeaderType {
 }
 
 export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
+
   user && console.log(user);
+
 
   return (
     <header className="bg-none sticky top-0 z-20 h-[10vh] flex items-center">
@@ -118,7 +120,6 @@ export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
                   <p className="text-sm">Log In</p>
                 </div>
               </Link>
-
             </div>
           )}
 
