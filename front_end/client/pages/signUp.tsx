@@ -1,7 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 
 export default function signUp(): JSX.Element {
@@ -15,10 +15,9 @@ export default function signUp(): JSX.Element {
   return (
     <div className="bg-black text-white w-full h-full signUpPage ">
       <div className="w-full flex justify-end">
-        <Link href={`/`}>
-
-        <button className="text-2xl mr-[20px]">X</button>
-        </Link>
+        <button className="text-2xl mr-[20px]" onClick={() => router.back()}>
+          X
+        </button>
       </div>
       <div className="flex justify-center items-center h-[80vh]">
         {!signBtn ? (

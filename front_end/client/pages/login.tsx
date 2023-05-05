@@ -18,8 +18,7 @@ export default function Login() {
       : setConfirmPass(false);
   }, [getSecondPass, getFirstPass]);
 
-  const btnStyle = " w-full h-20 bg-black text-white ";
-  const inputStyle = "w-full p-1 text-black border-2 rounded-lg";
+  const inputStyle = "w-full p-1 text-white bg-black  mb-[10px]";
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(e: any) {
@@ -62,9 +61,12 @@ export default function Login() {
     <div className="h-full  loginPage">
       {/* start new design */}
       <div className="w-full flex justify-end flex-row">
-        <Link href={`/`}>
-          <button className="text-2xl text-white mr-[20px]">X</button>
-        </Link>
+        <button
+          className="text-2xl text-white mr-[20px]"
+          onClick={() => router.back()}
+        >
+          X
+        </button>
       </div>
 
       <div className="flex justify-center items-center h-[80vh]">
@@ -101,6 +103,7 @@ export default function Login() {
                     className={inputStyle}
                     name="firstname"
                     required
+                    id="inputStyle"
                   />
                   <input
                     type="text"
@@ -108,6 +111,7 @@ export default function Login() {
                     className={inputStyle}
                     name="lastname"
                     required
+                    id="inputStyle"
                   />
                 </p>
 
@@ -117,6 +121,7 @@ export default function Login() {
                   className={inputStyle}
                   name="email"
                   required
+                  id="inputStyle"
                 />
                 <select className={`${inputStyle}`} name="gender" required>
                   <option value="male">Male</option>
@@ -130,6 +135,7 @@ export default function Login() {
                   name="password"
                   onChange={(e) => setFirstPass(e.target.value)}
                   required
+                  id="inputStyle"
                 />
                 <input
                   type="text"
@@ -142,28 +148,32 @@ export default function Login() {
                   onChange={(e) => setSecondPass(e.target.value)}
                   name="confirm"
                   required
+                  id="inputStyle"
                 />
-                
               </>
-              <button
-                type="submit"
-                className={`w-4/6 border-2 bg-green-300 p-2 rounded-lg text-black m-4`}
-              >
-                {!registerbtn ? "Register" : "Login"}
-              </button>
+              <div className="w-full flex justify-center">
+                <button
+                  type="submit"
+                  className={`w-full h-[48px] p-2  text-white mt-4 bg-[#4D9799]`}
+                >
+                  {!registerbtn ? "Register" : "Login"}
+                </button>
+              </div>
 
               <div className="flex justify-center items-center my-[5px] text-white">
                 <span>Or</span>
               </div>
-              <button
-                onClick={googleLoginHandler}
-                className="signbutton flex items-center relative"
-              >
-                <FaGoogle className="absolute left-5" />
-                <div className="flex justify-center w-full">
-                  <span>Sign Up with Google</span>
-                </div>
-              </button>
+              <div className="w-full flex justify-center">
+                <button
+                  onClick={googleLoginHandler}
+                  className="signbutton flex items-center relative"
+                >
+                  <FaGoogle className="absolute " />
+                  <div className="flex justify-center w-full">
+                    <span>Sign Up with Google</span>
+                  </div>
+                </button>
+              </div>
             </div>
           ) : (
             <div>
@@ -188,33 +198,36 @@ export default function Login() {
                   placeholder="Email"
                   className={inputStyle}
                   name="email"
+                  id="inputStyle"
                 />
                 <input
                   type="text"
                   placeholder="Password"
                   className={inputStyle}
                   name="password"
+                  id="inputStyle"
                 />
               </>
               <button
                 type="submit"
-                className={`w-4/6 border-2 bg-green-300 p-2 rounded-lg text-black m-4`}
+                className={`w-full h-[48px] p-2  text-white mt-4 bg-[#4D9799]`}
               >
                 {registerbtn ? "Register" : "Login"}
               </button>
               <div className="flex justify-center items-center my-[5px] text-white">
                 <span>Or </span>
               </div>
-
-              <button
-                onClick={googleLoginHandler}
-                className="signbutton flex items-center relative"
-              >
-                <FaGoogle className="absolute left-5" />
-                <div className="flex justify-center w-full">
-                  <span>Sign Up with Google</span>
-                </div>
-              </button>
+              <div className="w-full flex justify-center">
+                <button
+                  onClick={googleLoginHandler}
+                  className="signbutton flex items-center relative"
+                >
+                  <FaGoogle className="absolute " />
+                  <div className="flex justify-center w-full">
+                    <span>Sign Up with Google</span>
+                  </div>
+                </button>
+              </div>
             </div>
           )}
         </form>
