@@ -9,7 +9,6 @@ import Timetable from "@/components/subcomp/SingleFitness/Timetable";
 import FitnessPrice from "@/components/subcomp/SingleFitness/FitnessPrice";
 import Discount from "@/components/subcomp/SingleFitness/Discount";
 import ContactInfo from "@/components/subcomp/SingleFitness/ContactInfo";
-import Link from "next/link";
 import Spec from "@/components/subcomp/SingleFitness/Spec";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import axios from "axios";
@@ -21,7 +20,6 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   useDisclosure,
   Button,
   IconButton,
@@ -142,7 +140,7 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
         </div>
         <>
           <p className="flex items-center my-5 text-xs text-white">
-            <IoLocationSharp size={"1rem"} /> {fitness.address.description}
+            <IoLocationSharp size={"1rem"} /> {fitness.address?.description}
           </p>
         </>
         <div className="lg:flex justify-between gap-8">
@@ -254,7 +252,7 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                           />
                         </form>
                       </div>
-                      {/* <div>
+                      <div>
                         <label htmlFor="year">Жил: </label>
                         <div>
                           <input
@@ -278,16 +276,19 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                             icon={<AddIcon />}
                           />
                         </div>
-                      </div> */}
+                      </div>
                     </div>
                     <div>
                       <p>
-                        Нийт хугацаа: {day} өдөр, {month} сар
+                        Нийт хугацаа: {day} өдөр, {month} сар, {year} жил
                       </p>
                       <p>
                         Нийт төлбөр:{" "}
-                        {fitness.price?.onetime * day +
-                          fitness.price?.oneMonth * month}
+                        {fitness.price?.year &&
+                          fitness.price.year * year + fitness.price.onetime &&
+                          fitness.price.onetime * day +
+                            fitness.price.oneMonth &&
+                          fitness.price.oneMonth * month}
                       </p>
                     </div>
                   </ModalBody>

@@ -13,7 +13,7 @@ interface HeaderType {
 }
 
 export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
-  const router = useRouter();
+  // const router = useRouter();
   // user && console.log(user);
 
   return (
