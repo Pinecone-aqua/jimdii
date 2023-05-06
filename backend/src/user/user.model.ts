@@ -46,17 +46,24 @@ export class User {
   @Prop({ type: String })
   gender: string;
 
-  @Prop({ type: String, default: 'client' })
-  type: string;
+  // @Prop({ type: String, default: 'client' })
+  // type: string;
 
-  @Prop({ type: String })
-  fitness_id?: string;
+  // @Prop({ type: String })
+  // fitness_id?: string;
 
   @Prop({ type: String })
   birth_date?: string;
 
   @Prop({ type: String })
   created_date: string;
+
+  @Prop({ default: 'CLIENT' })
+  role: 'CLIENT' | 'MODERATOR' | 'ADMIN';
+}
+
+export class UpdateUserInput extends User {
+  _id: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

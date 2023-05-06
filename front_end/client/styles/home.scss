@@ -60,7 +60,26 @@
   transition-timing-function: ease-in-out;
   border-radius: 5px;
 }
+.signbutton {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  padding: 15px 50px;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
 
+  margin-bottom: 5px;
+}
+.signFBbutton {
+  width: 320px;
+  background-color: rgb(0, 114, 237);
+  color: black;
+  padding: 15px 50px;
+  transition: 0.3s;
+  transition-timing-function: ease-in-out;
+
+  margin-bottom: 5px;
+}
 .mainButton:hover {
   color: white;
   background: #26595b;

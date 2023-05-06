@@ -1,7 +1,7 @@
 import { TimetableType } from "@/util/types";
 
 interface PropsType {
-	timetable: TimetableType;
+	timetable: TimetableType | undefined;
 }
 
 export default function Timetable({ timetable }: PropsType) {
@@ -13,31 +13,31 @@ export default function Timetable({ timetable }: PropsType) {
 			<p className="text-lg font-bold">Цагийн хууварь:</p>
 			<div className={timetableStyle}>
 				<span className={spanStyle}>Mon</span>
-				{timetable.Monday}
+				{timetable?.Monday}
 			</div>
 			<div className={timetableStyle}>
 				<span className={spanStyle}>Tue</span>
-				{timetable.Tuesday}
+				{timetable?.Tuesday}
 			</div>
 			<div className={timetableStyle}>
 				<span className={spanStyle}>Wed</span>
-				{timetable.Wednesday}
+				{timetable?.Wednesday}
 			</div>
 			<div className={timetableStyle}>
 				<span className={spanStyle}>Thu</span>
-				{timetable.Thursday}
+				{timetable?.Thursday}
 			</div>
 			<div className={timetableStyle}>
 				<span className={spanStyle}>Fri</span>
-				{timetable.Friday}
+				{timetable?.Friday}
 			</div>
 			<div className={timetableStyle}>
 				<span className={spanStyle}>Sat</span>
-				{timetable.Saturday}
+				{timetable?.Saturday}
 			</div>
 			<div className={timetableStyle}>
 				<span className={spanStyle}>Sun</span>
-				{timetable.Sunday}
+				{timetable?.Sunday}
 			</div>
 		</div>
 	);

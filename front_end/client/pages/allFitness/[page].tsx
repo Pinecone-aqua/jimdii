@@ -1,10 +1,17 @@
 import AllCard from "@/components/AllCard";
-import React from "react";
+import Pagination from "@/components/Pagination";
+import { AllFitnessProp, FitnessType } from "@/util/types";
+import axios from "axios";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 
-export default function allFitness(): JSX.Element {
+export default function allFitness({
+  data: fitnesses,
+}: {
+  data: FitnessType[];
+}): JSX.Element {
   return (
-    <div className=" h-full allFitness">
-      <div className="w-[60%] mx-auto  h-[50vh] sm:h-[40vh]">
+    <div className="min-h-screen allFitness">
+      <div className="container mx-auto h-[50vh] sm:h-[40vh]">
         <div className="text-white">
           <h2 className="text-center text-[30px] sm:text-[38px] pt-[50px]">
             Gym
@@ -80,10 +87,36 @@ export default function allFitness(): JSX.Element {
         </div>
       </div>
       <div className="w-[60%] mx-auto lg:bg-black  ">
-        <AllCard />
-        <AllCard />
-        <AllCard />
+        {fitnesses.map((fitness: FitnessType, index: number) => (
+          <AllCard fitness={fitness} key={index} />
+        ))}
       </div>
+      <Pagination />
     </div>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async ({}) => {
+  const res = await axios.get("http://localhost:7003/fitness/pages");
+  const paths = await res.data.map((page: string) => ({
+    params: { page: page },
+  }));
+  return {
+    paths,
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps<AllFitnessProp> = async ({
+  params,
+}: GetStaticPropsContext) => {
+  const res = await axios.get(
+    `http://localhost:7003/fitness/getAllfitness${params?.page}`
+  );
+  const fitnesses = await res.data;
+  return {
+    props: {
+      data: fitnesses,
+    },
+  };
+};

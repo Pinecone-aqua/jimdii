@@ -1,7 +1,7 @@
 import { ContactType } from "@/util/types";
 
 interface PropsType {
-	contact: ContactType;
+	contact: ContactType | undefined;
 }
 
 export default function ContactInfo({ contact }: PropsType) {
@@ -9,7 +9,7 @@ export default function ContactInfo({ contact }: PropsType) {
 		<div className="flex md:flex-col">
 			<div className="flex gap-2">
 				<span>Утас:</span>
-				{contact.phoneNumber}
+				{contact?.phonenumber}
 			</div>
 			{/* <div className="flex">{contact.social}</div> */}
 		</div>

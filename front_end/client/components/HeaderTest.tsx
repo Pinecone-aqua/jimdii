@@ -1,13 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from "react";
 import Link from "next/link";
 import LoginLogo from "./subcomp/LoginLogo";
 import { Dropdown } from "flowbite-react";
 import MainResLogo from "./subcomp/MainResLogo";
+import Cookies from "js-cookie";
 
-export default function HeaderTest(): JSX.Element {
+interface HeaderType {
+	user: any;
+	setUser: (arg: any) => void;
+}
+
+export default function HeaderTest({ user, setUser }: HeaderType): JSX.Element {
+	user && console.log(user);
+
 	return (
 		<header className="bg-none sticky top-0 z-20 h-[10vh] flex items-center">
-			<div className="w-[80%] mx-auto  flex items-center justify-between">
+			<div className="container mx-auto  flex items-center justify-between">
 				<Dropdown
 					label="//"
 					className="bg-transparent text-black"
@@ -69,7 +79,7 @@ export default function HeaderTest(): JSX.Element {
 							Нүүр хуудас
 						</Link>
 						<Link
-							href={`/allFitness`}
+							href={`/allFitness/1`}
 							className="hover:text-[#4D9799]">
 							Gym захиалах
 						</Link>
@@ -85,15 +95,53 @@ export default function HeaderTest(): JSX.Element {
 						</Link>
 					</div>
 				</nav>
-				<div className="flex gap-[20px]">
-					<Link
-						href={`/login`}
-						className="flex items-center">
-						<div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
-							<LoginLogo />
-							<p className="text-sm">Log In</p>
+				<div className="w-1/4 flex justify-between items-center">
+					{/* <Link href={`/login`} className="flex items-center">
+            <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+              <LoginLogo />
+              <p className="text-sm">Log In</p>
+            </div>
+          </Link> */}
+					{user ? (
+						<div className="flex items-center w-1/2 justify-between">
+							<Link
+								href={`/#`}
+								className="flex w-1/2 items-center justify-between">
+								<div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+									<picture>
+										<img
+											className="w-[100px]"
+											src={user.image}
+											alt=""
+										/>
+									</picture>
+									<p className="text-sm">Hi {user.name}</p>
+								</div>
+							</Link>
+							<div>
+								<div
+									className="cursor-pointer text-main"
+									onClick={() => {
+										Cookies.remove("token");
+										setUser("");
+									}}>
+									logout
+								</div>
+							</div>
 						</div>
-					</Link>
+					) : (
+						<div className="flex gap-5">
+							<Link
+								href={`/signUp`}
+								className="flex items-center">
+								<div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+									<LoginLogo />
+									<p className="text-sm">Log In</p>
+								</div>
+							</Link>
+						</div>
+					)}
+
 					<Link
 						href={`/signUpGym`}
 						className="hidden lg:flex">
