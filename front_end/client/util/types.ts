@@ -5,8 +5,7 @@ export interface UserType {
   username: string;
   image?: string;
   phone?: number;
-  email: string;
-  password: string;
+  password?: string;
   address?: {
     coord: number[];
   };
