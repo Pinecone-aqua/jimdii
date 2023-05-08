@@ -1,7 +1,7 @@
 export default function UserDetail() {
-	return (
-		<div>
-			<form action="">
+  return (
+    <div>
+      {/* <form action="">
 				<input
 					type="text"
 					placeholder="username"
@@ -14,7 +14,8 @@ export default function UserDetail() {
 					type="text"
 					placeholder="username"
 				/>
-			</form>
-		</div>
-	);
+			</form> */}
+      profile
+    </div>
+  );
 }

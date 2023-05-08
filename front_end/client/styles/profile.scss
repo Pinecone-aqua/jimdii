@@ -1,0 +1,20 @@
+.profile {
+  border: 1px red solid;
+  box-sizing: border-box;
+  &-header {
+    border: 1px $main solid;
+    &-background {
+      border: 3px blueviolet solid;
+    }
+    &-image {
+      border: 1px red solid;
+    }
+    &-navbar {
+      border: 1px blue solid;
+    }
+  }
+  &-body {
+    margin-top: 10px;
+    border: 1px green solid;
+  }
+}

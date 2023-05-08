@@ -19,11 +19,13 @@ export default function Layout({ children }: PropType) {
 
   useEffect(() => {
     if (router.asPath === "/allFitness") router.push("allFitness/1");
-  }, [router]);
+    if (!token && router.asPath === "/profile") router.push("/login");
+  }, [router, token]);
 
   useEffect(() => {
     if (token) setUser(jwtDecode(token));
   }, [token]);
+
   return (
     <div>
       <Head>
