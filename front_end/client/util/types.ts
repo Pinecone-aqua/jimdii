@@ -79,3 +79,9 @@ export interface FitnessProp {
 export interface AllFitnessProp {
   data: FitnessType[];
 }
+
+export interface TmpMembership {
+  fitnessName: string;
+  startDate: string;
+  expireDate: string;
+}
