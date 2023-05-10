@@ -2,7 +2,7 @@ import Membership from "@/components/profile/ActiveMembership";
 import History from "@/components/profile/MembershipHistory";
 import UserDetail from "@/components/profile/UserDetail";
 
-export const ProfileButton = [
+export const ProfileNavbar = [
   {
     name: "Profile",
     component: <UserDetail />,

@@ -1,12 +1,11 @@
 import { useUser } from "@/context/UserContext";
-import { ProfileButton } from "../constants/Pages";
+import { ProfileNavbar } from "../constants/Pages";
 import { useState } from "react";
 import Image from "next/image";
 
 export default function Profile() {
-  const [currentBtn, setCurrentBtn] = useState(ProfileButton[0]);
+  const [currentBtn, setCurrentBtn] = useState(ProfileNavbar[0]);
   const { currentUser } = useUser();
-  console.log(currentUser);
 
   return (
     <div className="bg-gray-900 min-h-screen text-white py-5">
@@ -17,7 +16,7 @@ export default function Profile() {
           </div>
           <nav className="profile-header-navbar w-full">
             <ul className="flex bg-gray-700 h-[60px] items-end p-2 gap-10 justify-between md:w-1/2 xl:w-1/3 profile-header-list">
-              {ProfileButton.map((button, i: number) => (
+              {ProfileNavbar.map((button, i: number) => (
                 <li
                   key={i}
                   onClick={() => setCurrentBtn(button)}
