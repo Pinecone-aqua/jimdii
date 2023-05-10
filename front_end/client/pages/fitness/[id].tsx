@@ -27,93 +27,25 @@ import {
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 // import { MinusIcon } from "@chakra-ui/icons/dist/Minus";
 
+const arr = [
+  ["onetime", "1хоног"],
+  ["oneMonth", "sar"],
+  ["threeMonth", "3sar"],
+  ["sixMonth", "6sar"],
+];
+
 export default function SingleGym({ data: fitness }: { data: FitnessType }) {
   const [changeImg, setChangeImg] = useState(0);
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [disabled, setDisabled] = useState([]);
 
-  const [day, setDay] = useState(0);
-  const [month, setMonth] = useState(0);
-  const [year, setYear] = useState(0);
-  const dayRef = useRef(null);
-  const monthRef = useRef(null);
-  const yearRef = useRef(null);
+  console.log(fitness.price);
 
-  function handleDay() {
-    if (dayRef.current.value < 29) {
-      setDay(dayRef.current.value);
-    } else {
-      setDay(29);
-    }
+  function priceHandler(key) {
+    disabled !== key && setDisabled(key);
   }
-
-  function handleDayAdd() {
-    if (dayRef.current.value < 29) {
-      setDay(Number(dayRef.current.value) + 1);
-    } else {
-      setDay(29);
-    }
-  }
-
-  function handleDayMinus() {
-    if (dayRef.current.value > 0 && dayRef.current.value != null) {
-      setDay(Number(dayRef.current.value) - 1);
-    } else {
-      setDay(0);
-    }
-  }
-
-  function handleMonth() {
-    if (monthRef.current.value < 11) {
-      setMonth(monthRef.current.value);
-    } else {
-      setMonth(11);
-    }
-    // if (monthRef.current.value == null) {
-    //   setMonth(0);
-    // } else {
-    //   setMonth(monthRef.current.value);
-    // }
-  }
-
-  function handleMonthAdd() {
-    if (monthRef.current.value < 11) {
-      setMonth(Number(monthRef.current.value) + 1);
-    } else {
-      setMonth(11);
-    }
-  }
-
-  function handleMonthMinus() {
-    if (monthRef.current.value > 0) {
-      setMonth(Number(monthRef.current.value) - 1);
-    } else {
-      setMonth(0);
-    }
-  }
-  function handleYear() {
-    if (yearRef.current.value < 5) {
-      setYear(yearRef.current.value);
-    } else {
-      setYear(5);
-    }
-  }
-
-  function handleYearAdd() {
-    if (yearRef.current.value < 5) {
-      setYear(Number(yearRef.current.value) + 1);
-    } else {
-      setYear(5);
-    }
-  }
-
-  function handleYearMinus() {
-    if (yearRef.current.value > 0) {
-      setYear(Number(yearRef.current.value) - 1);
-    } else {
-      setYear(0);
-    }
-  }
+  console.log(disabled);
 
   if (!fitness) fitness = Fitnesses[0];
 
@@ -198,7 +130,28 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                     <h3 className="text-center font-bold mb-10">
                       Хугацаагаа сонгоно уу
                     </h3>
-                    <div className="border-b border-black pb-10">
+                    <div className="flex flex-col justify-center items-center">
+                      {fitness.price &&
+                        Object.entries(fitness.price).map((key, i: number) =>
+                          arr.map(
+                            (test) =>
+                              test[0] === key[0] && (
+                                <button
+                                  className={
+                                    disabled[0] == key[0]
+                                      ? `secondaryButton`
+                                      : `mainButton`
+                                  }
+                                  key={i}
+                                  onClick={() => priceHandler(key)}
+                                >
+                                  {test[1]}:{key[1]}
+                                </button>
+                              )
+                          )
+                        )}
+                    </div>
+                    {/* <div className="border-b border-black pb-10">
                       <div>
                         <label htmlFor="day">Хоног: </label>
                         <div>
@@ -277,11 +230,11 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                           />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     <div>
-                      <p>
+                      {/* <p>
                         Нийт хугацаа: {day} өдөр, {month} сар, {year} жил
-                      </p>
+                      </p> */}
                       <p>
                         Нийт төлбөр:{" "}
                         {fitness.price?.year &&
@@ -300,9 +253,6 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                     <Button
                       onClick={() => {
                         onClose();
-                        setDay(0);
-                        setMonth(0);
-                        setYear(0);
                       }}
                     >
                       Цуцлах
