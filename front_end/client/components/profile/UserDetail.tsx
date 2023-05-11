@@ -17,31 +17,10 @@ export default function UserDetail() {
 
   const { currentUser } = useUser();
 
-  const inputStyle = `focus:outline-main mx-2 p-2 bg-${
-    editState === EditedState.edited ? "white" : "black"
-  } text-${
-    editState === EditedState.edited ? "black" : "white"
-  } min-w-[300px] caret-main`;
-
-  useEffect(() => {
-    if (currentUser) {
-      setUserDetailState(currentUser);
-    }
-  }, [currentUser]);
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function handleEditState(e: any) {
-    if (e.target.innerText === EditedState.default) {
-      setEditState(EditedState.edited);
-      return;
-    }
-    if (e.target.innerText === EditedState.edited) {
-      console.log("asd");
-
-      try {
-        const token = Cookies.get("token");
-        if (!token) return;
-        console.log(token);
+  function editHandler() {
+    if (!editUserDetail) {
+      setEditUserDetail(true);
+      console.log("editable");
 
         axios
           .patch(
