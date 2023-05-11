@@ -5,10 +5,12 @@
 
 // import Banner from "@/components/Banner";
 import Card from "@/components/Card";
+import Footer from "@/components/Footer";
 import Logo from "@/components/subcomp/Logo";
 import Service from "@/components/subcomp/Service";
 import { FitnessType } from "@/util/types";
 import axios from "axios";
+import Link from "next/link";
 // import "../styles/index.css";
 
 interface PropsType {
@@ -62,7 +64,10 @@ export default function Home(props: PropsType) {
 						/>
 					))}
 				</div>
+				<Link href={`allFitness/1`}>
 				<button className="mainButton">Бүх жийм үзэх</button>
+				</Link>
+				
 			</section>
 			<Service />
 			<section className="bg-black flex flex-col items-center py-10">
@@ -151,6 +156,7 @@ export default function Home(props: PropsType) {
 					</div>
 				</div>
 			</section>
+			<Footer/>
 		</main>
 	);
 }
