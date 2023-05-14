@@ -31,88 +31,14 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
   const [changeImg, setChangeImg] = useState(0);
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [disabled, setDisabled] = useState([]);
+  const [total, setTotal] = useState([]);
 
-  const [day, setDay] = useState(0);
-  const [month, setMonth] = useState(0);
-  const [year, setYear] = useState(0);
-  const dayRef = useRef(null);
-  const monthRef = useRef(null);
-  const yearRef = useRef(null);
+  console.log(fitness.price);
 
-  function handleDay() {
-    if (dayRef.current.value < 29) {
-      setDay(dayRef.current.value);
-    } else {
-      setDay(29);
-    }
-  }
-
-  function handleDayAdd() {
-    if (dayRef.current.value < 29) {
-      setDay(Number(dayRef.current.value) + 1);
-    } else {
-      setDay(29);
-    }
-  }
-
-  function handleDayMinus() {
-    if (dayRef.current.value > 0 && dayRef.current.value != null) {
-      setDay(Number(dayRef.current.value) - 1);
-    } else {
-      setDay(0);
-    }
-  }
-
-  function handleMonth() {
-    if (monthRef.current.value < 11) {
-      setMonth(monthRef.current.value);
-    } else {
-      setMonth(11);
-    }
-    // if (monthRef.current.value == null) {
-    //   setMonth(0);
-    // } else {
-    //   setMonth(monthRef.current.value);
-    // }
-  }
-
-  function handleMonthAdd() {
-    if (monthRef.current.value < 11) {
-      setMonth(Number(monthRef.current.value) + 1);
-    } else {
-      setMonth(11);
-    }
-  }
-
-  function handleMonthMinus() {
-    if (monthRef.current.value > 0) {
-      setMonth(Number(monthRef.current.value) - 1);
-    } else {
-      setMonth(0);
-    }
-  }
-  function handleYear() {
-    if (yearRef.current.value < 5) {
-      setYear(yearRef.current.value);
-    } else {
-      setYear(5);
-    }
-  }
-
-  function handleYearAdd() {
-    if (yearRef.current.value < 5) {
-      setYear(Number(yearRef.current.value) + 1);
-    } else {
-      setYear(5);
-    }
-  }
-
-  function handleYearMinus() {
-    if (yearRef.current.value > 0) {
-      setYear(Number(yearRef.current.value) - 1);
-    } else {
-      setYear(0);
-    }
+  function priceHandler(key, test) {
+    disabled !== key && setDisabled(key);
+    setTotal(test);
   }
 
   if (!fitness) fitness = Fitnesses[0];
@@ -198,98 +124,30 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                     <h3 className="text-center font-bold mb-10">
                       Хугацаагаа сонгоно уу
                     </h3>
-                    <div className="border-b border-black pb-10">
-                      <div>
-                        <label htmlFor="day">Хоног: </label>
-                        <div>
-                          <input
-                            ref={dayRef}
-                            onChange={handleDay}
-                            className="border border-black"
-                            type="number"
-                            id="day"
-                            name="day"
-                            // defaultValue={0}
-                            value={day}
-                            max="30"
-                            required
-                          />
-                          <IconButton
-                            onClick={handleDayMinus}
-                            aria-label="Add to friends"
-                            icon={<MinusIcon />}
-                          />
-                          <IconButton
-                            onClick={handleDayAdd}
-                            aria-label="Add to friends"
-                            icon={<AddIcon />}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label htmlFor="month">Сар: </label>
-                        <form>
-                          <input
-                            ref={monthRef}
-                            onChange={handleMonth}
-                            className="border border-black"
-                            type="number"
-                            id="month"
-                            name="month"
-                            // min={0}
-                            value={month}
-                            required
-                          />
-                          <IconButton
-                            onClick={handleMonthMinus}
-                            aria-label="Add to friends"
-                            icon={<MinusIcon />}
-                          />
-                          <IconButton
-                            onClick={handleMonthAdd}
-                            aria-label="Add to friends"
-                            icon={<AddIcon />}
-                          />
-                        </form>
-                      </div>
-                      <div>
-                        <label htmlFor="year">Жил: </label>
-                        <div>
-                          <input
-                            ref={yearRef}
-                            onChange={handleYear}
-                            className="border border-black"
-                            type="number"
-                            id="year"
-                            name="year"
-                            value={year}
-                            required
-                          />
-                          <IconButton
-                            onClick={handleYearMinus}
-                            aria-label="Add to friends"
-                            icon={<MinusIcon />}
-                          />
-                          <IconButton
-                            onClick={handleYearAdd}
-                            aria-label="Add to friends"
-                            icon={<AddIcon />}
-                          />
-                        </div>
-                      </div>
+                    <div className="flex flex-col justify-center items-center gap-2">
+                      {fitness.price &&
+                        Object.entries(fitness.price).map((key, i: number) =>
+                          arr.map(
+                            (test) =>
+                              test[0] === key[0] && (
+                                <button
+                                  className={
+                                    disabled[0] == key[0]
+                                      ? `mainButton !bg-slate-600`
+                                      : `mainButton`
+                                  }
+                                  key={i}
+                                  onClick={() => priceHandler(key, test)}
+                                >
+                                  {test[1]}:{key[1]}
+                                </button>
+                              ),
+                          ),
+                        )}
                     </div>
                     <div>
-                      <p>
-                        Нийт хугацаа: {day} өдөр, {month} сар, {year} жил
-                      </p>
-                      <p>
-                        Нийт төлбөр:{" "}
-                        {fitness.price?.year &&
-                          fitness.price.year * year + fitness.price.onetime &&
-                          fitness.price.onetime * day +
-                            fitness.price.oneMonth &&
-                          fitness.price.oneMonth * month}
-                      </p>
+                      <p>Нийт хугацаа: {total[1]}</p>
+                      <p>Нийт төлбөр: {disabled[1]}</p>
                     </div>
                   </ModalBody>
 
@@ -347,7 +205,7 @@ export const getStaticProps: GetStaticProps<FitnessProp> = async ({
 }: GetStaticPropsContext) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:7003/fitness/getfitness${params?.id}`
+      `http://localhost:7003/fitness/getfitness${params?.id}`,
     );
     return {
       props: {
