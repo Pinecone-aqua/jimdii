@@ -39,11 +39,13 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [disabled, setDisabled] = useState([]);
+  const [total, setTotal] = useState([]);
 
   console.log(fitness.price);
 
-  function priceHandler(key) {
+  function priceHandler(key, test) {
     disabled !== key && setDisabled(key);
+    setTotal(test);
   }
   console.log(disabled);
 
@@ -130,7 +132,7 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                     <h3 className="text-center font-bold mb-10">
                       Хугацаагаа сонгоно уу
                     </h3>
-                    <div className="flex flex-col justify-center items-center">
+                    <div className="flex flex-col justify-center items-center gap-2">
                       {fitness.price &&
                         Object.entries(fitness.price).map((key, i: number) =>
                           arr.map(
@@ -139,11 +141,11 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                                 <button
                                   className={
                                     disabled[0] == key[0]
-                                      ? `secondaryButton`
+                                      ? `mainButton !bg-slate-600`
                                       : `mainButton`
                                   }
                                   key={i}
-                                  onClick={() => priceHandler(key)}
+                                  onClick={() => priceHandler(key, test)}
                                 >
                                   {test[1]}:{key[1]}
                                 </button>
@@ -151,98 +153,9 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                           )
                         )}
                     </div>
-                    {/* <div className="border-b border-black pb-10">
-                      <div>
-                        <label htmlFor="day">Хоног: </label>
-                        <div>
-                          <input
-                            ref={dayRef}
-                            onChange={handleDay}
-                            className="border border-black"
-                            type="number"
-                            id="day"
-                            name="day"
-                            // defaultValue={0}
-                            value={day}
-                            max="30"
-                            required
-                          />
-                          <IconButton
-                            onClick={handleDayMinus}
-                            aria-label="Add to friends"
-                            icon={<MinusIcon />}
-                          />
-                          <IconButton
-                            onClick={handleDayAdd}
-                            aria-label="Add to friends"
-                            icon={<AddIcon />}
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <label htmlFor="month">Сар: </label>
-                        <form>
-                          <input
-                            ref={monthRef}
-                            onChange={handleMonth}
-                            className="border border-black"
-                            type="number"
-                            id="month"
-                            name="month"
-                            // min={0}
-                            value={month}
-                            required
-                          />
-                          <IconButton
-                            onClick={handleMonthMinus}
-                            aria-label="Add to friends"
-                            icon={<MinusIcon />}
-                          />
-                          <IconButton
-                            onClick={handleMonthAdd}
-                            aria-label="Add to friends"
-                            icon={<AddIcon />}
-                          />
-                        </form>
-                      </div>
-                      <div>
-                        <label htmlFor="year">Жил: </label>
-                        <div>
-                          <input
-                            ref={yearRef}
-                            onChange={handleYear}
-                            className="border border-black"
-                            type="number"
-                            id="year"
-                            name="year"
-                            value={year}
-                            required
-                          />
-                          <IconButton
-                            onClick={handleYearMinus}
-                            aria-label="Add to friends"
-                            icon={<MinusIcon />}
-                          />
-                          <IconButton
-                            onClick={handleYearAdd}
-                            aria-label="Add to friends"
-                            icon={<AddIcon />}
-                          />
-                        </div>
-                      </div>
-                    </div> */}
                     <div>
-                      {/* <p>
-                        Нийт хугацаа: {day} өдөр, {month} сар, {year} жил
-                      </p> */}
-                      <p>
-                        Нийт төлбөр:{" "}
-                        {fitness.price?.year &&
-                          fitness.price.year * year + fitness.price.onetime &&
-                          fitness.price.onetime * day +
-                            fitness.price.oneMonth &&
-                          fitness.price.oneMonth * month}
-                      </p>
+                      <p>Нийт хугацаа: {total[1]}</p>
+                      <p>Нийт төлбөр: {disabled[1]}</p>
                     </div>
                   </ModalBody>
 
