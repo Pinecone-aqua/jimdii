@@ -32,8 +32,6 @@ export class FitnessController {
   @Get('getAllFitness:page')
   async getAllfitness(@Param('page') page: string) {
     try {
-      console.log(page);
-
       const result = await this.fitnessService.getAllfitness(page);
       return result;
     } catch (err) {

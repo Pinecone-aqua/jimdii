@@ -45,7 +45,7 @@ export default function Home(props: PropsType) {
         </div>
       </div>
 
-      <section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl h-72 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
+      <section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
         <p className="container mx-auto w-3/4 text-white ">
           "Эхлэх хамгийн зөв цаг нь өчигдөр байсан. Харин дараагийн хамгийн зөв
           цаг нь өнөөдөр юм."
@@ -151,8 +151,7 @@ export default function Home(props: PropsType) {
 
 export async function getStaticProps() {
   const res = await axios.get(
-    `http://localhost:7003/fitness/limitedFitness:limit`,
-
+    `http://localhost:7003/fitness/limitedFitness:limit`
   );
   const fitness = await res.data;
   return {
