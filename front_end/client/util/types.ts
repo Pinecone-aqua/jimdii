@@ -1,17 +1,15 @@
 export interface UserType {
-	username: {
-		firstname: string;
-		lastname: string;
-	};
-	phone?: number;
-	email: string;
-	password: string;
-	address?: {
-		coord: number[];
-	};
-	gender?: "male" | "female" | "other";
-	fitness_id?: string;
-	birth_date?: string;
+  id: string;
+  username: string;
+  phone?: number;
+  email: string;
+  password: string;
+  address?: {
+    coord: number[];
+  };
+  gender?: "male" | "female" | "other";
+  fitness_id?: string;
+  birth_date?: string;
 }
 
 export interface FitnessType {
@@ -47,41 +45,39 @@ export interface FitnessType {
   contact?: ContactType;
 }
 export interface TimetableType {
-	Monday: string;
-	Tuesday: string;
-	Wednesday: string;
-	Thursday: string;
-	Friday: string;
-	Saturday: string;
-	Sunday: string;
+  Monday: string;
+  Tuesday: string;
+  Wednesday: string;
+  Thursday: string;
+  Friday: string;
+  Saturday: string;
+  Sunday: string;
 }
 
 export interface PriceType {
-	onetime?: number;
-	oneMonth: number;
-	threeMonth?: number;
-	sixMonth?: number;
-	year?: number;
+  onetime?: number;
+  oneMonth: number;
+  threeMonth?: number;
+  sixMonth?: number;
+  year?: number;
 }
 
 export interface DiscountType {
-	name: string;
-	discount: number;
+  name: string;
+  discount: number;
 }
 
 export interface ContactType {
-
-	phonenumber?: number;
-	social?: string[];
+  phonenumber?: number;
+  social?: string[];
 }
 
 export interface FitnessProp {
-	data: FitnessType;
+  data: FitnessType;
 }
 
 export interface AllFitnessProp {
-	data: FitnessType[];
-
+  data: FitnessType[];
 }
 
 // export interface SpecType {}

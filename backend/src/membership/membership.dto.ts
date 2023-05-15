@@ -1,6 +1,6 @@
 export class MembershipDto {
-  public fitness_id!: string;
-  public user_id!: string;
+  public fitnessId!: string;
+  public userId!: string;
   public price!: {
     duration: string;
     price: number;
