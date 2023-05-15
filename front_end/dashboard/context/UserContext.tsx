@@ -22,44 +22,41 @@ export function useUser() {
   return useContext(UserContext);
 }
 
-interface UserProviderType {
+type PropType = {
   children: ReactNode;
-  children: ReactNode;
-}
+};
 
-export default function UserProvider({ children }: UserProviderType) {
-  const [currentUser, setCurrentUser] = useState<UserType | null>(null);
+type ContextType = {
+  loginHandler: () => void;
+  logoutHandler: () => void;
+};
+
+const UserContext = createContext<ContextType>({} as ContextType);
+
+export default function UserProvider({ children }: PropType) {
   const router = useRouter();
 
-  useEffect(() => {
-    const token = Cookies.get("aToken");
-    // if (!token && router.asPath !== "/login") {
-    //   router.push("/login");
-    //   return;
-    // }
-    if (token) {
-      try {
-        axios
-          .get("http://localhost:7003/user/checkToken?role=admin", {
-            headers: { Authorization: token },
-          })
-          .then(() => setCurrentUser(jwtDecode(token)))
-          .catch(() => (Cookies.remove("atoken"), setCurrentUser(null)));
-      } catch (err) {
-        console.log(err);
-      }
+  function loginHandler() {
+    try {
+      axios.get("http://localhost:7003/google-login").then((res) => {
+        router.push(res.data);
+      });
+    } catch (err) {
+      loginHandler();
     }
-  }, [router]);
+  }
 
   function logoutHandler() {
-    Cookies.remove("aToken");
-    setCurrentUser(null);
-    router.push("/login");
+    Cookies.remove("token");
   }
 
   return (
-    <UserContext.Provider value={{ currentUser, logoutHandler }}>
+    <UserContext.Provider value={{ loginHandler, logoutHandler }}>
       {children}
     </UserContext.Provider>
   );
+}
+
+export function useUser() {
+  return useContext(UserContext);
 }

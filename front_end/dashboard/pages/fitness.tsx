@@ -20,12 +20,12 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
 
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/${fitnesses.length}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/${fitnesses.length}`
         )
         .then(({ data }) =>
           data.message
             ? setShowLoadMore(false)
-            : setFitnesses([...fitnesses, ...data]),
+            : setFitnesses([...fitnesses, ...data])
         );
     } catch (err) {
       console.log(err);
@@ -38,8 +38,8 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
       .delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/delete${id}`)
       .then(() =>
         setFitnesses((fitnesses) =>
-          fitnesses.filter((fitness) => fitness._id !== id),
-        ),
+          fitnesses.filter((fitness) => fitness._id !== id)
+        )
       );
   }
 
@@ -100,7 +100,7 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
 export async function getStaticProps() {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/0`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/0`
     );
     return {
       props: {
