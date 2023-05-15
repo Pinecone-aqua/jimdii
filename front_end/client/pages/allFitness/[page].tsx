@@ -3,12 +3,43 @@ import Pagination from "@/components/Pagination";
 import { AllFitnessProp, FitnessType } from "@/util/types";
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
+import { useRouter } from "next/router";
 
-export default function allFitness({
+export default function AllFitness({
   data: fitnesses,
 }: {
   data: FitnessType[];
-}): JSX.Element {
+}) {
+  const router = useRouter();
+
+  async function testHandler(e: { target: { value: string } }) {
+    console.log("1", router);
+
+    router.push({
+      pathname: `/allFitness/${router.query.page}`,
+      query: { category: e.target.value },
+    });
+    console.log(router);
+    const res = await axios.get("http://localhost:7003/fitness/pages");
+    const paths = await res.data.map((page: string) => ({
+      params: { page },
+    }));
+    const category = [
+      {
+        params: {
+          category: "Bayangol",
+        },
+      },
+      { params: { category: "Sukhbaatar" } },
+      { params: { category: "Khan-uul" } },
+      { params: { category: "Songino-Khairkhan" } },
+      { params: { category: "Bayanzurkh" } },
+      { params: { category: "Chingeltei" } },
+      { params: { category: "Baganuur" } },
+    ];
+    console.log([...paths, ...category]);
+  }
+
   return (
     <div className="min-h-screen allFitness">
       <div className="container mx-auto h-[50vh] sm:h-[40vh]">
@@ -27,27 +58,34 @@ export default function allFitness({
         </div>
         <div className="sm:flex lg:w-[70%] m-auto ">
           <div className="border w-[100%] sm:w-[50%] h-[42px] flex">
-            <label
-              htmlFor="districts"
-              className="text-white border flex items-center"
-            >
-              Icon
-            </label>
             <select
               name="districts"
               id="districts"
               className="h-full w-[100%] bg-transparent text-white"
-        
+              defaultValue={router.query.category}
+              onChange={testHandler}
             >
-              <option value="Бүх дүүрэг/сум..." className="w-[50%]">
-                Бүх дүүрэг/сум...
+              <option value="Бүх дүүрэг" className="w-[50%]">
+                Бүх дүүрэг
               </option>
-              <option value="Bayangol" className="text-black">Bayangol</option>
-              <option value="Khan-uul" className="text-black">Khan-uul</option>
-              <option value="Bayanzurkh" className="text-black">Bayanzurkh</option>
-              <option value="Sukhbaatar" className="text-black">Sukhbaatar</option>
-              <option value="Songino-Khairkhan" className="text-black">Songino-Khairkhan</option>
-              <option value="Chingeltei" className="text-black">Chingeltei</option>
+              <option value="Bayangol" className="text-black">
+                Bayangol
+              </option>
+              <option value="Khan-uul" className="text-black">
+                Khan-uul
+              </option>
+              <option value="Bayanzurkh" className="text-black">
+                Bayanzurkh
+              </option>
+              <option value="Sukhbaatar" className="text-black">
+                Sukhbaatar
+              </option>
+              <option value="Songino-Khairkhan" className="text-black">
+                Songino-Khairkhan
+              </option>
+              <option value="Chingeltei" className="text-black">
+                Chingeltei
+              </option>
             </select>
           </div>
           <div className="border w-[100%] sm:w-[50%] h-[42px]">
@@ -99,9 +137,23 @@ export default function allFitness({
 
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   const res = await axios.get("http://localhost:7003/fitness/pages");
-  const paths = await res.data.map((page: string) => ({
-    params: { page: page },
+  const pages = await res.data.map((page: string) => ({
+    params: { page },
   }));
+  const category = [
+    {
+      params: {
+        category: "Bayangol",
+      },
+    },
+    { params: { category: "Sukhbaatar" } },
+    { params: { category: "Khan-uul" } },
+    { params: { category: "Songino-Khairkhan" } },
+    { params: { category: "Bayanzurkh" } },
+    { params: { category: "Chingeltei" } },
+    { params: { category: "Baganuur" } },
+  ];
+  const paths = [...pages, ...category];
   return {
     paths,
     fallback: "blocking",
@@ -111,13 +163,23 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
 export const getStaticProps: GetStaticProps<AllFitnessProp> = async ({
   params,
 }: GetStaticPropsContext) => {
-  const res = await axios.get(
-    `http://localhost:7003/fitness/getAllfitness${params?.page}`
-  );
-  const fitnesses = await res.data;
-  return {
-    props: {
-      data: fitnesses,
-    },
-  };
+  try {
+    const res = await axios.get(
+      `http://localhost:7003/fitness/getAllfitness/?page=${
+        params?.page
+      }&category=${params?.category || ""}`
+    );
+    const fitnesses = await res.data;
+    return {
+      props: {
+        data: fitnesses,
+      },
+    };
+  } catch (err) {
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
 };
