@@ -15,7 +15,9 @@ export default function signUpGym(): JSX.Element {
       description: e.target.description.value,
       price: {
         oneMonth: e.target.oneMonth.value,
+        threeMonth: e.target.threeMonth.value,
         year: e.target.year.value,
+        onetime: e.target.onetime.value,
       },
       address: {
         district: e.target.districts.value,
