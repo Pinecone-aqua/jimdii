@@ -29,7 +29,8 @@ export default function UserDetail() {
 		}
 	}, [currentUser]);
 
-	function handleEditState(e) {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	function handleEditState(e: any) {
 		if (e.target.innerText === EditedState.default) {
 			setEditState(EditedState.edited);
 			return;

@@ -26,7 +26,7 @@ export class UserController {
       const result = this.userService.checkUser(query);
       return result;
     } catch (err) {
-      console.log(err);
+      return err;
     }
   }
 
@@ -51,10 +51,10 @@ export class UserController {
       };
       const token = this.jwtService.sign(payload);
 
-      res
-        .status(200)
-        .cookie('token', token)
-        .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+      // res
+      //   .status(200)
+      //   .cookie('token', token)
+      //   .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
     } catch (err) {
       throw new BadRequestException(err.message);
     }

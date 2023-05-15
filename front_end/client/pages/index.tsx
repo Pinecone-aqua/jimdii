@@ -5,13 +5,16 @@
 
 // import Banner from "@/components/Banner";
 import Card from "@/components/Card";
+import Footer from "@/components/Footer";
 import Logo from "@/components/subcomp/Logo";
 import Service from "@/components/subcomp/Service";
 import { FitnessType } from "@/util/types";
 import axios from "axios";
+import Link from "next/link";
 // import "../styles/index.css";
 
 interface PropsType {
+	fitness: FitnessType[];
 	fitness: FitnessType[];
 }
 export default function Home(props: PropsType) {
