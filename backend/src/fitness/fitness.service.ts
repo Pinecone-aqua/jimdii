@@ -24,7 +24,8 @@ export class FitnessService {
       .select({ name: 1, _id: 1, image: 1, price: 1 });
   }
 
-  async getAllfitness(page: string): Promise<any> {
+  async getAllfitness(query): Promise<any> {
+    const { page, category } = query;
     const num = Number(page);
     const allFitness = await this.fitnessModel
       .find({})

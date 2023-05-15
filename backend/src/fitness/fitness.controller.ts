@@ -5,7 +5,6 @@ import {
   Query,
   Delete,
   Param,
-  Patch,
   Body,
   Post,
   UseInterceptors,
@@ -29,8 +28,8 @@ export class FitnessController {
     }
   }
 
-  @Get('getAllFitness:page')
-  async getAllfitness(@Param('page') page: string) {
+  @Get('getAllFitness/')
+  async getAllfitness(@Query() query: string) {
     try {
       const result = await this.fitnessService.getAllfitness(page);
       return result;
