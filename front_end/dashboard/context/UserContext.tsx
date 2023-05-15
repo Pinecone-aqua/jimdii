@@ -1,45 +1,41 @@
-import axios from "axios";
+import { UserType } from "@/util/types";
 import Cookies from "js-cookie";
-import { useRouter } from "next/router";
-import { createContext, useContext } from "react";
+import jwtDecode from "jwt-decode";
+import React, {
+	ReactNode,
+	createContext,
+	useContext,
+	useEffect,
+	useState,
+} from "react";
 
-import { ReactNode } from "react";
-
-type PropType = {
-  children: ReactNode;
-};
-
-type ContextType = {
-  loginHandler: () => void;
-  logoutHandler: () => void;
-};
-
-const UserContext = createContext<ContextType>({} as ContextType);
-
-export default function UserProvider({ children }: PropType) {
-  const router = useRouter();
-
-  function loginHandler() {
-    try {
-      axios.get("http://localhost:7003/google-login").then((res) => {
-        router.push(res.data);
-      });
-    } catch (err) {
-      loginHandler();
-    }
-  }
-
-  function logoutHandler() {
-    Cookies.remove("token");
-  }
-
-  return (
-    <UserContext.Provider value={{ loginHandler, logoutHandler }}>
-      {children}
-    </UserContext.Provider>
-  );
+interface UserContextType {
+	currentUser: UserType | null;
 }
 
+const UserContext = createContext<UserContextType>({} as UserContextType);
+
 export function useUser() {
-  return useContext(UserContext);
+	return useContext(UserContext);
+}
+
+interface UserProviderType {
+	children: ReactNode;
+}
+
+export default function UserProvider({ children }: UserProviderType) {
+	const [currentUser, setCurrentUser] = useState<UserType | null>(null);
+
+	useEffect(() => {
+		const token = Cookies.get("token");
+		if (token) {
+			setCurrentUser(jwtDecode(token));
+		}
+	}, []);
+
+	return (
+		<UserContext.Provider value={{ currentUser }}>
+			{children}
+		</UserContext.Provider>
+	);
 }
