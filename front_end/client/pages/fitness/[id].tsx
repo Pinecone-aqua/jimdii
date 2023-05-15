@@ -165,8 +165,10 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                                 >
                                   {test[1]}:{key[1]}
                                 </button>
+
                               )
                           )
+
                         )}
                     </div>
                     <div>
@@ -226,7 +228,7 @@ export const getStaticProps: GetStaticProps<FitnessProp> = async ({
 }: GetStaticPropsContext) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:7003/fitness/getfitness${params?.id}`
+      `http://localhost:7003/fitness/getfitness${params?.id}`,
     );
     return {
       props: {

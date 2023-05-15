@@ -3,10 +3,9 @@ import React, { ReactNode, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 // import Banner from "./Banner";
-
-import HeaderTest from "./HeaderTest";
 import jwtDecode from "jwt-decode";
 import { useRouter } from "next/router";
+import Header from "./Header";
 
 type PropType = {
   children: ReactNode;
@@ -34,7 +33,7 @@ export default function Layout({ children }: PropType) {
         <link rel="icon" href="favicon.io" />
       </Head>
 
-      <HeaderTest user={user} setUser={setUser} />
+      <Header user={user} setUser={setUser} />
       <main>{children}</main>
     </div>
   );

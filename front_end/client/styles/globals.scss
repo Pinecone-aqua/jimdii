@@ -40,7 +40,17 @@
   border-bottom: 1px solid white;
   transition: 0.4;
 }
-
+#input_Style {
+  background-color: black;
+  border-bottom: 1px solid white;
+  transition: 0.4;
+  margin-bottom: 10px;
+}
+#input_Style:focus {
+  outline: none;
+  border-bottom: 1px solid #4d9799;
+  transition: 0.4;
+}
 #inputStyle:focus {
   outline: none;
   border-bottom: 1px solid #4d9799;

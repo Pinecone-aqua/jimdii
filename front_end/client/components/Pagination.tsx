@@ -30,7 +30,7 @@ export default function Pagination() {
 
   return (
     <div className="flex justify-center items-center m-2 text-xs text-white">
-      <div className="flex items-end justify-center gap-2 w-1/2">
+      <div className="flex items-end justify-center gap-2 w-3/4">
         {lastPageNum > 1 && (
           <>
             <div className="flex gap-2 w-2/7">
@@ -74,7 +74,7 @@ export default function Pagination() {
                         ? currentPage > +3
                           ? currentPage - 1
                           : currentPage
-                        : lastPageNum - 2
+                        : lastPageNum - 2,
                     )
                   }
                 >
@@ -104,7 +104,7 @@ export default function Pagination() {
                       ? currentPage > +3
                         ? currentPage
                         : currentPage + 1
-                      : lastPageNum - 1
+                      : lastPageNum - 1,
                   )
                 }
               >
@@ -134,7 +134,7 @@ export default function Pagination() {
                         ? currentPage > +3
                           ? currentPage + 1
                           : currentPage + 2
-                        : lastPageNum
+                        : lastPageNum,
                     )
                   }
                 >

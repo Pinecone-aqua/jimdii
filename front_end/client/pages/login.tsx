@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { UserType } from "../util/types";
 import axios from "axios";
-import Link from "next/link";
 import { FaGoogle } from "react-icons/fa";
 import { useRouter } from "next/router";
 
@@ -80,6 +79,60 @@ export default function Login() {
             <div>
               <div className="flex justify-center items-center">
                 <h2 className="text-[60px] leading-[48px] font-bold my-[10px] text-white">
+                  Login
+                </h2>
+              </div>
+
+              <div className="flex w-full justify-center  gap-[5px]  items-center my-[10px] text-white ">
+                <p>New to this site?</p>
+                <button
+                  className="text-[#4D9799]"
+                  onClick={() => setsignBtn(true)}
+                >
+                  Sign Up
+                </button>
+              </div>
+              <>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className={inputStyle}
+                  name="email"
+                  id="inputStyle"
+                />
+                <input
+                  type="text"
+                  placeholder="Password"
+                  className={inputStyle}
+                  name="password"
+                  id="inputStyle"
+                />
+              </>
+              <button
+                type="submit"
+                className={`w-full h-[48px] p-2  text-white mt-4 bg-[#4D9799]`}
+              >
+                {registerbtn ? "Register" : "Login"}
+              </button>
+              <div className="flex justify-center items-center my-[5px] text-white">
+                <span>Or </span>
+              </div>
+              <div className="w-full flex justify-center">
+                <button
+                  onClick={googleLoginHandler}
+                  className="signbutton flex items-center relative"
+                >
+                  <FaGoogle className="absolute " />
+                  <div className="flex justify-center w-full">
+                    <span>Login with Google</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div className="flex justify-center items-center">
+                <h2 className="text-[60px] leading-[48px] font-bold my-[10px] text-white">
                   Sign Up
                 </h2>
               </div>
@@ -88,7 +141,7 @@ export default function Login() {
                 <p>Already a member?</p>
                 <button
                   className="text-[#4D9799]"
-                  onClick={() => setsignBtn(true)}
+                  onClick={() => setsignBtn(false)}
                 >
                   Log In
                 </button>
@@ -175,171 +228,9 @@ export default function Login() {
                 </button>
               </div>
             </div>
-          ) : (
-            <div>
-              <div className="flex justify-center items-center">
-                <h2 className="text-[60px] leading-[48px] font-bold my-[10px] text-white">
-                  Login
-                </h2>
-              </div>
-
-              <div className="flex w-full justify-center  gap-[5px]  items-center my-[10px] text-white ">
-                <p>New to this site?</p>
-                <button
-                  className="text-[#4D9799]"
-                  onClick={() => setsignBtn(false)}
-                >
-                  Sign Up
-                </button>
-              </div>
-              <>
-                <input
-                  type="text"
-                  placeholder="Email"
-                  className={inputStyle}
-                  name="email"
-                  id="inputStyle"
-                />
-                <input
-                  type="text"
-                  placeholder="Password"
-                  className={inputStyle}
-                  name="password"
-                  id="inputStyle"
-                />
-              </>
-              <button
-                type="submit"
-                className={`w-full h-[48px] p-2  text-white mt-4 bg-[#4D9799]`}
-              >
-                {registerbtn ? "Register" : "Login"}
-              </button>
-              <div className="flex justify-center items-center my-[5px] text-white">
-                <span>Or </span>
-              </div>
-              <div className="w-full flex justify-center">
-                <button
-                  onClick={googleLoginHandler}
-                  className="signbutton flex items-center relative"
-                >
-                  <FaGoogle className="absolute " />
-                  <div className="flex justify-center w-full">
-                    <span>Sign Up with Google</span>
-                  </div>
-                </button>
-              </div>
-            </div>
           )}
         </form>
       </div>
-      {/* new design */}
-      {/* <div className="w-[400px] h-[500px] border-2 p-2 bg-balck rounded-xl">
-        <div className="w-full h-full bg-white rounded-xl">
-          <div className="w-full flex gap-1 ">
-            <button
-              className={`${
-                registerbtn
-                  ? btnStyle
-                  : "bg-white text-black w-full rounded-l-lg"
-              } `}
-              onClick={() => setRegisterBtn(false)}
-            >
-              Login
-            </button>
-            <button
-              className={`${
-                registerbtn
-                  ? "bg-white text-black w-full rounded-r-lg"
-                  : btnStyle
-              } `}
-              onClick={() => setRegisterBtn(true)}
-            >
-              Register
-            </button>
-          </div>
-          <form
-            onSubmit={(e) =>
-              confirmPass ? submitHandler(e) : e.preventDefault()
-            }
-            className="flex flex-col justify-between gap-2 items-center pt-10 p-3"
-          >
-            {!registerbtn ? (
-              <>
-                <input
-                  type="text"
-                  placeholder="Email"
-                  className={inputStyle}
-                  name="email"
-                />
-                <input
-                  type="text"
-                  placeholder="Password"
-                  className={inputStyle}
-                  name="password"
-                />
-              </>
-            ) : (
-              <>
-                <p className="flex justify-between gap-2">
-                  <input
-                    type="text"
-                    placeholder="Firstname"
-                    className={inputStyle}
-                    name="firstname"
-                    required
-                  />
-                  <input
-                    type="text"
-                    placeholder="Lastname"
-                    className={inputStyle}
-                    name="lastname"
-                    required
-                  />
-                </p>
-
-                <input
-                  type="text"
-                  placeholder="Email"
-                  className={inputStyle}
-                  name="email"
-                  required
-                />
-                <select className={`${inputStyle}`} name="gender" required>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-                <input
-                  type="text"
-                  placeholder="Password"
-                  className={inputStyle}
-                  name="password"
-                  onChange={(e) => setFirstPass(e.target.value)}
-                  required
-                />
-                <input
-                  type="text"
-                  placeholder="Confirm password"
-                  className={` ${
-                    confirmPass
-                      ? inputStyle
-                      : "w-full p-1 text-black rounded-lg border-2 border-rose-500"
-                  }`}
-                  onChange={(e) => setSecondPass(e.target.value)}
-                  name="confirm"
-                  required
-                />
-              </>
-            )}
-            <button
-              type="submit"
-              className={`w-4/6 border-2 bg-green-300 p-2 rounded-lg text-black m-4`}
-            >
-              {registerbtn ? "Register" : "Login"}
-            </button>
-          </form>
-        </div>
-      </div> */}
     </div>
   );
 }

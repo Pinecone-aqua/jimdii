@@ -5,10 +5,12 @@
 
 // import Banner from "@/components/Banner";
 import Card from "@/components/Card";
+import Footer from "@/components/Footer";
 import Logo from "@/components/subcomp/Logo";
 import Service from "@/components/subcomp/Service";
 import { FitnessType } from "@/util/types";
 import axios from "axios";
+import Link from "next/link";
 // import "../styles/index.css";
 
 interface PropsType {
@@ -149,7 +151,8 @@ export default function Home(props: PropsType) {
 
 export async function getStaticProps() {
   const res = await axios.get(
-    `http://localhost:7003/fitness/limitedFitness:limit`
+    `http://localhost:7003/fitness/limitedFitness:limit`,
+
   );
   const fitness = await res.data;
   return {
