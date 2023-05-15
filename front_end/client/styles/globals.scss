@@ -29,15 +29,15 @@
     rgb(var(--background-start-rgb));
 } */
 #headerDropdown {
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+  background: none;
   border: none;
-  width: 50px;
+  width: 10px;
 }
-@media (min-width: 1024px) {
-  #headerDropdown {
-    display: none;
-  }
-}
+// @media (min-width: 640px) {
+//   #headerDropdown {
+//     display: none;
+//   }
+// }
 #inputStyle {
   border-bottom: 1px solid white;
   transition: 0.4;
