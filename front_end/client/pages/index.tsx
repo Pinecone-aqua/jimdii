@@ -5,13 +5,16 @@
 
 // import Banner from "@/components/Banner";
 import Card from "@/components/Card";
+import Footer from "@/components/Footer";
 import Logo from "@/components/subcomp/Logo";
 import Service from "@/components/subcomp/Service";
 import { FitnessType } from "@/util/types";
 import axios from "axios";
+import Link from "next/link";
 // import "../styles/index.css";
 
 interface PropsType {
+	fitness: FitnessType[];
 	fitness: FitnessType[];
 }
 export default function Home(props: PropsType) {
@@ -45,7 +48,7 @@ export default function Home(props: PropsType) {
 				</div>
 			</div>
 
-			<section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl h-72 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
+			<section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
 				<p className="container mx-auto w-3/4 text-white ">
 					"Эхлэх хамгийн зөв цаг нь өчигдөр байсан. Харин дараагийн хамгийн зөв
 					цаг нь өнөөдөр юм."
@@ -129,7 +132,7 @@ export default function Home(props: PropsType) {
 						aliquam est tempore expedita! Commodi, neque debitis. Veritatis
 						magnam consequatur nostrum.
 					</p>
-					<button className="bg-main">Shop Now</button>
+					<button className="mainButton">Shop Now</button>
 				</div>
 			</section>
 			<section className="bg-white text-black flex justify-center items-center py-40 gap-10">

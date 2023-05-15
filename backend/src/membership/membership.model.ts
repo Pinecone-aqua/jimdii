@@ -1,12 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 
 @Schema()
 export class Membership {
-  @Prop({ type: String })
-  fitness_id: string;
+  @Prop({ type: mongoose.Schema.Types.String, ref: 'fitness' })
+  fitnessId: string;
   @Prop()
-  user_id: string;
-  @Prop()
+  userId: string;
+  @Prop({ default: false })
   isPayment: boolean;
   @Prop()
   price: number;
@@ -16,9 +17,9 @@ export class Membership {
     discount: number;
   };
   @Prop()
-  start_date: string;
+  startDate: string;
   @Prop()
-  expire_date: string;
+  expireDate: string;
 }
 
 export const MembershipSchema = SchemaFactory.createForClass(Membership);

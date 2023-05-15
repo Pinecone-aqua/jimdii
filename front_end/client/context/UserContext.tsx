@@ -1,4 +1,6 @@
+import { UserType } from "@/util/types";
 import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 import React, {
   ReactNode,
   createContext,
@@ -8,7 +10,7 @@ import React, {
 } from "react";
 
 interface UserContextType {
-  currentUser: string;
+  currentUser: UserType | null;
 }
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
@@ -22,12 +24,12 @@ interface UserProviderType {
 }
 
 export default function UserProvider({ children }: UserProviderType) {
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState<UserType | null>(null);
 
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
-      setCurrentUser(token);
+      setCurrentUser(jwtDecode(token));
     }
   }, []);
 
