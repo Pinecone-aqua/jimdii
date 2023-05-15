@@ -17,6 +17,15 @@ export default function UserDetail() {
 
   const { currentUser } = useUser();
 
+  const inputStyle = `focus:outline-main mx-2 p-2 bg-${
+    editUserDetail ? "white" : "black"
+  } text-${editUserDetail ? "black" : "white"} min-w-[200px] caret-main`;
+  const labelStyle =
+    "flex flex-col md:flex-row md:items-center gap-2 md:w-1/2 lg:w-1/4 md:justify-between";
+  const labelTextStyle = "w-1/2";
+
+  console.log(currentUser);
+
   function editHandler() {
     if (!editUserDetail) {
       setEditUserDetail(true);
