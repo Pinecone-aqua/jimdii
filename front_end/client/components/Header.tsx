@@ -1,46 +1,26 @@
-import { Dropdown } from "flowbite-react";
-import Link from "next/link";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React from "react";
+import Link from "next/link";
 import LoginLogo from "./subcomp/LoginLogo";
-import Logo from "./subcomp/Logo";
+import { Dropdown } from "flowbite-react";
+import MainResLogo from "./subcomp/MainResLogo";
+import Cookies from "js-cookie";
 
-export default function Header(): JSX.Element {
+interface HeaderType {
+  user: any;
+  setUser: (arg: any) => void;
+}
+
+export default function Header({ user, setUser }: HeaderType): JSX.Element {
+  user && console.log(user);
+
   return (
-    <header className="h-[140px] flex items-center bg-slate-700">
-      <div className="w-[100%] m-auto flex justify-between items-center">
-        <Link href={`/`}>
-          <Logo />
-        </Link>
-        <nav className=" flex justify-between text-white font-light invisible md:visible ">
-          <Link href={`/`} className="hover:text-[#4D9799]">
-            Нүүр хуудас
-          </Link>
-          <Link href={`/allFitness`} className="hover:text-[#4D9799] ">
-            Gym захиалах
-          </Link>
-          <Link href={`/map`} className="hover:text-[#4D9799]">
-            Газрын зураг
-          </Link>
-          <Link href={`/membership`} className="hover:text-[#4D9799]">
-            Гишүүнчлэл
-          </Link>
-          <Link href={`/aboutUs`} className="hover:text-[#4D9799]">
-            Бидний тухай
-          </Link>
-          <Link href={`/contact`} className="hover:text-[#4D9799]">
-            Холбоо барих
-          </Link>
-        </nav>
-        <Link href={`/login`}>
-          <div className="flex justify-between gap-[14px] text-[#4D9799]">
-            <LoginLogo />
-            <p>Log In</p>
-          </div>
-        </Link>
-
+    <header className="bg-none sticky top-0 z-20 h-[10vh] flex items-center">
+      <div className="container mx-auto  flex items-center justify-between">
         <Dropdown
-          label="DD svg"
-          className="bg-slate-200 text-black"
+          label="//"
+          className="bg-transparent text-white"
           id="headerDropdown"
           arrowIcon={false}
         >
@@ -57,7 +37,7 @@ export default function Header(): JSX.Element {
           </Dropdown.Item>
           <Dropdown.Item>
             <Link href={`/allFitness`} className="hover:text-[#4D9799]">
-              Gym захиалах
+              Жийм
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
@@ -71,20 +51,84 @@ export default function Header(): JSX.Element {
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            <Link href={`/aboutUs`} className="hover:text-[#4D9799]">
-              Бидний тухай
+            <Link href={`/signUpGym`} className="hover:text-[#4D9799]">
+              Gym-ээ бүртгүүлэх
             </Link>
           </Dropdown.Item>
-          <Dropdown.Item>
-            <Link href={`/contact`} className="hover:text-[#4D9799]">
-              Холбоо барих
-            </Link>
-          </Dropdown.Item>
+
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>
-        {/* Dropdown */}
+        <Link href={`/`}>
+          <MainResLogo />
+        </Link>
+        <nav className="hidden lg:flex  w-1/2 justify-between   text-white">
+          <div className="w-[70%] flex gap-[30px]">
+            <Link href={`/`} className="hover:text-[#4D9799]">
+              Нүүр хуудас
+            </Link>
+            <Link href={`/allFitness/1`} className="hover:text-[#4D9799]">
+              Жийм
+            </Link>
+            <Link href={`/map`} className="hover:text-[#4D9799]">
+              Газрын зураг
+            </Link>
+            <Link href={`/membership`} className="hover:text-[#4D9799]">
+              Гишүүнчлэл
+            </Link>
+          </div>
+        </nav>
+        <div className="w-1/4 flex justify-between items-center">
+          {/* <Link href={`/login`} className="flex items-center">
+            <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+              <LoginLogo />
+              <p className="text-sm">Log In</p>
+            </div>
+          </Link> */}
+          {user ? (
+            <div className="flex items-center w-[200px] justify-between">
+              <Link
+                href={`/#`}
+                className="flex w-1/2 items-center justify-between hidden sm:inline"
+              >
+                <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+                  <picture className="flex items-center">
+                    <img className="w-[100px]" src={user.image} alt="" />
+                  </picture>
+                  <p className="text-sm ">{user.name}</p>
+                </div>
+              </Link>
+              <div>
+                <div
+                  className="cursor-pointer text-main"
+                  onClick={() => {
+                    Cookies.remove("token");
+                    setUser("");
+                  }}
+                >
+                  LOG OUT
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex gap-5">
+              <Link href={`/login`} className="flex items-center">
+                <div className="flex justify-end gap-[5px] text-[#4D9799] w-[80px] md:w-[90px] m-0">
+                  <LoginLogo />
+                  <p className="text-sm">Log In</p>
+                </div>
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
+}
+
+{
+  /* <Link href={`/signUpGym`} className="hidden lg:flex">
+            <button className="bg-[#4D9799] h-[40px] w-[155px]">
+              Gym-ээ бүртгүүлэх
+            </button>
+          </Link> */
 }

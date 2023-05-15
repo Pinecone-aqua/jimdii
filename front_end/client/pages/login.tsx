@@ -124,7 +124,7 @@ export default function Login() {
                 >
                   <FaGoogle className="absolute " />
                   <div className="flex justify-center w-full">
-                    <span>Sign Up with Google</span>
+                    <span>Login with Google</span>
                   </div>
                 </button>
               </div>

@@ -10,13 +10,17 @@ export default function AllCard(props: Proptype): JSX.Element {
   return (
     <div className=" w-[100%] lg:w-[90%] mx-auto relative lg:flex mb-[20px] pt-[20px]">
       <Link href={`/fitness/${fitness._id}`}>
-      <div className="bg-gray-600 w-full h-[150px] md:h-[200px]   lg:w-[600px] lg:h-[450px]">
-        <picture>
-          <img src={fitness.image[0]} alt="fitnesspic" className="w-full h-full"/>
-        </picture>
-      </div>
+        <div className="bg-gray-600 w-full h-[150px] md:h-[300px]   lg:w-[600px] lg:h-[450px]">
+          <picture>
+            <img
+              src={fitness.image[0]}
+              alt="fitnesspic"
+              className="w-full h-full"
+            />
+          </picture>
+        </div>
       </Link>
-      
+
       <div className="bg-black border h-[140px] md:h-[180px] lg:w-[470px] lg:h-[340px] lg:absolute right-0 top-[60px] text-white flex flex-col justify-center items-center">
         <div className="text-xl">{fitness.name}</div>
         <p>Mon, Wed, Fri</p>
