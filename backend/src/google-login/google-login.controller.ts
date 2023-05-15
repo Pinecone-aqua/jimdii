@@ -70,6 +70,7 @@ export class GoogleLoginController {
     }
 
     const payload = {
+      id: user._id,
       name: user.username,
       email: user.email,
       role: user.role,
