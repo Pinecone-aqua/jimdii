@@ -89,7 +89,7 @@ export default function Header({ user, setUser }: HeaderType): JSX.Element {
         <div className="">
           {user ? (
             <div className="flex items-center">
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-6">
                 <picture className="">
                   <img
                     className="w-[30px] rounded-[50%]"
