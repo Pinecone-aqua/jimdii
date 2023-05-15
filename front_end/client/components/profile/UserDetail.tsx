@@ -15,10 +15,19 @@ export default function UserDetail() {
 
   console.log(currentUser);
 
-  function editHandler() {
-    if (!editUserDetail) {
-      setEditUserDetail(true);
-      console.log("editable");
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	function handleEditState(e: any) {
+		if (e.target.innerText === EditedState.default) {
+			setEditState(EditedState.edited);
+			return;
+		}
+		if (e.target.innerText === EditedState.edited) {
+			console.log("asd");
+
+			try {
+				const token = Cookies.get("token");
+				if (!token) return;
+				console.log(token);
 
       return;
     } else {
