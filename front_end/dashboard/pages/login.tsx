@@ -16,7 +16,7 @@ export default function Login() {
         <p className="text-lg font-bold text-white my-3">Login</p>
         <p className="text-sm font-slim text-white my-1">with</p>
         <div
-          className="flex justify-center items-center border bg-white w-4/5 py-2 text-xl gap-2 my-3  rounded-md"
+          className="flex justify-center items-center border bg-white px-10 py-2 text-xl gap-2 my-3 rounded-md"
           onClick={loginHandler}
         >
           <FcGoogle /> Google

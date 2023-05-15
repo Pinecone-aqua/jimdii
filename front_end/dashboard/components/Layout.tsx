@@ -1,6 +1,9 @@
 import Head from "next/head";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import Sidemenu from "./Sidemenu";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 type PropType = {
   children: ReactNode;
