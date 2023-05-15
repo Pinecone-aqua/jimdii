@@ -78,9 +78,16 @@ export class GoogleLoginController {
       image: user?.profile_img,
     };
     const token = this.jwtService.sign(payload);
+
+    if (user.role === 'CLIENT') {
+      res
+        .status(200)
+        .cookie('token', token)
+        .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+    }
     res
       .status(200)
-      .cookie('token', token)
-      .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+      .cookie('atoken', token)
+      .redirect(`http://localhost:${process.env.ADMIN_PORT}`);
   }
 }

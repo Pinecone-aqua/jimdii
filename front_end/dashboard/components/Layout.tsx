@@ -1,12 +1,37 @@
 import Head from "next/head";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import Sidemenu from "./Sidemenu";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 type PropType = {
 	children: ReactNode;
 };
 
 export default function Layout({ children }: PropType) {
+	const router = useRouter();
+
+	useEffect(() => {
+		const token = Cookies.get("atoken");
+
+		if (!token && router.asPath !== "/login") {
+			router.push("/login");
+			return;
+		}
+
+		try {
+			axios
+				.get("http://localhost:7003/user/checkToken?role=admin", {
+					headers: { Authorization: token },
+				})
+				.then((res) => console.log(res))
+				.catch(() => Cookies.remove("atoken"));
+		} catch (err) {
+			console.log(err);
+		}
+	}, [router]);
+
 	return (
 		<>
 			<Head>
@@ -21,7 +46,7 @@ export default function Layout({ children }: PropType) {
 				/>
 				<link
 					rel="icon"
-					href="favicon.io"
+					href="favicon.ico"
 				/>
 			</Head>
 			<div className="w-full h-screen flex relative">

@@ -9,7 +9,8 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
-import { CreateUserDto } from './user.dto';
+import { CheckToken } from 'src/middleware/checkToken';
+import { CheckRole } from 'src/role/role.decorator';
 
 @Controller('user')
 export class UserController {
@@ -24,7 +25,17 @@ export class UserController {
       const result = this.userService.checkUser(query);
       return result;
     } catch (err) {
-      return err;
+      throw new BadRequestException(err.message);
+    }
+  }
+
+  @Get('checkToken')
+  @CheckRole('ADMIN')
+  async tokenChecker() {
+    try {
+      console.log('token check');
+    } catch (err) {
+      throw new BadRequestException(err.message);
     }
   }
 
@@ -33,21 +44,21 @@ export class UserController {
   async EditUserDetail(
     @Req() req: Request,
     @Body() body: { username: string },
-    @Res() res: Response,
+    // @Res() res: Response,
   ) {
     try {
       const result = await this.userService.updateUser(req['user'].id, body);
 
       if (!result) return 'error';
-      const payload = {
-        id: result._id,
-        username: result.username,
-        email: result.email,
-        role: result.role,
-        phone: result?.phone,
-        image: result?.profileImage,
-      };
-      const token = this.jwtService.sign(payload);
+      // const payload = {
+      //   id: result._id,
+      //   username: result.username,
+      //   email: result.email,
+      //   role: result.role,
+      //   phone: result?.phone,
+      //   image: result?.profileImage,
+      // };
+      // const token = this.jwtService.sign(payload);
 
       // res
       //   .status(200)
