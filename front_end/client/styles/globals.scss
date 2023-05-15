@@ -4,6 +4,45 @@
 @import "./variables.scss";
 @import "./home.scss";
 @import "./parallax.scss";
+
+body {
+  overflow: overlay;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(90, 90, 90);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+// /* width */
+// ::-webkit-scrollbar {
+//   width: 10px;
+// }
+
+// /* Track */
+// ::-webkit-scrollbar-track {
+//   background: #f1f1f1;
+// }
+
+// /* Handle */
+// ::-webkit-scrollbar-thumb {
+//   background: #888;
+// }
+
+// /* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #555;
+// }
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -27,15 +66,15 @@
     rgb(var(--background-start-rgb));
 } */
 #headerDropdown {
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+  background: none;
   border: none;
-  width: 50px;
+  width: 10px;
 }
-@media (min-width: 1024px) {
-  #headerDropdown {
-    display: none;
-  }
-}
+// @media (min-width: 640px) {
+//   #headerDropdown {
+//     display: none;
+//   }
+// }
 #inputStyle {
   border-bottom: 1px solid white;
   transition: 0.4;
