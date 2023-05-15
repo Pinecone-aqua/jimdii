@@ -60,9 +60,7 @@ export class FitnessService {
   //   return fitness;
   // }
 
-  async addToCloudinary(files, i: number): Promise<any> {
-    console.log(i);
-
+  async addToCloudinary(files): Promise<any> {
     const arr = [];
     await Promise.all(
       await files?.map(async (file) => {

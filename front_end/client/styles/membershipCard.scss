@@ -1,0 +1,78 @@
+$card-border-color: #e5e7eb;
+$card-border-radius: 0.5rem;
+
+.membership {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 30px;
+	@media (min-width: 1024px) {
+		padding: 3em;
+	}
+}
+
+.membership-card {
+	width: 100%;
+	@media (min-width: 768px) {
+		width: 100%;
+	}
+	@media (min-width: 1024px) {
+		width: 46%;
+	}
+	border: 1px solid $card-border-color;
+	border-radius: $card-border-radius;
+
+	&__header {
+		padding: 0.5rem 1rem;
+		background-color: #1f2937;
+		color: #fff;
+	}
+
+	&__fitness {
+		font-size: 1rem;
+		font-weight: bold;
+		color: #48bb78;
+	}
+
+	&__dates {
+		font-size: 0.75rem;
+		padding: 10px;
+	}
+
+	&__dates-separator {
+		display: none;
+		@media (min-width: 768px) {
+			display: inline-block;
+			margin-left: 0.5rem;
+			margin-right: 0.5rem;
+		}
+	}
+}
+
+.membership-card--primary {
+	background-color: #6366f1;
+	color: #fff;
+	border-color: transparent;
+
+	&__fitness {
+		color: #fff;
+	}
+
+	&__dates {
+		color: #fff;
+	}
+}
+
+.membership-card--secondary {
+	background-color: #f3f4f6;
+	color: #374151;
+	border-color: $card-border-color;
+
+	&__fitness {
+		color: #374151;
+	}
+
+	&__dates {
+		color: #374151;
+	}
+}

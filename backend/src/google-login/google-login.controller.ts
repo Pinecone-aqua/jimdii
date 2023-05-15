@@ -57,12 +57,12 @@ export class GoogleLoginController {
       const userInput: User = {
         email: profile.email,
         username: profile.name,
-        profile_img: profile.picture,
+        profileImage: profile.picture,
         password: null,
         address: null,
         gender: null,
-        birth_date: null,
-        created_date: moment().format('LLLL'),
+        birthdate: null,
+        createdDate: moment().format('LLLL'),
         phone: null,
         role: 'CLIENT',
       };
@@ -71,11 +71,11 @@ export class GoogleLoginController {
 
     const payload = {
       id: user._id,
-      name: user.username,
+      username: user.username,
       email: user.email,
       role: user.role,
       phone: user?.phone,
-      image: user?.profile_img,
+      image: user?.profileImage,
     };
     const token = this.jwtService.sign(payload);
     res
