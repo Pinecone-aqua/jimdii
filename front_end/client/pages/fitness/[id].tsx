@@ -28,6 +28,13 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useUser } from "@/context/UserContext";
 // import { MinusIcon } from "@chakra-ui/icons/dist/Minus";
 
+const arr = [
+  ["onetime", "1хоног"],
+  ["oneMonth", "sar"],
+  ["threeMonth", "3sar"],
+  ["sixMonth", "6sar"],
+];
+
 export default function SingleGym({ data: fitness }: { data: FitnessType }) {
   const [changeImg, setChangeImg] = useState(0);
   const router = useRouter();
@@ -158,8 +165,10 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                                 >
                                   {test[1]}:{key[1]}
                                 </button>
-                              ),
-                          ),
+
+                              )
+                          )
+
                         )}
                     </div>
                     <div>
@@ -175,9 +184,6 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                     <Button
                       onClick={() => {
                         onClose();
-                        setDay(0);
-                        setMonth(0);
-                        setYear(0);
                       }}
                     >
                       Цуцлах
