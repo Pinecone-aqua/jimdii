@@ -10,9 +10,9 @@ export class tempFitnessService {
     @InjectModel('fitness') private readonly fitnessModel: Model<tempFitness>,
     private readonly cloudinary: CloudinaryService,
   ) {}
+
   async addToCloudinary(files, i: number): Promise<any> {
     console.log(i);
-
     const arr = [];
     await Promise.all(
       await files?.map(async (file) => {
