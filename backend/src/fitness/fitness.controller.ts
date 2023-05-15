@@ -25,19 +25,17 @@ export class FitnessController {
       const result = await this.fitnessService.getFitness(id);
       return result;
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 
   @Get('getAllFitness:page')
   async getAllfitness(@Param('page') page: string) {
     try {
-      console.log(page);
-
       const result = await this.fitnessService.getAllfitness(page);
       return result;
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 
@@ -55,7 +53,7 @@ export class FitnessController {
       }
       throw new BadRequestException('something went wrong');
     } catch (err) {
-      throw new BadRequestException(err);
+      throw new BadRequestException(err.message);
     }
   }
 
@@ -105,7 +103,7 @@ export class FitnessController {
       );
       if (result.length === files.image.length) console.log(result);
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 }

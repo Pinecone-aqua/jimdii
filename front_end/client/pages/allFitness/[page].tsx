@@ -37,16 +37,17 @@ export default function allFitness({
               name="districts"
               id="districts"
               className="h-full w-[100%] bg-transparent text-white"
+        
             >
               <option value="Бүх дүүрэг/сум..." className="w-[50%]">
                 Бүх дүүрэг/сум...
               </option>
-              <option value="Bayangol">Bayangol</option>
-              <option value="Khan-uul">Khan-uul</option>
-              <option value="Bayanzurkh">Bayanzurkh</option>
-              <option value="Sukhbaatar">Sukhbaatar</option>
-              <option value="Songino-Khairkhan">Songino-Khairkhan</option>
-              <option value="Chingeltei">Chingeltei</option>
+              <option value="Bayangol" className="text-black">Bayangol</option>
+              <option value="Khan-uul" className="text-black">Khan-uul</option>
+              <option value="Bayanzurkh" className="text-black">Bayanzurkh</option>
+              <option value="Sukhbaatar" className="text-black">Sukhbaatar</option>
+              <option value="Songino-Khairkhan" className="text-black">Songino-Khairkhan</option>
+              <option value="Chingeltei" className="text-black">Chingeltei</option>
             </select>
           </div>
           <div className="border w-[100%] sm:w-[50%] h-[42px]">
@@ -86,7 +87,7 @@ export default function allFitness({
           </div>
         </div>
       </div>
-      <div className="w-[60%] mx-auto lg:bg-black  ">
+      <div className="w-[70%] sm:w-[60%] md:w-[55%] mx-auto lg:bg-black  ">
         {fitnesses.map((fitness: FitnessType, index: number) => (
           <AllCard fitness={fitness} key={index} />
         ))}

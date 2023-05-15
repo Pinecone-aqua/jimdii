@@ -1,8 +1,12 @@
 import MainLogo from "@/components/subcomp/MainLogo";
-import { FitnessType } from "@/util/types";
-import React from "react";
+import { DiscountType, FitnessType } from "@/util/types";
+import React, { useRef, useState } from "react";
 
 export default function signUpGym(): JSX.Element {
+	const [discounts, setDiscounts] = useState<DiscountType[]>([]);
+	const discountName = useRef("");
+	const discountPers = useRef("");
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	function submitHandler(e: any) {
 		e.preventDefault();
 
@@ -26,20 +30,7 @@ export default function signUpGym(): JSX.Element {
 				Saturday: e.target.weekend.value,
 				Sunday: e.target.weekend.value,
 			},
-			discount: [
-				{
-					name: e.target.discountName.value,
-					discount: e.target.discountPer.value,
-				},
-				{
-					name: e.target.discountName.value,
-					discount: e.target.discountPer.value,
-				},
-				{
-					name: e.target.discountName.value,
-					discount: e.target.discountPer.value,
-				},
-			],
+			discount: discounts,
 			spec: {
 				wifi: e.target.specWifi.value,
 				shower: e.target.specShower.value,
@@ -53,12 +44,27 @@ export default function signUpGym(): JSX.Element {
 			image: [""],
 		};
 		console.log(newFitness);
+		fetch("http://localhost:3002/fitness/addFitness  ", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(newFitness),
+		});
+
 		// fetch("http://localhost:3030/fitness/addFitness", {
 		//   headers: { "Content-Type": "application/json" },
 		//   method: "POST",
 		//   body: JSON.stringify(newFitness),
 		// });
 	}
+	function discountAdd() {
+		setDiscounts([
+			...discounts,
+			{ name: discountName.current, discount: Number(discountPers.current) },
+		]);
+	}
+	console.log(discounts);
 
 	return (
 		<div className="w-full h-fit registerPage">
@@ -70,35 +76,37 @@ export default function signUpGym(): JSX.Element {
 						</div>
 					</div>
 
-					<div className="bg-slate-700 text-white rounded-r-lg w-[50%]">
+					<div className="bg-black text-white rounded-r-lg w-[50%]">
 						<div className=" text-white flex justify-center items-center h-[50px] text-lg font-bold rounded-t-lg p-[30px]">
 							<h2>Gym Registration Form</h2>
 						</div>
 						<form
 							onSubmit={submitHandler}
 							className="w-[80%] mx-auto">
-							<label className="block">
+							<label className="block w-full">
 								<h2>НЭР :</h2>
 								<input
 									type="text"
 									name="name"
 									placeholder="Your Gym Name"
-									className="w-full bg-slate-700 border rounded-lg p-[5px]"
+									className="w-full p-[5px]"
+									id="input_Style"
 									required
 								/>
 							</label>
-							<label>
+							<label className="w-full">
 								<h2>ДЭЛГЭРЭНГҮЙ :</h2>
 
 								<input
 									type="text"
 									name="description"
 									placeholder="Description"
-									className="w-full bg-slate-700 border rounded-lg p-[5px]"
+									className="w-full  p-[5px]"
+									id="input_Style"
 									required
 								/>
 							</label>
-							<label>
+							<label className="w-full">
 								<h2>ҮНЭ :</h2>
 
 								<div className="flex justify-between">
@@ -106,14 +114,16 @@ export default function signUpGym(): JSX.Element {
 										type="text"
 										name="oneMonth"
 										placeholder="Month"
-										className="w-[48%] bg-slate-700 border rounded-lg p-[5px]"
+										className="w-[49%]  p-[5px]"
+										id="input_Style"
 										required
 									/>
 									<input
 										type="text"
 										name="year"
 										placeholder="Year"
-										className="w-[48%] bg-slate-700 border rounded-lg p-[5px]"
+										className="w-[49%]  p-[5px]"
+										id="input_Style"
 									/>
 								</div>
 							</label>
@@ -122,7 +132,7 @@ export default function signUpGym(): JSX.Element {
 								<select
 									name="districts"
 									id="districts"
-									className="text-white w-full bg-slate-700 border rounded-lg p-[5px]">
+									className="text-white w-full bg-black border-bottom p-[5px]">
 									<option
 										value="Бүх дүүрэг/сум..."
 										className="w-[50%]">
@@ -135,26 +145,29 @@ export default function signUpGym(): JSX.Element {
 									<option value="Songino-Khairkhan">Songino-Khairkhan</option>
 									<option value="Chingeltei">Chingeltei</option>
 								</select>
-								<h2>ХАЯГ :</h2>
-								<input
-									type="text"
-									name="addressDescription"
-									placeholder="Description"
-									className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
-								/>
+								<div className="mt-3">
+									<h2>ХАЯГ :</h2>
+									<input
+										type="text"
+										name="addressDescription"
+										placeholder="Description"
+										className="text-white w-full p-[5px] "
+										id="input_Style"
+									/>
+								</div>
 							</label>
 							<label className="block">
 								<h2>ЦАГИЙН ХУВААРЬ:</h2>
 
-								<div>
+								<div className="mt-2">
 									<h2>Ажлын өдөр:</h2>
 
 									<input
 										type="text"
 										name="workDay"
-										id="workDay"
 										placeholder="Хэдээс хэдэн цаг хүртэл"
-										className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
+										className="text-white w-full p-[5px]"
+										id="input_Style"
 									/>
 								</div>
 								<div>
@@ -163,13 +176,13 @@ export default function signUpGym(): JSX.Element {
 									<input
 										type="text"
 										name="weekend"
-										id="weekend "
 										placeholder="Хэдээс хэдэн цаг хүртэл"
-										className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
+										className="text-white w-full p-[5px]"
+										id="input_Style"
 									/>
 								</div>
 							</label>
-							<label>
+							<label className="w-full">
 								<h2>ХӨНГӨЛӨЛТ :</h2>
 
 								<div>
@@ -178,7 +191,9 @@ export default function signUpGym(): JSX.Element {
 										type="text"
 										name="discountName"
 										placeholder="Discount name"
-										className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
+										className="text-white w-full  p-[5px]"
+										id="input_Style"
+										onChange={(e) => (discountName.current = e.target.value)}
 									/>
 								</div>
 								<div>
@@ -187,9 +202,16 @@ export default function signUpGym(): JSX.Element {
 										type="number"
 										name="discountPer"
 										placeholder="Discount Percentage"
-										className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
+										className="text-white w-full  p-[5px]"
+										id="input_Style"
+										onChange={(e) => (discountPers.current = e.target.value)}
 									/>
 								</div>
+								<input
+									type="button"
+									value={"+"}
+									onClick={discountAdd}
+								/>
 							</label>
 							<label>
 								<h2>НЭМЭЛТ :</h2>
@@ -214,21 +236,23 @@ export default function signUpGym(): JSX.Element {
 									/>
 								</div>
 							</label>
-							<label>
+							<label className="w-full">
 								<div>
 									<h3>УТАСНЫ ДУГААР :</h3>
 									<input
 										type="number"
 										name="phonenumber"
 										placeholder="Phone Number"
-										className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
+										className="text-white w-full p-[5px]"
+										id="input_Style"
 									/>
 									<h3>СОШИАЛ :</h3>
 									<input
 										type="url"
 										name="social"
 										placeholder="Social Link"
-										className="text-white w-full bg-slate-700 border rounded-lg p-[5px]"
+										className="text-white w-full  p-[5px]"
+										id="input_Style"
 									/>
 								</div>
 							</label>
@@ -238,7 +262,7 @@ export default function signUpGym(): JSX.Element {
                 </label> */}
 							<button
 								type="submit"
-								className="bg-[#4D9799] my-[20px] p-[15px] w-full rounded-lg">
+								className="bg-[#4D9799] my-[20px] p-[15px] w-full ">
 								Add New Gym
 							</button>
 						</form>
