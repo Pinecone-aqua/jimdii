@@ -3,9 +3,9 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema()
 export class Membership {
   @Prop({ type: String })
-  fitness_id: string;
+  fitnessId: string;
   @Prop()
-  user_id: string;
+  userId: string;
   @Prop()
   isPayment: boolean;
   @Prop()
@@ -16,9 +16,9 @@ export class Membership {
     discount: number;
   };
   @Prop()
-  start_date: string;
+  startDate: string;
   @Prop()
-  expire_date: string;
+  expireDate: string;
 }
 
 export const MembershipSchema = SchemaFactory.createForClass(Membership);

@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MembershipSchema } from './membership.model';
+import { Membership, MembershipSchema } from './membership.model';
 import { MembershipController } from './membership.controller';
 import { MembershipService } from './membership.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name: 'membership', schema: MembershipSchema },
+      { name: Membership.name, schema: MembershipSchema },
     ]),
   ],
   controllers: [MembershipController],

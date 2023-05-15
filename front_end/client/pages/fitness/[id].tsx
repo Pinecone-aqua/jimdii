@@ -25,6 +25,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { useUser } from "@/context/UserContext";
 // import { MinusIcon } from "@chakra-ui/icons/dist/Minus";
 
 export default function SingleGym({ data: fitness }: { data: FitnessType }) {
@@ -33,8 +34,25 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [disabled, setDisabled] = useState([]);
   const [total, setTotal] = useState([]);
+  const { currentUser } = useUser();
+  // console.log(currentUser?.id);
 
-  console.log(fitness.price);
+  function submitHandler() {
+    onClose();
+    // console.log(disabled);
+
+    const newMembership = {
+      fitnessId: fitness._id,
+      userId: currentUser?.id,
+      isPayment: false,
+      price: disabled[1],
+      discount: fitness.discount ? fitness.discount[0] : null,
+    };
+
+    axios
+      .post("http://localhost:7003/membership/add", newMembership)
+      .then((res) => console.log(res.data));
+  }
 
   function priceHandler(key, test) {
     disabled !== key && setDisabled(key);
@@ -104,7 +122,6 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
               <button
                 onClick={() => {
                   onOpen();
-                  console.log("hi");
                 }}
                 className="px-4 py-2 bg-main rounded-lg"
               >
@@ -152,7 +169,7 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                   </ModalBody>
 
                   <ModalFooter>
-                    <Button colorScheme="blue" mr={3}>
+                    <Button onClick={submitHandler} colorScheme="blue" mr={3}>
                       Захиалах
                     </Button>
                     <Button
