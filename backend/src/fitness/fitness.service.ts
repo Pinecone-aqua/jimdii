@@ -53,13 +53,13 @@ export class FitnessService {
     return result;
   }
 
-  // async updateFitness(_id: string, updateFitnessInput: Fitness): Promise<any> {
-  //   const fitness = await this.fitnessModel.findByIdAndUpdate(
-  //     _id,
-  //     updateFitnessInput,
-  //   );
-  //   return fitness;
-  // }
+  async updateFitness(_id: string, updateFitnessInput: Fitness): Promise<any> {
+    const fitness = await this.fitnessModel.findByIdAndUpdate(
+      _id,
+      updateFitnessInput,
+    );
+    return fitness;
+  }
 
   async addToCloudinary(files): Promise<any> {
     const arr = [];
@@ -71,5 +71,10 @@ export class FitnessService {
     );
 
     return arr;
+  }
+
+  async addFitness(fitness, image) {
+    const newFitness = new this.fitnessModel({ ...fitness, image });
+    return newFitness.save();
   }
 }

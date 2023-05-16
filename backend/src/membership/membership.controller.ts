@@ -19,8 +19,6 @@ export class MembershipController {
   @UseGuards(CheckToken)
   async getUserMembership(@Req() req: Request) {
     try {
-      console.log(req['user']);
-
       return this.membershipService.getMembership(req['user'].id);
     } catch (err) {
       throw new BadRequestException(err.message);

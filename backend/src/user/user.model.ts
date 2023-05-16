@@ -1,24 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-// export interface UserType {
-//   _id: string;
-//   profile_img?: string;
-//   username: {
-//     firstname: string;
-//     lastname: string;
-//   };
-//   phone?: number;
-//   email: string;
-//   password: string;
-//   address?: {
-//     coord: number[];
-//   };
-//   gender?: 'male' | 'female' | 'other';
-//   type: 'client' | 'admin';
-//   fitness_id?: string;
-//   birth_date?: string;
-//   created_date: string;
-// }
 @Schema()
 export class User {
   @Prop()
@@ -42,12 +23,6 @@ export class User {
 
   @Prop({ type: String })
   gender: string;
-
-  // @Prop({ type: String, default: 'client' })
-  // type: string;
-
-  // @Prop({ type: String })
-  // fitness_id?: string;
 
   @Prop({ type: String })
   birthdate?: string;
