@@ -11,6 +11,7 @@ import React, {
 
 interface UserContextType {
   currentUser: UserType | null;
+  setCurrentUser: React.Dispatch<React.SetStateAction<UserType | null>>;
 }
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
@@ -34,7 +35,7 @@ export default function UserProvider({ children }: UserProviderType) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ currentUser }}>
+    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
       {children}
     </UserContext.Provider>
   );

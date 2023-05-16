@@ -1,9 +1,15 @@
 import Link from "next/link";
+import { useParallax } from "react-scroll-parallax";
 
 export default function Service(): JSX.Element {
+  // const { ref } = useParallax({ speed: 100 });
+  // const { running } = useParallax({ speed: 10 });
+  // const { running } = useParallax({ speed: 50 });
+
   return (
     <div className="relative parallax">
-      <video
+      {/* <video
+        // ref={ref}
         autoPlay
         loop
         muted
@@ -12,7 +18,7 @@ export default function Service(): JSX.Element {
         className="running"
       >
         <source src="./running.mp4" type="video/mp4" />
-      </video>
+      </video> */}
       <section className="flex flex-col items-center py-10">
         <h2 className="text-3xl text-white">Таны сонирхож буй үйлчилгээ</h2>
         <p>

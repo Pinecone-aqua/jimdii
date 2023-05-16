@@ -5,20 +5,52 @@
 
 // import Banner from "@/components/Banner";
 import Card from "@/components/Card";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
 import Logo from "@/components/subcomp/Logo";
 import Service from "@/components/subcomp/Service";
 import { FitnessType } from "@/util/types";
 import axios from "axios";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useParallax } from "react-scroll-parallax";
 // import "../styles/index.css";
 
+// import {
+//   motion,
+//   useScroll,
+//   useSpring,
+//   useTransform,
+//   MotionValue,
+// } from "framer-motion";
+
 interface PropsType {
-  fitness: FitnessType[];
   fitness: FitnessType[];
 }
 export default function Home(props: PropsType) {
   const { fitness } = props;
+  const [scrollY, setScrollY] = useState(0);
+
+  // const { ref } = useParallax({ speed: 100 });
+
+  // function useParallax(value: MotionValue<number>, distance: number) {
+  //   return useTransform(value, [0, 1], [-distance, distance]);
+  // }
+
+  // const ref = useRef(null);
+  // const { scrollYProgress } = useScroll({ target: ref });
+  // const y = useParallax(scrollYProgress, 300);
+
+  const onScroll = useCallback(() => {
+    const { pageYOffset, scrollY } = window;
+    console.log("pageYoffset", pageYOffset, "scrollY", scrollY);
+    setScrollY(window.pageYOffset);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // remove event on unmount to prevent a memory leak with the cleanup
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [onScroll]);
 
   return (
     <main className="text-white">
@@ -27,7 +59,9 @@ export default function Home(props: PropsType) {
         <p className="text-3xl">Монголын анхны цахим фитнесс захиалга</p>
         <div className="py-20 flex gap-5">
           <button className="secondaryButton">Үйлчилгээний тухай</button>
-          <button className="mainButton">Захиалах</button>
+          <Link href={`/allFitness/1`}>
+            <button className="mainButton">Захиалах</button>
+          </Link>
         </div>
       </div>
 
@@ -41,7 +75,10 @@ export default function Home(props: PropsType) {
             // id="pattern"
             className="rope"
           >
-            <source src="./rope.mp4" type="video/mp4" />
+            <source
+              src={scrollY < 700 ? `./rope.mp4` : `./running.mp4`}
+              type="video/mp4"
+            />
           </video>
         </div>
       </div>
@@ -60,7 +97,9 @@ export default function Home(props: PropsType) {
             <Card fitness={fitness} key={index} />
           ))}
         </div>
-        <button className="mainButton">Бүх жийм үзэх</button>
+        <Link href={`/allFitness/1`}>
+          <button className="mainButton">Бүх жийм үзэх</button>
+        </Link>
       </section>
       <Service />
       <section className="bg-black flex flex-col items-center py-10">
@@ -78,55 +117,7 @@ export default function Home(props: PropsType) {
         </div>
         <button className="mainButton">Бүх мэдээ үзэх</button>
       </section>
-      <section className="text-black flex h-[500px]">
-        <div className="w-1/2">
-          <picture>
-            <img
-              src="./trainer.png"
-              alt=""
-              className="object-cover h-full w-full"
-            />
-          </picture>
-        </div>
-        <div className="bg-main w-1/2 text-center flex flex-col items-center justify-center">
-          <h2 className="text-5xl font-bold">Success Stories</h2>
-          <div className="mt-10">
-            <p>"In just 6 months of training with Michael I lost 38 pounds"</p>
-            <p>JACK</p>
-            <p>January 10, 2035</p>
-          </div>
-          <div className="mt-10">
-            <p>"In just 6 months of training with Michael I lost 38 pounds"</p>
-            <p>JACK</p>
-            <p>January 10, 2035</p>
-          </div>
-          <div className="mt-10">
-            <p>"In just 6 months of training with Michael I lost 38 pounds"</p>
-            <p>JACK</p>
-            <p>January 10, 2035</p>
-          </div>
-        </div>
-      </section>
-      <section className="text-black flex h-[400px]">
-        <div className="w-1/3">
-          <picture>
-            <img
-              src="./sale.png"
-              alt=""
-              className="cover h-full w-full object-cover"
-            />
-          </picture>
-        </div>
-        <div className="w-2/3 bg-black text-white pl-60 py-20">
-          <h2>Holiday Sale</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-            aliquam est tempore expedita! Commodi, neque debitis. Veritatis
-            magnam consequatur nostrum.
-          </p>
-          <button className="mainButton">Shop Now</button>
-        </div>
-      </section>
+
       <section className="bg-white text-black flex justify-center items-center py-40 gap-10">
         <div className="border-r-2 border-black h-[100px]">
           <p className="text-6xl font-bold px-10">Partners</p>
