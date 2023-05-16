@@ -2,10 +2,8 @@ import { FitnessService } from './fitness.service';
 import {
   Controller,
   Get,
-  Query,
   Delete,
   Param,
-  Patch,
   Body,
   Post,
   UseInterceptors,
@@ -94,7 +92,7 @@ export class FitnessController {
       const req = JSON.parse(body.body);
 
       const result = await this.fitnessService.addToCloudinary(files.image);
-      if (result.length === files.image.length) return result;
+      return await this.fitnessService.addFitness(req, result);
     } catch (err) {
       throw new BadRequestException(err.message);
     }

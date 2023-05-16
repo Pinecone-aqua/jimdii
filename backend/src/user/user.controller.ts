@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   Patch,
+  Post,
   Query,
   Request as Req,
   UseGuards,
@@ -12,6 +13,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { CheckToken } from 'src/middleware/checkToken';
 import { CheckRole } from 'src/role/role.decorator';
+import { CreateUserDto } from './user.dto';
 
 @Controller('user')
 export class UserController {
@@ -48,7 +50,6 @@ export class UserController {
   ) {
     try {
       const result = await this.userService.updateUser(req['user'].id, body);
-
       if (!result) return 'error';
       const payload = {
         id: result._id,
@@ -58,20 +59,19 @@ export class UserController {
         phone: result?.phone,
         image: result?.profileImage,
       };
-
       return { access_token: await this.jwtService.signAsync(payload) };
     } catch (err) {
       throw new BadRequestException(err.message);
     }
   }
 
-  // @Post('register')
-  // async newUser(@Body() newUser: CreateUserDto) {
-  //   try {
-  //     const result = await this.userService.addUser(newUser);
-  //     return result;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  @Post('register')
+  async newUser(@Body() newUser: CreateUserDto) {
+    try {
+      const result = await this.userService.addUser(newUser);
+      return result;
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
+  }
 }

@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Membership } from './membership.model';
 import * as moment from 'moment';
-import { Fitness } from 'src/fitness/fitness.model';
 
 @Injectable()
 export class MembershipService {
@@ -17,7 +16,6 @@ export class MembershipService {
       .find({ userId: id })
       .populate('fitnessId', 'name')
       .select({ startDate: 1, expireDate: 1 });
-    console.log(result);
 
     return result;
   }

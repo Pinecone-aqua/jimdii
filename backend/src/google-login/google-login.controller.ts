@@ -49,7 +49,6 @@ export class GoogleLoginController {
       throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
 
     const profile: any = await getGoogleUserInfo(accessToken);
-    console.log(profile);
 
     let user = await this.userService.findByEmail(profile.email);
 
