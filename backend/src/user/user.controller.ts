@@ -6,7 +6,7 @@ import {
   Patch,
   Post,
   Query,
-  Request as Req,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
