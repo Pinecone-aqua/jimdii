@@ -22,6 +22,14 @@ import {
   ModalBody,
   useDisclosure,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useUser } from "@/context/UserContext";
@@ -70,8 +78,6 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
     setTotal(test);
   }
 
-  const changeImgStyle =
-    "absolute top-0 h-full flex items-center text-main w-1/2 group";
   const changeImgStyle =
     "absolute top-0 h-full flex items-center text-main w-1/2 group";
 

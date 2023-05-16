@@ -18,7 +18,6 @@ interface PropsType {
 }
 export default function Home(props: PropsType) {
   const { fitness } = props;
-  const { fitness } = props;
 
   return (
     <main className="text-white">
@@ -30,17 +29,21 @@ export default function Home(props: PropsType) {
           <button className="mainButton">Захиалах</button>
         </div>
       </div>
-  return (
-    <main className="text-white">
-      <div className="relative z-30 py-40 pl-60">
-        <Logo />
-        <p className="text-3xl">Монголын анхны цахим фитнесс захиалга</p>
-        <div className="py-20 flex gap-5">
-          <button className="secondaryButton">Үйлчилгээний тухай</button>
-          <button className="mainButton">Захиалах</button>
+
+      <div className="relative">
+        <div id="pattern">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            // id="pattern"
+            className="rope"
+          >
+            <source src="./rope.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
-
       <div className="relative">
         <div id="pattern">
           <video
@@ -162,7 +165,7 @@ export default function Home(props: PropsType) {
 
 export async function getStaticProps() {
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/limitedFitness:limit`
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/limitedFitness:limit`,
   );
   const fitness = await res.data;
   return {
