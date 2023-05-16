@@ -29,29 +29,6 @@ interface PropsType {
 }
 export default function Home(props: PropsType) {
   const { fitness } = props;
-  const [scrollY, setScrollY] = useState(0);
-
-  // const { ref } = useParallax({ speed: 100 });
-
-  // function useParallax(value: MotionValue<number>, distance: number) {
-  //   return useTransform(value, [0, 1], [-distance, distance]);
-  // }
-
-  // const ref = useRef(null);
-  // const { scrollYProgress } = useScroll({ target: ref });
-  // const y = useParallax(scrollYProgress, 300);
-
-  const onScroll = useCallback(() => {
-    const { pageYOffset, scrollY } = window;
-    console.log("pageYoffset", pageYOffset, "scrollY", scrollY);
-    setScrollY(window.pageYOffset);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", onScroll, { passive: true });
-    // remove event on unmount to prevent a memory leak with the cleanup
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [onScroll]);
 
   return (
     <main className="text-white">
@@ -72,39 +49,23 @@ export default function Home(props: PropsType) {
           </Link>
         </div>
       </div>
-      {scrollY < 850 && (
-        <div className="relative">
-          <div id="pattern">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              // id="pattern"
-              className="rope"
-            >
-              <source src="./rope.mp4" type="video/mp4" />
-            </video>
-          </div>
+
+      <div className="relative">
+        <div id="pattern">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            // id="pattern"
+            className="rope"
+          >
+            <source src="./rope.mp4" type="video/mp4" />
+          </video>
         </div>
-      )}{" "}
-      {scrollY > 850 && (
-        <div className="relative">
-          <div id="pattern">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              // id="pattern"
-              className="rope"
-            >
-              <source src="./running.mp4" type="video/mp4" />
-            </video>
-          </div>
-        </div>
-      )}
-      <section className="h-[80px] flex items-center text-center bg-main w-full text-sm md:h-[120px] lg:h-[160px]   sm:text-2xl  lg:text-4xl bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
+      </div>
+
+      <section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
         <p className="container mx-auto w-3/4 text-white ">
           "Эхлэх хамгийн зөв цаг нь өчигдөр байсан. Харин дараагийн хамгийн зөв
           цаг нь өнөөдөр юм."

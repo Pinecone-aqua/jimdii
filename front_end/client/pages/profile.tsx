@@ -6,6 +6,8 @@ import Image from "next/image";
 export default function Profile() {
   const [currentBtn, setCurrentBtn] = useState(ProfileNavbar[0]);
   const { currentUser } = useUser();
+  const [currentBtn, setCurrentBtn] = useState(ProfileNavbar[0]);
+  const { currentUser } = useUser();
 
   return (
     <div className="bg-black min-h-screen text-white">
