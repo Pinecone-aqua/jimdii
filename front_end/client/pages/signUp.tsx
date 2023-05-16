@@ -8,9 +8,11 @@ export default function signUp(): JSX.Element {
   const [signBtn, setsignBtn] = useState<boolean>(false);
   const router = useRouter();
   function googleLoginHandler() {
-    axios.get("http://localhost:7003/google-login").then((res) => {
-      router.push(res.data);
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}google-login`)
+      .then((res) => {
+        router.push(res.data);
+      });
   }
   return (
     <div className="bg-black text-white w-full h-full signUpPage ">
