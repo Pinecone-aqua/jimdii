@@ -44,10 +44,7 @@ export class UserController {
 
   @Patch('editMyDetail')
   @UseGuards(CheckToken)
-  async EditUserDetail(
-    @Req() req: Request,
-    @Body() body: { username: string },
-  ) {
+  async EditUserDetail(@Req() req, @Body() body: { username: string }) {
     try {
       const result = await this.userService.updateUser(req['user'].id, body);
       if (!result) return 'error';
