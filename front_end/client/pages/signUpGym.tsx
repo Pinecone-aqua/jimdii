@@ -15,7 +15,6 @@ export default function signUpGym(): JSX.Element {
       description: e.target.description.value,
       price: {
         oneMonth: e.target.oneMonth.value,
-        threeMonth: e.target.threeMonth.value,
         year: e.target.year.value,
         onetime: e.target.onetime.value,
       },
@@ -46,7 +45,10 @@ export default function signUpGym(): JSX.Element {
       image: [""],
     };
     console.log(newFitness);
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/addFitness`, {
+
+    const data = new FormData();
+    data.append("file", e.target.imageUrl.files);
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/addtempFitness`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
