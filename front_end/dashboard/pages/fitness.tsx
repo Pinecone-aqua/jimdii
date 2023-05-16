@@ -11,14 +11,9 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
   const [fitnesses, setFitnesses] = useState(fitness);
   const [addFitness, setAddFitness] = useState(false);
   const [showLoadMore, setShowLoadMore] = useState(true);
-  const { fitness } = props;
-  const [fitnesses, setFitnesses] = useState(fitness);
-  const [addFitness, setAddFitness] = useState(false);
-  const [showLoadMore, setShowLoadMore] = useState(true);
 
-  function loadMore() {
-    try {
-      if (fitnesses.length % 5 !== 0) return setShowLoadMore(false);
+  console.log(fitnesses);
+
   function loadMore() {
     try {
       if (fitnesses.length % 5 !== 0) return setShowLoadMore(false);
@@ -48,58 +43,6 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
       );
   }
 
-  return (
-    <>
-      <div className="bg-white h-full">
-        <div className="w-full flex align-center justify-between px-6 py-4">
-          <form className="flex w-1/2 ">
-            <label className="relative flex items-center w-3/4 text-red-950">
-              <FiSearch className="absolute m-2" />
-              <input
-                className="placeholder:text-red-950 block bg-slate-200 w-full border-b-2 border-red-950  rounded-l-2xl py-2 pl-9 pr-3 focus:outline-0"
-                placeholder="Search for anything..."
-                type="text"
-                name="search"
-              />
-            </label>
-            <button className="bg-red-950 px-4 rounded-r-2xl text-white">
-              Search
-            </button>
-          </form>
-          <button
-            className="bg-red-950 px-4 rounded-2xl text-white flex items-center"
-            onClick={() => setAddFitness(true)}
-          >
-            <FiPlus /> Add Fitness
-          </button>
-          {addFitness && <AddFitness setAddFitness={setAddFitness} />}
-        </div>
-        <div>
-          <table className="table-auto text-left w-full border-2 ">
-            <thead>
-              <tr className="h-20">
-                <th scope="col">No</th>
-                <th scope="col">Fitness Name</th>
-                <th scope="col">Members</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {fitnesses?.map((fitness, i) => (
-                <FitnessCol
-                  fitness={fitness}
-                  deleteHandler={deleteHandler}
-                  i={i}
-                  key={i}
-                />
-              ))}
-            </tbody>
-          </table>
-          {showLoadMore && <button onClick={loadMore}>Load more</button>}
-        </div>
-      </div>
-    </>
-  );
   return (
     <>
       <div className="bg-white h-full">
