@@ -17,7 +17,7 @@ export class MembershipController {
 
   @Get('getMyMembership')
   @UseGuards(CheckToken)
-  async getUserMembership(@Req() req: Request) {
+  async getUserMembership(@Req() req) {
     try {
       return this.membershipService.getMembership(req['user'].id);
     } catch (err) {
@@ -27,10 +27,7 @@ export class MembershipController {
 
   @Post('add')
   @UseGuards(CheckToken)
-  createMembership(
-    @Body() createMembershipInput: Membership,
-    @Req() req: Request,
-  ) {
+  createMembership(@Body() createMembershipInput: Membership, @Req() req) {
     try {
       return this.membershipService.createMembership(
         createMembershipInput,
