@@ -84,10 +84,11 @@ export class GoogleLoginController {
         .status(200)
         .cookie('token', token)
         .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+    } else {
+      res
+        .status(200)
+        .cookie('aToken', token)
+        .redirect(`http://localhost:${process.env.ADMIN_PORT}`);
     }
-    res
-      .status(200)
-      .cookie('atoken', token)
-      .redirect(`http://localhost:${process.env.ADMIN_PORT}`);
   }
 }

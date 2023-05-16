@@ -1,64 +1,92 @@
 import { ReactNode } from "react";
 
 export interface UserType {
-	_id: string;
-	username: {
-		firstname: string;
-		lastname: string;
-	};
-	role: string;
+  id: string;
+  username: string;
+  image?: string;
+  phone?: number;
+  email: string;
+  password: string;
+  address?: {
+    coord: number[];
+  };
+  gender?: "male" | "female" | "other";
+  fitness_id?: string;
+  birth_date?: string;
+  bgImage?: string;
 }
 
 export interface SingleType {
-	_id: string;
-	name: string;
+  _id: string;
+  name: string;
 }
 
 export interface FitnessType {
-	_id: string;
-	name: string;
-	description?: string;
-	image?: string[];
-	price?: {
-		oneTime?: number;
-		oneMonth: number;
-		threeMonth?: number;
-		sixMonth?: number;
-		year?: number;
-	};
-	contact: {
-		number?: number;
-		email?: string;
-		social?: string[];
-	};
-	address?: {
-		district: "Sukhbaatar" | "Bayangol";
-		description: string;
-		coord: number[];
-	};
-	timetable?: {
-		monday: string;
-		tuesday: string;
-		wednesday: string;
-		thursday: string;
-		friday: string;
-		saturday: string;
-		sunday: string;
-	};
-	discount: { name: string; discount: number }[] | null;
-	spec: {
-		wifi: boolean;
-		shower: boolean;
-		parking: boolean;
-	};
+  _id?: string;
+  name: string;
+  description?: string;
+  image: string[];
+  price?: {
+    oneMonth: number;
+    threeMonth?: number;
+    onetime: number;
+    year?: number;
+  };
+  address?: {
+    district:
+      | "Bayangol"
+      | "Sukhbaatar"
+      | "Khan-uul"
+      | "Songino-Khairkhan"
+      | "Bayanzurkh"
+      | "Chingeltei"
+      | "Baganuur";
+    description: string;
+    coord?: number[];
+  };
+  timetable?: TimetableType;
+  discount?: DiscountType[];
+  spec?: {
+    wifi: boolean;
+    shower: boolean;
+    parking: boolean;
+  };
+  contact?: ContactType;
+}
+export interface TimetableType {
+  Monday: string;
+  Tuesday: string;
+  Wednesday: string;
+  Thursday: string;
+  Friday: string;
+  Saturday: string;
+  Sunday: string;
+}
+
+export interface PriceType {
+  onetime?: number;
+  oneMonth: number;
+  threeMonth?: number;
+  sixMonth?: number;
+  year?: number;
+}
+
+export interface DiscountType {
+  name: string;
+  discount: number;
+}
+
+export interface ContactType {
+  phonenumber?: number;
+  social?: string[];
 }
 
 export interface PageType {
-	name: string;
-	url: string;
-	icon?: ReactNode;
+  name: string;
+  url: string;
+  icon?: ReactNode;
 }
 
 export interface FitnessProp {
-	data: FitnessType | null;
+  data: FitnessType | null;
 }
