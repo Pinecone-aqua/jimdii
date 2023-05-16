@@ -9,6 +9,12 @@ export default function signUpGym(): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(e: any) {
     e.preventDefault();
+  const [discounts, setDiscounts] = useState<DiscountType[]>([]);
+  const discountName = useRef("");
+  const discountPers = useRef("");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function submitHandler(e: any) {
+    e.preventDefault();
 
     const newFitness: FitnessType = {
       name: e.target.name.value,
@@ -16,7 +22,6 @@ export default function signUpGym(): JSX.Element {
       price: {
         oneMonth: e.target.oneMonth.value,
         year: e.target.year.value,
-        onetime: e.target.onetime.value,
       },
       address: {
         district: e.target.districts.value,
@@ -45,10 +50,7 @@ export default function signUpGym(): JSX.Element {
       image: [""],
     };
     console.log(newFitness);
-
-    const data = new FormData();
-    data.append("file", e.target.imageUrl.files);
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/addtempFitness`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/addFitness`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
