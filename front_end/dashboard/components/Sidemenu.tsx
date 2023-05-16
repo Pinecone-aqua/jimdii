@@ -2,11 +2,10 @@ import Cookies from "js-cookie";
 import Navbar from "./Navbar";
 import Profile from "./Profile";
 import { RxExit } from "react-icons/rx";
+import { useUser } from "@/context/UserContext";
 
 export default function Sidemenu() {
-  function logoutHandler() {
-    Cookies.remove("atoken");
-  }
+  const { logoutHandler } = useUser();
   return (
     <div className="w-1/6 h-full bg-red-950 flex flex-col items-center justify-between py-5">
       <div className="w-full flex flex-col items-center justify-between mt-4">

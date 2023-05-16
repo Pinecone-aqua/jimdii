@@ -100,7 +100,7 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
 export async function getStaticProps() {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/0`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/getAllfitness0`
     );
     return {
       props: {
