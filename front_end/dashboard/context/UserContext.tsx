@@ -1,47 +1,65 @@
+import { UserType } from "@/utils/types";
 import axios from "axios";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 import { useRouter } from "next/router";
-import { createContext, useContext } from "react";
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-import { ReactNode } from "react";
-
-type PropType = {
-	children: ReactNode;
-};
-
-type ContextType = {
-	loginHandler: () => void;
-	logoutHandler: () => void;
-};
-
-const UserContext = createContext<ContextType>({} as ContextType);
-
-export default function UserProvider({ children }: PropType) {
-	const router = useRouter();
-
-	function loginHandler() {
-		try {
-			axios
-				.get("http://localhost:7003/google/login")
-				.then((res) => {
-					router.push(res.data);
-				})
-				.catch((err) => console.log(err));
-		} catch (err) {
-			console.log(err);
-		}
-	}
-
-	function logoutHandler() {
-		localStorage.removeItem("currentUser");
-	}
-
-	return (
-		<UserContext.Provider value={{ loginHandler, logoutHandler }}>
-			{children}
-		</UserContext.Provider>
-	);
+interface UserContextType {
+  currentUser: UserType | null;
+  logoutHandler: () => void;
 }
 
+const UserContext = createContext<UserContextType>({} as UserContextType);
+
 export function useUser() {
-	return useContext(UserContext);
+  return useContext(UserContext);
+}
+
+interface UserProviderType {
+  children: ReactNode;
+  children: ReactNode;
+}
+
+export default function UserProvider({ children }: UserProviderType) {
+  const [currentUser, setCurrentUser] = useState<UserType | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = Cookies.get("aToken");
+    // if (!token && router.asPath !== "/login") {
+    //   router.push("/login");
+    //   return;
+    // }
+    if (token) {
+      try {
+        axios
+          .get("http://localhost:7003/user/checkToken?role=admin", {
+            headers: { Authorization: token },
+          })
+          .then(() => setCurrentUser(jwtDecode(token)))
+          .catch(() => (Cookies.remove("atoken"), setCurrentUser(null)));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [router]);
+
+  function logoutHandler() {
+    Cookies.remove("aToken");
+    setCurrentUser(null);
+    router.push("/login");
+  }
+
+  return (
+    <UserContext.Provider value={{ currentUser, logoutHandler }}>
+      {children}
+    </UserContext.Provider>
+  );
 }

@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useRef } from "react";
-import { Fitnesses } from "@/util/dummydata";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { IoMdArrowBack } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import Timetable from "@/components/subcomp/SingleFitness/Timetable";
-import FitnessPrice from "@/components/subcomp/SingleFitness/FitnessPrice";
-import Discount from "@/components/subcomp/SingleFitness/Discount";
-import ContactInfo from "@/components/subcomp/SingleFitness/ContactInfo";
-import Spec from "@/components/subcomp/SingleFitness/Spec";
+import Timetable from "@/components/SingleFitness/Timetable";
+import FitnessPrice from "@/components/SingleFitness/FitnessPrice";
+import Discount from "@/components/SingleFitness/Discount";
+import ContactInfo from "@/components/SingleFitness/ContactInfo";
+import Spec from "@/components/SingleFitness/Spec";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import axios from "axios";
 import { FitnessProp, FitnessType } from "@/util/types";
@@ -22,10 +21,8 @@ import {
   ModalBody,
   useDisclosure,
   Button,
-  IconButton,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { useUser } from "@/context/UserContext";
+import Cookies from "js-cookie";
 // import { MinusIcon } from "@chakra-ui/icons/dist/Minus";
 
 const arr = [
@@ -41,23 +38,28 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [disabled, setDisabled] = useState([]);
   const [total, setTotal] = useState([]);
-  const { currentUser } = useUser();
   // console.log(currentUser?.id);
 
   function submitHandler() {
     onClose();
     // console.log(disabled);
+    const token = Cookies.get("token");
+    if (!token) return;
 
     const newMembership = {
       fitnessId: fitness._id,
-      userId: currentUser?.id,
-      isPayment: false,
-      price: disabled[1],
+      price: disabled,
       discount: fitness.discount ? fitness.discount[0] : null,
     };
 
     axios
-      .post("http://localhost:7003/membership/add", newMembership)
+      .post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}membership/add`,
+        newMembership,
+        {
+          headers: { Authorization: token },
+        }
+      )
       .then((res) => console.log(res.data));
   }
 
@@ -65,8 +67,6 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
     disabled !== key && setDisabled(key);
     setTotal(test);
   }
-
-  if (!fitness) fitness = Fitnesses[0];
 
   const changeImgStyle =
     "absolute top-0 h-full flex items-center text-main w-1/2 group";
@@ -165,10 +165,8 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                                 >
                                   {test[1]}:{key[1]}
                                 </button>
-
                               )
                           )
-
                         )}
                     </div>
                     <div>
@@ -213,7 +211,9 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
   );
 }
 export const getStaticPaths: GetStaticPaths = async ({}) => {
-  const res = await axios.get("http://localhost:7003/fitness/id");
+  const res = await axios.get(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/id`
+  );
   const paths = await res.data.map((id: { _id: string }) => ({
     params: { id: id._id },
   }));
@@ -228,7 +228,7 @@ export const getStaticProps: GetStaticProps<FitnessProp> = async ({
 }: GetStaticPropsContext) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:7003/fitness/getfitness${params?.id}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/getfitness${params?.id}`
     );
     return {
       props: {

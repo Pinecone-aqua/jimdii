@@ -5,5 +5,4 @@ export class CreateUserDto {
   };
   email: string;
   password: string;
-  gender: 'male' | 'female' | 'other';
 }

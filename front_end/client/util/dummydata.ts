@@ -586,3 +586,101 @@ export const Fitnesses = [
 		},
 	},
 ];
+
+export const tmpMemberships = [
+	{
+		fitnessName: "Planet Gym",
+		startDate: "2022-03-15",
+		expireDate: "2023-03-14",
+	},
+	{
+		fitnessName: "Gold's Gym",
+		startDate: "2022-05-01",
+		expireDate: "2023-04-30",
+	},
+	{
+		fitnessName: "Anytime Fit",
+		startDate: "2023-05-05",
+		expireDate: "2024-05-04",
+	},
+	{
+		fitnessName: "FitX1 ",
+		startDate: "2021-01-01",
+		expireDate: "2021-12-31",
+	},
+	{
+		fitnessName: "Planet Gym 1",
+		startDate: "2022-03-15",
+		expireDate: "2023-03-14",
+	},
+	{
+		fitnessName: "Gold's Gym 1",
+		startDate: "2023-05-01",
+		expireDate: "2024-04-30",
+	},
+	{
+		fitnessName: "Anytime Fit 1",
+		startDate: "2023-05-05",
+		expireDate: "2024-05-04",
+	},
+	{
+		fitnessName: "FitX 2",
+		startDate: "2021-01-01",
+		expireDate: "2021-12-31",
+	},
+	{
+		fitnessName: "Planet Gym 2",
+		startDate: "2022-03-15",
+		expireDate: "2023-03-14",
+	},
+	{
+		fitnessName: "Gold's Gym 2",
+		startDate: "2023-05-01",
+		expireDate: "2024-04-30",
+	},
+	{
+		fitnessName: "Anytime Fit 2",
+		startDate: "2023-05-05",
+		expireDate: "2024-05-04",
+	},
+	{
+		fitnessName: "FitX 3",
+		startDate: "2021-01-01",
+		expireDate: "2021-12-31",
+	},
+	{
+		fitnessName: "Planet Gym 3",
+		startDate: "2022-03-15",
+		expireDate: "2023-03-14",
+	},
+	{
+		fitnessName: "Gold's Gym 3",
+		startDate: "2023-05-01",
+		expireDate: "2024-04-30",
+	},
+	{
+		fitnessName: "Anytime Fit 3",
+		startDate: "2023-05-05",
+		expireDate: "2024-05-04",
+	},
+	{
+		fitnessName: "FitX 4",
+		startDate: "2021-01-01",
+		expireDate: "2022-12-31",
+	},
+	{
+		fitnessName: "Planet Gym 4",
+		startDate: "2022-03-15",
+		expireDate: "2023-02-14",
+	},
+	{
+		fitnessName: "Gold's Gym 4",
+		startDate: "2023-05-01",
+		expireDate: "2024-06-30",
+	},
+	{
+		fitnessName: "Anytime Fit 4",
+		startDate: "2023-05-05",
+		expireDate: "2023-05-04",
+	},
+];

@@ -2,7 +2,6 @@ import { FitnessService } from './fitness.service';
 import {
   Controller,
   Get,
-  Query,
   Delete,
   Param,
   Body,
@@ -24,18 +23,17 @@ export class FitnessController {
       const result = await this.fitnessService.getFitness(id);
       return result;
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 
   @Get('getAllFitness/')
   async getAllfitness(@Query() query: string) {
     try {
-      console.log(query);
-      const result = await this.fitnessService.getAllfitness(query);
+      const result = await this.fitnessService.getAllfitness(page);
       return result;
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 
@@ -43,9 +41,7 @@ export class FitnessController {
   async getSomeFitness(@Param('limit') limit: string) {
     try {
       const num = Number(limit);
-      console.log(num);
       const result = await this.fitnessService.getSomeFitness(num);
-      console.log(result.length);
 
       if (result) {
         if (result[0]) return result;
@@ -53,7 +49,7 @@ export class FitnessController {
       }
       throw new BadRequestException('something went wrong');
     } catch (err) {
-      throw new BadRequestException(err);
+      throw new BadRequestException(err.message);
     }
   }
 
@@ -94,16 +90,11 @@ export class FitnessController {
   ) {
     try {
       const req = JSON.parse(body.body);
-      console.log(files.image[0].buffer);
-      console.log('body', req.name);
 
-      const result = await this.fitnessService.addToCloudinary(
-        files.image,
-        files.image.length,
-      );
-      if (result.length === files.image.length) console.log(result);
+      const result = await this.fitnessService.addToCloudinary(files.image);
+      return await this.fitnessService.addFitness(req, result);
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 }

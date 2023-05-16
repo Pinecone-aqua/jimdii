@@ -49,7 +49,6 @@ export class GoogleLoginController {
       throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
 
     const profile: any = await getGoogleUserInfo(accessToken);
-    console.log(profile);
 
     let user = await this.userService.findByEmail(profile.email);
 
@@ -57,12 +56,12 @@ export class GoogleLoginController {
       const userInput: User = {
         email: profile.email,
         username: profile.name,
-        profile_img: profile.picture,
+        profileImage: profile.picture,
         password: null,
         address: null,
         gender: null,
-        birth_date: null,
-        created_date: moment().format('LLLL'),
+        birthdate: null,
+        createdDate: moment().format('LLLL'),
         phone: null,
         role: 'CLIENT',
       };
@@ -71,16 +70,24 @@ export class GoogleLoginController {
 
     const payload = {
       id: user._id,
-      name: user.username,
+      username: user.username,
       email: user.email,
       role: user.role,
       phone: user?.phone,
-      image: user?.profile_img,
+      image: user?.profileImage,
     };
     const token = this.jwtService.sign(payload);
-    res
-      .status(200)
-      .cookie('token', token)
-      .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+
+    if (user.role === 'CLIENT') {
+      res
+        .status(200)
+        .cookie('token', token)
+        .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+    } else {
+      res
+        .status(200)
+        .cookie('aToken', token)
+        .redirect(`http://localhost:${process.env.ADMIN_PORT}`);
+    }
   }
 }

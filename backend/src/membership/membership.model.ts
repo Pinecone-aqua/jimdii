@@ -1,12 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
 
 @Schema()
 export class Membership {
-  @Prop({ type: String })
+  @Prop({ type: mongoose.Schema.Types.String, ref: 'fitness' })
   fitnessId: string;
   @Prop()
   userId: string;
-  @Prop()
+  @Prop({ default: false })
   isPayment: boolean;
   @Prop()
   price: number;
