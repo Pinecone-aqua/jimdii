@@ -12,6 +12,7 @@ export default function Login() {
   const [signBtn, setsignBtn] = useState<boolean>(false);
   const router = useRouter();
   useEffect(() => {
+    setRegisterBtn(false);
     getSecondPass == getFirstPass
       ? setConfirmPass(true)
       : setConfirmPass(false);
@@ -24,17 +25,15 @@ export default function Login() {
     e.preventDefault();
     if (registerbtn) {
       const register: UserType = {
-        username: {
-          firstname: e.target.firstname.value,
-          lastname: e.target.lastname.value,
-        },
+        username: e.target.name.value,
         gender: e.target.gender.value,
         email: e.target.email.value,
         password: e.target.password.value,
+        id: "",
       };
       console.log(register);
       axios
-        .post("http://localhost:7003/user/register", register)
+        .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}user/register`, register)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     } else {
@@ -44,16 +43,22 @@ export default function Login() {
       };
       console.log(login);
       axios
-        .get(`http://localhost:7003/user/login?user=${JSON.stringify(login)}`)
+        .get(
+          `${
+            process.env.NEXT_PUBLIC_BACKEND_URL
+          }user/login?user=${JSON.stringify(login)}`
+        )
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
   }
 
   function googleLoginHandler() {
-    axios.get("http://localhost:7003/google-login").then((res) => {
-      router.push(res.data);
-    });
+    axios
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}google-login`)
+      .then((res) => {
+        router.push(res.data);
+      });
   }
 
   return (
@@ -154,15 +159,7 @@ export default function Login() {
                     type="text"
                     placeholder="Firstname"
                     className={inputStyle}
-                    name="firstname"
-                    required
-                    id="inputStyle"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Lastname"
-                    className={inputStyle}
-                    name="lastname"
+                    name="name"
                     required
                     id="inputStyle"
                   />
