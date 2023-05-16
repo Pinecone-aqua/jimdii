@@ -6,7 +6,6 @@ import {
   Patch,
   Query,
   Request as Req,
-  Response as Res,
   UseGuards,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -35,7 +34,6 @@ export class UserController {
   async EditUserDetail(
     @Req() req: Request,
     @Body() body: { username: string },
-    @Res() res: Response,
   ) {
     try {
       const result = await this.userService.updateUser(req['user'].id, body);
@@ -49,12 +47,8 @@ export class UserController {
         phone: result?.phone,
         image: result?.profileImage,
       };
-      const token = this.jwtService.sign(payload);
 
-      // res
-      //   .status(200)
-      //   .cookie('token', token)
-      //   .redirect(`http://localhost:${process.env.CLIENT_PORT}`);
+      return { access_token: await this.jwtService.signAsync(payload) };
     } catch (err) {
       throw new BadRequestException(err.message);
     }
