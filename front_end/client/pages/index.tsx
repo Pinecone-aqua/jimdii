@@ -29,6 +29,29 @@ interface PropsType {
 }
 export default function Home(props: PropsType) {
   const { fitness } = props;
+  const [scrollY, setScrollY] = useState(0);
+
+  // const { ref } = useParallax({ speed: 100 });
+
+  // function useParallax(value: MotionValue<number>, distance: number) {
+  //   return useTransform(value, [0, 1], [-distance, distance]);
+  // }
+
+  // const ref = useRef(null);
+  // const { scrollYProgress } = useScroll({ target: ref });
+  // const y = useParallax(scrollYProgress, 300);
+
+  const onScroll = useCallback(() => {
+    const { pageYOffset, scrollY } = window;
+    console.log("pageYoffset", pageYOffset, "scrollY", scrollY);
+    setScrollY(window.pageYOffset);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // remove event on unmount to prevent a memory leak with the cleanup
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [onScroll]);
 
   return (
     <main className="text-white">
