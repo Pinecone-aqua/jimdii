@@ -16,6 +16,7 @@ export default function signUpGym(): JSX.Element {
       price: {
         oneMonth: e.target.oneMonth.value,
         year: e.target.year.value,
+        onetime: e.target.onetime.value,
       },
       address: {
         district: e.target.districts.value,
@@ -45,6 +46,7 @@ export default function signUpGym(): JSX.Element {
     };
     console.log(newFitness);
     fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/addFitness`, {
+
       method: "POST",
       headers: {
         "Content-Type": "application/json",

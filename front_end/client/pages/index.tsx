@@ -45,6 +45,20 @@ export default function Home(props: PropsType) {
           </video>
         </div>
       </div>
+      <div className="relative">
+        <div id="pattern">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            // id="pattern"
+            className="rope"
+          >
+            <source src="./rope.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
 
       <section className="h-[80px] md:h-[120px] lg:h-[160px] flex items-center text-center bg-main w-full text-sm  sm:text-2xl  lg:text-4xl bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#90FFFF] via-main to-main">
         <p className="container mx-auto w-3/4 text-white ">
