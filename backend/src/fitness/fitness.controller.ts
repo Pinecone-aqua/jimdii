@@ -25,7 +25,7 @@ export class FitnessController {
       const result = await this.fitnessService.getFitness(id);
       return result;
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 
@@ -35,7 +35,7 @@ export class FitnessController {
       const result = await this.fitnessService.getAllfitness(page);
       return result;
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 
@@ -51,7 +51,7 @@ export class FitnessController {
       }
       throw new BadRequestException('something went wrong');
     } catch (err) {
-      throw new BadRequestException(err);
+      throw new BadRequestException(err.message);
     }
   }
 
@@ -96,7 +96,7 @@ export class FitnessController {
       const result = await this.fitnessService.addToCloudinary(files.image);
       if (result.length === files.image.length) return result;
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 }

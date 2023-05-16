@@ -1,10 +1,11 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
   Patch,
-  Post,
   Query,
+  Request as Req,
   UseGuards,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -72,13 +73,5 @@ export class UserController {
   //   } catch (err) {
   //     console.log(err);
   //   }
-  // }
-
-  // @Patch('edit')
-  // async editUser(@Body() editedUser) {
-  //   try {
-  //     const result = await this.userService.editUser(editedUser);
-  //     return result;
-  //   } catch (err) {}
   // }
 }

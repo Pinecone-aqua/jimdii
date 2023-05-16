@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useRef } from "react";
-import { Fitnesses } from "@/util/dummydata";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { IoMdArrowBack } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
@@ -22,17 +21,8 @@ import {
   ModalBody,
   useDisclosure,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  useDisclosure,
-  Button,
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { useUser } from "@/context/UserContext";
+import Cookies from "js-cookie";
 // import { MinusIcon } from "@chakra-ui/icons/dist/Minus";
 
 const arr = [
@@ -68,7 +58,7 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
         newMembership,
         {
           headers: { Authorization: token },
-        },
+        }
       )
       .then((res) => console.log(res.data));
   }
@@ -175,8 +165,8 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
                                 >
                                   {test[1]}:{key[1]}
                                 </button>
-                              ),
-                          ),
+                              )
+                          )
                         )}
                     </div>
                     <div>
@@ -222,7 +212,7 @@ export default function SingleGym({ data: fitness }: { data: FitnessType }) {
 }
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/id`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/id`
   );
   const paths = await res.data.map((id: { _id: string }) => ({
     params: { id: id._id },
@@ -238,7 +228,7 @@ export const getStaticProps: GetStaticProps<FitnessProp> = async ({
 }: GetStaticPropsContext) => {
   try {
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/getfitness${params?.id}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/getfitness${params?.id}`
     );
     return {
       props: {

@@ -49,7 +49,7 @@ export default function UserDetail() {
             editedDetails,
             {
               headers: { Authorization: token },
-            },
+            }
           )
           .then(({ data }) => console.log(data))
           .catch((err) => console.log(err));

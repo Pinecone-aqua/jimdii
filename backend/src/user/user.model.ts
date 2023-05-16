@@ -21,13 +21,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 // }
 @Schema()
 export class User {
-  @Prop({ type: Object })
-  username: {
-    firstname: string;
-    lastname: string;
-  };
+  @Prop()
+  username: string;
   @Prop({ type: String })
-  profile_img?: string;
+  profileImage?: string;
 
   @Prop({ type: Number })
   phone?: number;
@@ -53,10 +50,10 @@ export class User {
   // fitness_id?: string;
 
   @Prop({ type: String })
-  birth_date?: string;
+  birthdate?: string;
 
   @Prop({ type: String })
-  created_date: string;
+  createdDate: string;
 
   @Prop({ default: 'CLIENT' })
   role: 'CLIENT' | 'MODERATOR' | 'ADMIN';

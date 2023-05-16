@@ -38,7 +38,7 @@ export default function AllFitness({
 
 export const getStaticPaths: GetStaticPaths = async ({}) => {
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/pages`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/pages`
   );
   const paths = await res.data.map((page: string) => ({
     params: { page: page },
@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps<AllFitnessProp> = async ({
 }: GetStaticPropsContext) => {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/getAllfitness${params?.page}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/getAllfitness${params?.page}`
     );
     const fitnesses = await res.data;
     return {

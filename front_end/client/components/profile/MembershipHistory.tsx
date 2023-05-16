@@ -1,6 +1,6 @@
-import { tmpMemberships } from "@/util/dummydata";
+
+import { MembershipType } from "@/util/types";
 import MembershipCard from "./MembershipCard";
-import { TmpMembership } from "@/util/types";
 import { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 import axios from "axios";
@@ -20,7 +20,7 @@ export default function History() {
           `${process.env.NEXT_PUBLIC_BACKEND_URL}membership/getMyMembership?filter=history`,
           {
             headers: { Authorization: token },
-          },
+          }
         )
         .then(({ data }) => setMembershipHistory(data));
     } catch (err) {

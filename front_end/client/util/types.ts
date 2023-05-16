@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 export interface UserType {
   id: string;
   username: string;

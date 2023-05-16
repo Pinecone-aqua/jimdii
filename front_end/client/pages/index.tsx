@@ -15,6 +15,7 @@ import Link from "next/link";
 
 interface PropsType {
   fitness: FitnessType[];
+  fitness: FitnessType[];
 }
 export default function Home(props: PropsType) {
   const { fitness } = props;
@@ -165,7 +166,7 @@ export default function Home(props: PropsType) {
 
 export async function getStaticProps() {
   const res = await axios.get(
-    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/limitedFitness:limit`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/limitedFitness:limit`
   );
   const fitness = await res.data;
   return {
