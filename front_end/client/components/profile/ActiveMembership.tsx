@@ -5,23 +5,28 @@ import { useEffect, useState } from "react";
 import MembershipCard from "./MembershipCard";
 
 export default function Membership() {
-  const [memberships, setMemberships] = useState<TmpMembership[] | null>(null);
+  const [memberships, setMemberships] = useState<MembershipType[] | null>(null);
+
   useEffect(() => {
-    const currentDate = moment().format("YYYY-MM-DD");
-    console.log(currentDate);
-    setMemberships(
-      tmpMemberships.filter((membership) => membership.expireDate > currentDate)
-    );
+    try {
+      const token = Cookies.get("token");
+      if (!token) return;
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}membership/getMyMembership?filter=active`,
+          {
+            headers: { Authorization: token },
+          },
+        )
+        .then(({ data }) => setMemberships(data));
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
   return (
-    <div className="flex flex-wrap p-5 gap-2 justify-between">
-      {memberships?.map((membership: TmpMembership, i: number) => (
-        <MembershipCard
-          membership={membership}
-          bgColor="white"
-          textColor="black"
-          key={i}
-        />
+    <div className="membership">
+      {memberships?.map((membership: MembershipType, i: number) => (
+        <MembershipCard membership={membership} bgColor="primary" key={i} />
       ))}
     </div>
   );

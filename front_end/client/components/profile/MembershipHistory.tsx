@@ -6,26 +6,30 @@ import moment from "moment";
 
 export default function History() {
   const [membershipHistory, setMembershipHistory] = useState<
-    TmpMembership[] | null
+    MembershipType[] | null
   >(null);
 
   useEffect(() => {
-    const currentDate = moment().format("YYYY-MM-DD");
-    console.log(currentDate);
-    setMembershipHistory(
-      tmpMemberships.filter((membership) => membership.expireDate < currentDate)
-    );
+    try {
+      const token = Cookies.get("token");
+      if (!token) return;
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}membership/getMyMembership?filter=history`,
+          {
+            headers: { Authorization: token },
+          },
+        )
+        .then(({ data }) => setMembershipHistory(data));
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   return (
-    <div className="flex flex-wrap p-5 gap-2 justify-between">
-      {membershipHistory?.map((membership: TmpMembership, i: number) => (
-        <MembershipCard
-          membership={membership}
-          bgColor="slate-700"
-          textColor="white"
-          key={i}
-        />
+    <div className="membership">
+      {membershipHistory?.map((membership: MembershipType, i: number) => (
+        <MembershipCard membership={membership} bgColor="secondary" key={i} />
       ))}
     </div>
   );

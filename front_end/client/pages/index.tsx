@@ -18,7 +18,18 @@ interface PropsType {
 }
 export default function Home(props: PropsType) {
   const { fitness } = props;
+  const { fitness } = props;
 
+  return (
+    <main className="text-white">
+      <div className="relative z-30 py-40 pl-60">
+        <Logo />
+        <p className="text-3xl">Монголын анхны цахим фитнесс захиалга</p>
+        <div className="py-20 flex gap-5">
+          <button className="secondaryButton">Үйлчилгээний тухай</button>
+          <button className="mainButton">Захиалах</button>
+        </div>
+      </div>
   return (
     <main className="text-white">
       <div className="relative z-30 py-40 pl-60">
@@ -151,7 +162,7 @@ export default function Home(props: PropsType) {
 
 export async function getStaticProps() {
   const res = await axios.get(
-    `http://localhost:7003/fitness/limitedFitness:limit`,
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/limitedFitness:limit`
   );
   const fitness = await res.data;
   return {
