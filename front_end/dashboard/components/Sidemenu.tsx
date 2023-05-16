@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import Navbar from "./Navbar";
 import Profile from "./Profile";
 import { RxExit } from "react-icons/rx";

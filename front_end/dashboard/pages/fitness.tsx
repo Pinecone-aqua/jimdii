@@ -16,9 +16,6 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
   const [addFitness, setAddFitness] = useState(false);
   const [showLoadMore, setShowLoadMore] = useState(true);
 
-  console.log(fitnesses);
-  console.log(fitnesses);
-
   function loadMore() {
     try {
       if (fitnesses.length % 5 !== 0) return setShowLoadMore(false);
@@ -160,7 +157,7 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
 export async function getStaticProps() {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/0`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/getAllfitness0`
     );
     return {
       props: {
