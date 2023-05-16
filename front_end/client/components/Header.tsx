@@ -39,7 +39,14 @@ export default function Header(): JSX.Element {
               <Link href={`/`}>Нүүр хуудас</Link>
             </Dropdown.Item>
             <Dropdown.Item>
-              <Link href={`/allFitness`}>Жийм</Link>
+              <Link
+                href={{
+                  pathname: "/allFitness",
+                  query: { page: 1 },
+                }}
+              >
+                Жийм
+              </Link>
             </Dropdown.Item>
             <Dropdown.Divider />
             <Dropdown.Item>
@@ -58,7 +65,12 @@ export default function Header(): JSX.Element {
             <Link href={`/`} className="hover:text-main">
               Нүүр хуудас
             </Link>
-            <Link href={`/allFitness/1`} className="hover:text-main">
+            <Link
+              href={{
+                pathname: "/allFitness",
+                query: { page: 1 },
+              }}
+            >
               Жийм
             </Link>
             <Link href={`/news`} className="hover:text-main">
