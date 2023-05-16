@@ -7,6 +7,7 @@ import {
   IoMdSettings,
   IoIosHome,
 } from "react-icons/io";
+import Cookies from "js-cookie";
 
 const pages: PageType[] = [
   {
@@ -36,19 +37,18 @@ export default function Navbar() {
   const router = useRouter();
 
   useEffect(() => {
+    const token = Cookies.get("aToken");
+    if (!token) return;
     if (localStorage.getItem("currentPage")) {
       const btn: string | null = localStorage.getItem("currentPage");
       const checkStorage = pages.find((page) => page.name === btn);
-      console.log(checkStorage);
 
       if (checkStorage) {
         setCurrentPage(checkStorage);
-        router.push(checkStorage.url);
-      } else {
-        router.push("/");
+        checkStorage !== currentPage && router.push(checkStorage.url);
       }
     }
-  }, []);
+  }, [currentPage, router]);
 
   const activeBtn = "bg-white text-xl";
   const unactiveBtn = "text-white hover:bg-red-900";

@@ -1,15 +1,17 @@
 export interface UserType {
-  name: string;
-  email: string;
+  id: string;
+  username: string;
   image?: string;
   phone?: number;
-  password?: string;
+  email: string;
+  password: string;
   address?: {
     coord: number[];
   };
   gender?: "male" | "female" | "other";
   fitness_id?: string;
   birth_date?: string;
+  bgImage?: string;
 }
 
 export interface FitnessType {
@@ -80,8 +82,20 @@ export interface AllFitnessProp {
   data: FitnessType[];
 }
 
-export interface TmpMembership {
-  fitnessName: string;
+export interface MembershipType {
+  fitnessId: {
+    _id: string;
+    name: string;
+  };
   startDate: string;
   expireDate: string;
+}
+
+export interface FormInputProps {
+  type: string;
+  inputStyle: string;
+  readOnly: boolean;
+  defaultValue: string | undefined;
+  name: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
