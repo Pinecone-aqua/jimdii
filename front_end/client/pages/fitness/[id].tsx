@@ -21,6 +21,14 @@ import {
   ModalBody,
   useDisclosure,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 // import { MinusIcon } from "@chakra-ui/icons/dist/Minus";

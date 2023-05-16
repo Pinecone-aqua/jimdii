@@ -9,12 +9,6 @@ export default function signUpGym(): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(e: any) {
     e.preventDefault();
-  const [discounts, setDiscounts] = useState<DiscountType[]>([]);
-  const discountName = useRef("");
-  const discountPers = useRef("");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function submitHandler(e: any) {
-    e.preventDefault();
 
     const newFitness: FitnessType = {
       name: e.target.name.value,
@@ -81,34 +75,7 @@ export default function signUpGym(): JSX.Element {
               <MainLogo />
             </div>
           </div>
-  return (
-    <div className="w-full h-fit registerPage">
-      <div className="w-[50%] mx-auto py-[35px]">
-        <div className="flex">
-          <div className="hidden lg:inline w-[50%] rounded-l-lg">
-            <div className="w-full h-full flex justify-center items-center bg-[#4D9799] rounded-l-lg  ">
-              <MainLogo />
-            </div>
-          </div>
 
-          <div className="bg-black text-white rounded-r-lg w-[50%]">
-            <div className=" text-white flex justify-center items-center h-[50px] text-lg font-bold rounded-t-lg p-[30px]">
-              <h2>Gym Registration Form</h2>
-            </div>
-            <form onSubmit={submitHandler} className="w-[80%] mx-auto">
-              <label className="block w-full">
-                <h2>НЭР :</h2>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Gym Name"
-                  className="w-full p-[5px]"
-                  id="input_Style"
-                  required
-                />
-              </label>
-              <label className="w-full">
-                <h2>ДЭЛГЭРЭНГҮЙ :</h2>
           <div className="bg-black text-white rounded-r-lg w-[50%]">
             <div className=" text-white flex justify-center items-center h-[50px] text-lg font-bold rounded-t-lg p-[30px]">
               <h2>Gym Registration Form</h2>

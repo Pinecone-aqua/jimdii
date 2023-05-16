@@ -49,7 +49,6 @@ export default function Home(props: PropsType) {
           </Link>
         </div>
       </div>
-
       <div className="relative">
         <div id="pattern">
           <video
