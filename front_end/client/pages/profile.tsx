@@ -7,16 +7,19 @@ export default function Profile() {
 	const [currentBtn, setCurrentBtn] = useState(ProfileNavbar[0]);
 	const { currentUser } = useUser();
 
+	console.log(currentUser);
+
 	return (
-		<div className="bg-black min-h-screen text-white">
-			<div className="container profile">
+		<div className="bg-black min-h-screen text-black">
+			<div className="container profile border-main border">
 				<div className="profile-header">
-					<div className="profile-header-background ">
+					<div className="profile-header-background">
 						{currentUser?.bgImage ? (
 							<Image
 								src={currentUser.bgImage}
-								alt=""
+								alt="profile"
 								fill
+								priority={true}
 							/>
 						) : (
 							<div className="" />
@@ -28,11 +31,11 @@ export default function Profile() {
 								<li
 									key={i}
 									onClick={() => setCurrentBtn(button)}
-									className={
+									className={`hover:opacity-75 ${
 										currentBtn == button
 											? "profile-header-activeBtn"
 											: "profile-header-inActiveBtn"
-									}>
+									}`}>
 									{button.name}
 								</li>
 							))}
@@ -48,7 +51,9 @@ export default function Profile() {
 								className="rounded-[100%]"
 							/>
 						) : (
-							<div className="rounded-[100%] bg-black">A</div>
+							<div className="rounded-[100%] bg-main text-white">
+								{currentUser?.username.slice(0, 1)}
+							</div>
 						)}
 						<p>{currentUser?.username}</p>
 					</div>
