@@ -1,9 +1,9 @@
 import Head from "next/head";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect } from "react";
 import Cookies from "js-cookie";
 
 // import Banner from "./Banner";
-import jwtDecode from "jwt-decode";
+// import jwtDecode from "jwt-decode";
 import { useRouter } from "next/router";
 import Header from "./Header";
 
@@ -12,19 +12,19 @@ type PropType = {
 };
 
 export default function Layout({ children }: PropType) {
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const token: any = Cookies.get("token");
   const router = useRouter();
 
   useEffect(() => {
-    if (router.asPath === "/allFitness") router.push("allFitness/1");
+    if (router.asPath === "/allFitness") router.push("/allFitness/1");
     if (!token && router.asPath === "/profile") router.push("/login");
   }, [router, token]);
 
-  useEffect(() => {
-    if (token) setUser(jwtDecode(token));
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) setUser(jwtDecode(token));
+  // }, [token]);
 
   return (
     <div>
@@ -35,7 +35,7 @@ export default function Layout({ children }: PropType) {
         <link rel="icon" href="favicon.ico" />
       </Head>
 
-      <Header user={user} setUser={setUser} />
+      <Header />
       <main>{children}</main>
     </div>
   );

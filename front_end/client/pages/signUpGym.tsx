@@ -9,6 +9,12 @@ export default function signUpGym(): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function submitHandler(e: any) {
     e.preventDefault();
+  const [discounts, setDiscounts] = useState<DiscountType[]>([]);
+  const discountName = useRef("");
+  const discountPers = useRef("");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function submitHandler(e: any) {
+    e.preventDefault();
 
     const newFitness: FitnessType = {
       name: e.target.name.value,
