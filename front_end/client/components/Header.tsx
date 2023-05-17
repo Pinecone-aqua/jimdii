@@ -47,7 +47,13 @@ export default function Header({ user, setUser }: HeaderType): JSX.Element {
 							<Link href={`/`}>Нүүр хуудас</Link>
 						</Dropdown.Item>
 						<Dropdown.Item>
-							<Link href={`/allFitness`}>Жийм</Link>
+							<Link
+								href={{
+									pathname: "/allFitness",
+									query: { page: 1 },
+								}}>
+								Жийм
+							</Link>
 						</Dropdown.Item>
 						<Dropdown.Divider />
 					</Dropdown>
@@ -68,7 +74,10 @@ export default function Header({ user, setUser }: HeaderType): JSX.Element {
 							Нүүр хуудас
 						</Link>
 						<Link
-							href={`/allFitness/1`}
+							href={{
+								pathname: "/allFitness",
+								query: { page: 1 },
+							}}
 							className="hover:text-main">
 							Жийм
 						</Link>

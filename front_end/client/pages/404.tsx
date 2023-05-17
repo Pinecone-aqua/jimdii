@@ -6,7 +6,7 @@ export default function Index() {
 
 	useEffect(() => {
 		setTimeout(() => {
-			router.back();
+			router.push("/");
 		}, 1500);
 	}, [router]);
 

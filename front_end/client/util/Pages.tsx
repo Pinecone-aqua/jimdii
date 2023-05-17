@@ -20,3 +20,12 @@ export const ProfileNavbar = [
 		icon: <BsClockHistory />,
 	},
 ];
+
+export const categoryDistrict = [
+	"Bayangol",
+	"Khan-uu",
+	"Bayanzurkh",
+	"Sukhbaatar",
+	"Songino-Khairkhan",
+	"Chingeltei",
+];

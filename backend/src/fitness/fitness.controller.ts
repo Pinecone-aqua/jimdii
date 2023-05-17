@@ -10,8 +10,10 @@ import {
   ParseFilePipe,
   UploadedFiles,
   BadRequestException,
+  Query,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { query } from 'express';
 
 @Controller('fitness')
 export class FitnessController {
@@ -27,10 +29,11 @@ export class FitnessController {
     }
   }
 
-  @Get('getAllFitness:page')
-  async getAllfitness(@Param('page') page: string) {
+  @Get('getAllFitness')
+  async getAllfitness(@Query() query) {
     try {
-      const result = await this.fitnessService.getAllfitness(page);
+      console.log(query);
+      const result = await this.fitnessService.getAllfitness(query);
       return result;
     } catch (err) {
       throw new BadRequestException(err.message);
@@ -59,9 +62,14 @@ export class FitnessController {
   }
 
   @Get('pages')
-  async getPages() {
-    const result = this.fitnessService.getPages();
-    return result;
+  async getPages(@Query() query: { category: string; search: string }) {
+    try {
+      const { category, search } = query;
+      const result = this.fitnessService.getPages(category, search);
+      return result;
+    } catch (err) {
+      throw new BadRequestException(err.message);
+    }
   }
 
   @Delete('delete:id')
