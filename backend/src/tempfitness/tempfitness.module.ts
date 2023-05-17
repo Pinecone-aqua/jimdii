@@ -7,7 +7,9 @@ import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'fitness', schema: tempFitnessSchema }]),
+    MongooseModule.forFeature([
+      { name: 'tempfitness', schema: tempFitnessSchema },
+    ]),
     CloudinaryModule,
   ],
 

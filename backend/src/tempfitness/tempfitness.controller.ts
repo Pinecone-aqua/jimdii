@@ -6,10 +6,11 @@ import {
   UseInterceptors,
   ParseFilePipe,
   UploadedFiles,
+  BadRequestException,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 
-@Controller('fitness')
+@Controller('tempfitness')
 export class tempFitnessController {
   constructor(private readonly fitnessService: tempFitnessService) {}
 
@@ -23,17 +24,14 @@ export class tempFitnessController {
     },
   ) {
     try {
-      const req = JSON.parse(body.body);
-      console.log(files.image[0].buffer);
-      console.log('body', req.name);
+      const res = JSON.parse(body.body);
 
-      const result = await this.fitnessService.addToCloudinary(
-        files.image,
-        files.image.length,
-      );
-      if (result.length === files.image.length) console.log(result);
+      const image = await this.fitnessService.addToCloudinary(files.image);
+      if (image.length === files.image.length) {
+        return await this.fitnessService.addTempFitness(res, image);
+      }
     } catch (err) {
-      console.log(err);
+      throw new BadRequestException(err.message);
     }
   }
 }

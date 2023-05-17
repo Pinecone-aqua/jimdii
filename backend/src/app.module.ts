@@ -6,6 +6,7 @@ import { FitnessModule } from './fitness/fitness.module';
 import { MembershipModule } from './membership/membership.module';
 import { GoogleLoginModule } from './google-login/google-login.module';
 import { CheckToken } from './middleware/checkToken';
+import { tempFitnessModule } from './tempfitness/tempfitness.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CheckToken } from './middleware/checkToken';
     FitnessModule,
     MembershipModule,
     GoogleLoginModule,
+    tempFitnessModule,
   ],
   controllers: [],
   providers: [CheckToken],
