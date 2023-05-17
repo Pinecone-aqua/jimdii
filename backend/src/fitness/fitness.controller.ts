@@ -11,9 +11,10 @@ import {
   UploadedFiles,
   BadRequestException,
   Query,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { query } from 'express';
 
 @Controller('fitness')
 export class FitnessController {
@@ -31,12 +32,12 @@ export class FitnessController {
 
   @Get('getAllFitness')
   async getAllfitness(@Query() query) {
-    try {
-      console.log(query);
-      const result = await this.fitnessService.getAllfitness(query);
+    const result = await this.fitnessService.getAllfitness(query);
+
+    if (result[0]) {
       return result;
-    } catch (err) {
-      throw new BadRequestException(err.message);
+    } else {
+      throw new HttpException('No fitness found', HttpStatus.NO_CONTENT);
     }
   }
 
