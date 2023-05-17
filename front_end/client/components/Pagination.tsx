@@ -19,8 +19,8 @@ export default function Pagination({
     try {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/pages/?category=${
-            category ? category : ""
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/pages?${
+            category ? `&category=${category}` : ""
           }&search=${search ? search : ""}`
         )
         .then((res) => setLastPage(res.data.length))
@@ -31,7 +31,6 @@ export default function Pagination({
   }, [category, search]);
 
   useEffect(() => {
-    console.log(router);
     if (!page) return;
     const pageNum = Number(page);
     // if (pageNum < 1 || pageNum > lastPage) router.push("1");
