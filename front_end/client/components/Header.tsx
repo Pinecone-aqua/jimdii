@@ -30,7 +30,7 @@ export default function Header(): JSX.Element {
     <header
       className={`${
         scrollY < 60 && router.asPath == "/"
-          ? "bg-black lg:bg-none z-50"
+          ? "lg:bg-transparent bg-black z-50"
           : "bg-black z-40"
       } sticky top-0 z-20 h-[120px] flex items-center transition ease-in text-main whitespace-nowrap`}
     >

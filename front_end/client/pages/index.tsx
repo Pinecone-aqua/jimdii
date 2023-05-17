@@ -22,7 +22,7 @@ export default function Home(props: PropsType) {
     // console.log("pageYoffset", pageYOffset, "scrollY", scrollY);
     setScrollY(window.pageYOffset);
   }, []);
-  
+
   useEffect(() => {
     window.addEventListener("scroll", onScroll, { passive: true });
     // remove event on unmount to prevent a memory leak with the cleanup
@@ -73,17 +73,17 @@ export default function Home(props: PropsType) {
           <p className="text-6xl font-bold px-10">Partners</p>
         </div>
         <div className="flex gap-3">
-          <div className="bg-main h-[120px] w-[120px] flex justify-center items-center">
-            <p className="text-lg font-bold">Naadam</p>
+          <div className="partner">
+            <p>Naadam</p>
           </div>
-          <div className="bg-main h-[120px] w-[120px] flex justify-center items-center">
-            <p className="text-lg font-bold">Gold's Gym</p>
+          <div className="partner">
+            <p>Gold's Gym</p>
           </div>
-          <div className="bg-main h-[120px] w-[120px] flex justify-center items-center">
-            <p className="text-lg font-bold">Olympus</p>
+          <div className="partner">
+            <p>Olympus</p>
           </div>
-          <div className="bg-main h-[120px] w-[120px] flex justify-center items-center">
-            <p className="text-lg font-bold">Uran Gan</p>
+          <div className="partner">
+            <p>Uran Gan</p>
           </div>
         </div>
       </section>
