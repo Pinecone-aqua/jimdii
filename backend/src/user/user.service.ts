@@ -28,7 +28,11 @@ export class UserService {
   }
 
   async updateUser(_id: string, user) {
-    return await this.userModel.findOneAndUpdate({ _id }, { ...user });
+    const result = await this.userModel.findOneAndUpdate({ _id }, { ...user });
+    if (result) {
+      return await this.userModel.findById({ _id: result._id });
+    }
+    return;
   }
 
   async removeUser(_id: string) {
