@@ -46,7 +46,7 @@ export default function Home(props: PropsType) {
             <Card fitness={fitness} key={index} />
           ))}
         </div>
-        <Link href={`/allFitness/1`}>
+        <Link href={{ pathname: "/allFitness", query: { page: 1 } }}>
           <button className="mainButton">Бүх жийм үзэх</button>
         </Link>
       </section>
