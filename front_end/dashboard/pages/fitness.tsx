@@ -31,6 +31,7 @@ export default function Fitness(props: { fitness: FitnessType[] }) {
           data.message
             ? setShowLoadMore(false)
             : setFitnesses([...fitnesses, ...data])
+
         );
     } catch (err) {
       console.log(err);

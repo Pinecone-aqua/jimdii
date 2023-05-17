@@ -39,17 +39,6 @@ export class UserController {
       console.log('token check');
     } catch (err) {
       throw new BadRequestException(err.message);
-      throw new BadRequestException(err.message);
-    }
-  }
-
-  @Get('checkToken')
-  @CheckRole('ADMIN')
-  async tokenChecker() {
-    try {
-      console.log('token check');
-    } catch (err) {
-      throw new BadRequestException(err.message);
     }
   }
 

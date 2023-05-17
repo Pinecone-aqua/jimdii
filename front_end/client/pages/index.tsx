@@ -22,7 +22,7 @@ export default function Home(props: PropsType) {
     // console.log("pageYoffset", pageYOffset, "scrollY", scrollY);
     setScrollY(window.pageYOffset);
   }, []);
-
+  
   useEffect(() => {
     window.addEventListener("scroll", onScroll, { passive: true });
     // remove event on unmount to prevent a memory leak with the cleanup

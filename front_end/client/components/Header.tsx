@@ -80,7 +80,6 @@ export default function Header(): JSX.Element {
             </Link>
           </nav>
         </div>
-
         <div className="w-1/10 sm:w-[15%] lg:w-1/10">
           {currentUser ? (
             <div className="flex items-center gap-10">

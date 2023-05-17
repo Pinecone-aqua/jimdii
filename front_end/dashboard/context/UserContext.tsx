@@ -9,22 +9,11 @@ import React, {
   useContext,
   useEffect,
   useState,
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
 } from "react";
 
 interface UserContextType {
   currentUser: UserType | null;
   logoutHandler: () => void;
-}
-
-const UserContext = createContext<UserContextType>({} as UserContextType);
-
-export function useUser() {
-  return useContext(UserContext);
 }
 
 const UserContext = createContext<UserContextType>({} as UserContextType);

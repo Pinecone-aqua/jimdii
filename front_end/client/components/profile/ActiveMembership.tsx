@@ -17,7 +17,7 @@ export default function Membership() {
           `${process.env.NEXT_PUBLIC_BACKEND_URL}membership/getMyMembership?filter=active`,
           {
             headers: { Authorization: token },
-          }
+          },
         )
         .then(({ data }) => setMemberships(data));
     } catch (err) {
