@@ -7,12 +7,12 @@ import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 @Injectable()
 export class tempFitnessService {
   constructor(
-    @InjectModel('fitness') private readonly fitnessModel: Model<tempFitness>,
+    @InjectModel('tempfitness')
+    private readonly fitnessModel: Model<tempFitness>,
     private readonly cloudinary: CloudinaryService,
   ) {}
 
-  async addToCloudinary(files, i: number): Promise<any> {
-    console.log(i);
+  async addToCloudinary(files): Promise<any> {
     const arr = [];
     await Promise.all(
       await files?.map(async (file) => {
@@ -22,5 +22,10 @@ export class tempFitnessService {
     );
 
     return arr;
+  }
+  async addTempFitness(body, image): Promise<any> {
+    const newfitness = new this.fitnessModel({ ...body, image });
+    newfitness.save();
+    return 'Successfully created';
   }
 }

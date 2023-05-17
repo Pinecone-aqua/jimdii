@@ -1,13 +1,15 @@
 import MainLogo from "@/components/subcomp/MainLogo";
 import { DiscountType, FitnessType } from "@/util/types";
+import axios from "axios";
 import React, { useRef, useState } from "react";
 
-export default function signUpGym(): JSX.Element {
+export default function SignUpGym(): JSX.Element {
   const [discounts, setDiscounts] = useState<DiscountType[]>([]);
+  const [statusMessage, setStatusMessage] = useState<number | null>(null);
   const discountName = useRef("");
   const discountPers = useRef("");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function submitHandler(e: any) {
+  async function submitHandler(e: any) {
     e.preventDefault();
   const [discounts, setDiscounts] = useState<DiscountType[]>([]);
   const discountName = useRef("");
@@ -16,13 +18,12 @@ export default function signUpGym(): JSX.Element {
   function submitHandler(e: any) {
     e.preventDefault();
 
-    const newFitness: FitnessType = {
+    const newFitness = {
       name: e.target.name.value,
       description: e.target.description.value,
       price: {
         oneMonth: e.target.oneMonth.value,
         year: e.target.year.value,
-        onetime: e.target.onetime.value,
       },
       address: {
         district: e.target.districts.value,
@@ -48,17 +49,32 @@ export default function signUpGym(): JSX.Element {
         phonenumber: e.target.phonenumber.value,
         social: e.target.social.value,
       },
-      image: [""],
     };
     console.log(newFitness);
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/addFitness`, {
+    const files: File[] = e.target.file.files;
 
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newFitness),
-    });
+    const data = new FormData();
+    Array.from(files).forEach((file) => data.append("image", file));
+
+    data.append("newFitness", JSON.stringify(newFitness));
+
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}tempfitness/addtempFitness`,
+      data,
+    );
+    if (res.status === 200) {
+      setStatusMessage(200);
+    } else {
+      setStatusMessage(res.status);
+    }
+
+    // fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/addtempFitness`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(newFitness),
+    // });
 
     // fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/addFitness`, {
     //   headers: { "Content-Type": "application/json" },
@@ -186,6 +202,9 @@ export default function signUpGym(): JSX.Element {
                     id="input_Style"
                   />
                 </div>
+              </label>
+              <label className="w-full">
+                <input type="file" name="file" multiple />
               </label>
               <label className="w-full">
                 <h2>ХӨНГӨЛӨЛТ :</h2>
