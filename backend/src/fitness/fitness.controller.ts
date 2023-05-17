@@ -46,7 +46,6 @@ export class FitnessController {
     try {
       const num = Number(limit);
       const result = await this.fitnessService.getSomeFitness(num);
-
       if (result) {
         if (result[0]) return result;
         return { message: 'no more data to fetch' };

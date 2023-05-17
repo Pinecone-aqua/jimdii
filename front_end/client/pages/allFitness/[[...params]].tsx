@@ -4,7 +4,6 @@ import Pagination from "@/components/Pagination";
 import Search from "@/components/Search";
 import { FitnessType } from "@/util/types";
 import axios from "axios";
-import { useRouter } from "next/router";
 
 export default function AllFitness({
   data: fitnesses,
@@ -13,17 +12,13 @@ export default function AllFitness({
   data: FitnessType[];
   status: number;
 }) {
-  const router = useRouter();
-
-  console.log("qeury", router.query);
-
   return status >= 300 ? (
     <div className="min-h-screen bg-black text-2xl text-white flex justify-center items-center">
       Something went wrond
     </div>
   ) : (
     <div className="min-h-screen allFitness bg-black">
-      <div className="container mx-auto p-5">
+      <div className="container mx-auto  p-4">
         <div className="text-white">
           <h2 className="text-center text-[30px] sm:text-[38px] pt-[50px]">
             Gym
@@ -37,14 +32,20 @@ export default function AllFitness({
             equipment and machines are typically used.
           </p>
         </div>
-        <div className="flex p-4">
+        <div className="flex p-4 flex-col md:flex-row">
           <Category pathname={"/allFitness"} />
           <Search pathname={"/allFitness"} />
         </div>
-        <div className="bg-black m-2 flex flex-col items-center justify-center">
-          {fitnesses.map((fitness: FitnessType, index: number) => (
-            <AllCard fitness={fitness} key={index} />
-          ))}
+        <div className="bg-black gap-5 flex flex-col justify-center w-full lg:w-2/3 mx-auto">
+          {status === 204 ? (
+            <div className="text-white w-full text-center text-2xl">
+              No fitness found
+            </div>
+          ) : (
+            fitnesses.map((fitness: FitnessType, index: number) => (
+              <AllCard fitness={fitness} key={index} />
+            ))
+          )}
         </div>
         <Pagination pathname={"/allFitness"} />
       </div>
@@ -59,7 +60,9 @@ export async function getServerSideProps(context: { query: any }) {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}fitness/getAllFitness?page=${
         query?.page
-      }&category=${query.category ? query.category : ""}`
+      }${query.category ? `&category=${query.category}` : ""}&search=${
+        query.search ? query.search : ""
+      }`
     );
     if (res.status == 200) {
       return {

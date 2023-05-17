@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Fitness } from './fitness.model';
@@ -27,13 +27,23 @@ export class FitnessService {
   async getAllfitness(query): Promise<any> {
     const { page, category, search } = query;
     const num = Number(page);
+    if (category) {
+      const allFitness = await this.fitnessModel
+        .find({
+          'address.district': category,
+          name: { $regex: new RegExp(search, 'i') },
+        })
+        .select({ _id: 1, name: 1, image: 1, price: 1 })
+        .skip((num - 1) * 8)
+        .limit(10);
+      return allFitness;
+    }
     const allFitness = await this.fitnessModel
       .find({
-        'address.district': category,
         name: { $regex: new RegExp(search, 'i') },
       })
       .select({ _id: 1, name: 1, image: 1, price: 1 })
-      .skip((num - 1) * 10)
+      .skip((num - 1) * 8)
       .limit(10);
     return allFitness;
   }
@@ -44,13 +54,19 @@ export class FitnessService {
 
   async getPages(category: string, search: string): Promise<any> {
     const pages = [];
-    console.log(category, 'space');
-    const result = await this.fitnessModel.find({
-      'address.district': category,
-      name: { $regex: new RegExp(search, 'i') },
-    });
+    let result = [];
+    if (category) {
+      result = await this.fitnessModel.find({
+        'address.district': category,
+        name: { $regex: new RegExp(search, 'i') },
+      });
+    } else {
+      result = await this.fitnessModel.find({
+        name: { $regex: new RegExp(search, 'i') },
+      });
+    }
 
-    for (let i = 1; i <= Math.ceil(result.length / 10); i++) {
+    for (let i = 1; i <= Math.ceil(result.length / 8); i++) {
       pages.push(i.toString());
     }
     return pages;
