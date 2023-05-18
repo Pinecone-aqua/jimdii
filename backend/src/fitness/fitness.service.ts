@@ -20,7 +20,7 @@ export class FitnessService {
     return await this.fitnessModel
       .find()
       .skip(num)
-      .limit(4)
+      .limit(8)
       .select({ name: 1, _id: 1, image: 1, price: 1 });
   }
 
