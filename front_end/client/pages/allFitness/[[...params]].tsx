@@ -20,7 +20,7 @@ export default function AllFitness({
 			<ShowReload />
 		</div>
 	) : (
-		<div className="min-h-screen allFitness bg-black">
+		<div className="min-h-screen allFitness">
 			<div className="container mx-auto  p-4">
 				<div className="text-white">
 					<h2 className="text-center text-[30px] sm:text-[38px] pt-[50px]">
