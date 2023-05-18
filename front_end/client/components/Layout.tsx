@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 // import jwtDecode from "jwt-decode";
 import { useRouter } from "next/router";
 import Header from "./Header";
+import { ToastContainer } from "react-toastify";
 
 type PropType = {
   children: ReactNode;
@@ -36,7 +37,10 @@ export default function Layout({ children }: PropType) {
       </Head>
 
       <Header />
-      <main>{children}</main>
+      <main className="relative">
+        {children}
+        <ToastContainer />
+      </main>
     </div>
   );
 }
