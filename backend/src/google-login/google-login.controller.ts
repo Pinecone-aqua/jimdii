@@ -81,7 +81,11 @@ export class GoogleLoginController {
     if (user.role === 'CLIENT') {
       res
         .status(200)
-        .cookie('token', token)
+        .cookie('token', token, {
+          httpOnly: false,
+          secure: true,
+          sameSite: 'strict',
+        })
         .redirect(`${process.env.CLIENT_PORT}`);
     } else {
       res
