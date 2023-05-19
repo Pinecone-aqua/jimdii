@@ -44,7 +44,7 @@ export class GoogleLoginController {
   async verifyGoogle(@Req() req: Request, @Res() res: Response) {
     const { code } = req.query;
 
-    console.log('google callback');
+    console.log('google callback', code);
 
     if (!code) throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
 
@@ -85,13 +85,9 @@ export class GoogleLoginController {
     console.log('token', token);
 
     if (user.role === 'CLIENT') {
-      res
-        .cookie('token', token, { httpOnly: true, secure: true })
-        .redirect(`${process.env.CLIENT_PORT}`);
+      res.redirect(`${process.env.CLIENT_PORT}?token=${token}`);
     } else {
-      res
-        .cookie('aToken', token, { httpOnly: true, secure: true })
-        .redirect(`${process.env.ADMIN_PORT}`);
+      res.redirect(`${process.env.ADMIN_PORT}?token=${token}`);
     }
   }
 }
