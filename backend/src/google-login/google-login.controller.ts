@@ -78,6 +78,8 @@ export class GoogleLoginController {
     };
     const token = this.jwtService.sign(payload);
 
+    console.log('token', token);
+
     if (user.role === 'CLIENT') {
       res
         .status(200)
