@@ -82,9 +82,10 @@ export class GoogleLoginController {
       res
         .status(200)
         .cookie('token', token, {
-          httpOnly: false,
+          domain: '*.jimdii.vercel.app',
+          httpOnly: true,
           secure: true,
-          sameSite: 'strict',
+          sameSite: 'lax',
         })
         .redirect(`${process.env.CLIENT_PORT}`);
     } else {
