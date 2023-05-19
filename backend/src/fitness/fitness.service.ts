@@ -21,30 +21,29 @@ export class FitnessService {
       .find()
       .skip(num)
       .limit(8)
-      .select({ name: 1, _id: 1, image: 1, price: 1 });
+      .select({ name: 1, _id: 1, image: { $slice: 1 }, price: 1 });
   }
 
   async getAllfitness(query): Promise<any> {
     const { page, category, search } = query;
     const num = Number(page);
-    if (category) {
+    if (!(category && search)) {
       const allFitness = await this.fitnessModel
-        .find({
-          'address.district': category,
-          name: { $regex: new RegExp(search, 'i') },
-        })
-        .select({ _id: 1, name: 1, image: 1, price: 1 })
+        .find({})
+        .select({ _id: 1, name: 1, image: { $slice: 1 }, price: 1 })
         .skip((num - 1) * 8)
-        .limit(10);
+        .limit(8);
       return allFitness;
     }
+
     const allFitness = await this.fitnessModel
       .find({
+        'address.district': category,
         name: { $regex: new RegExp(search, 'i') },
       })
-      .select({ _id: 1, name: 1, image: 1, price: 1 })
+      .select({ _id: 1, name: 1, image: { $slice: 1 }, price: 1 })
       .skip((num - 1) * 8)
-      .limit(10);
+      .limit(8);
     return allFitness;
   }
 
