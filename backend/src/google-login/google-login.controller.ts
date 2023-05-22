@@ -24,6 +24,8 @@ export class GoogleLoginController {
 
   @Get('google-login')
   googleLogin() {
+    console.log('google-login');
+
     const stringifiedParams = queryString.stringify({
       client_id: process.env.CLIENT_ID,
       redirect_uri: `${process.env.BACKEND_URL}/google/callback`,
@@ -41,6 +43,8 @@ export class GoogleLoginController {
   @Get('google/callback')
   async verifyGoogle(@Req() req: Request, @Res() res: Response) {
     const { code } = req.query;
+
+    console.log('google callback', code);
 
     if (!code) throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
 
@@ -78,20 +82,12 @@ export class GoogleLoginController {
     };
     const token = this.jwtService.sign(payload);
 
+    console.log('token', token);
+
     if (user.role === 'CLIENT') {
-      res
-        .status(200)
-        .cookie('token', token, {
-          httpOnly: false,
-          secure: true,
-          sameSite: 'strict',
-        })
-        .redirect(`${process.env.CLIENT_PORT}`);
+      res.redirect(`${process.env.CLIENT_PORT}?token=${token}`);
     } else {
-      res
-        .status(200)
-        .cookie('aToken', token)
-        .redirect(`${process.env.ADMIN_PORT}`);
+      res.redirect(`${process.env.ADMIN_PORT}?token=${token}`);
     }
   }
 }
