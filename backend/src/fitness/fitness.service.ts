@@ -27,9 +27,9 @@ export class FitnessService {
   async getAllfitness(query): Promise<any> {
     const { page, category, search } = query;
     const num = Number(page);
-    if (!(category && search)) {
+    if (!category) {
       const allFitness = await this.fitnessModel
-        .find({})
+        .find({ name: { $regex: new RegExp(search, 'i') } })
         .select({ _id: 1, name: 1, image: { $slice: 1 }, price: 1 })
         .skip((num - 1) * 8)
         .limit(8);
