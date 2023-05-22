@@ -1,32 +1,13 @@
 import Head from "next/head";
-import React, { ReactNode, useEffect } from "react";
-import Cookies from "js-cookie";
-
-import { useRouter } from "next/router";
+import React, { ReactNode } from "react";
 import Header from "./Header";
 import { ToastContainer } from "react-toastify";
-import { useUser } from "@/context/UserContext";
-import jwtDecode from "jwt-decode";
 
 type PropType = {
   children: ReactNode;
 };
 
 export default function Layout({ children }: PropType) {
-  const token = Cookies.get("token");
-  const router = useRouter();
-  const { setCurrentUser } = useUser();
-
-  useEffect(() => {
-    if (router.query.token) {
-      router.replace("/");
-      Cookies.set("token", `${router.query.token}`);
-      setCurrentUser(jwtDecode(`${router.query.token}`));
-    }
-    const token = Cookies.get("token");
-    if (!token && router.asPath === "/profile") router.push("/login");
-  }, [router, token]);
-
   return (
     <div>
       <Head>
