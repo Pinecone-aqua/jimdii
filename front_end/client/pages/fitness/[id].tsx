@@ -48,6 +48,16 @@ export default function SingleGym({
   const [disabled, setDisabled] = useState<Array<string | number>>();
   const [total, setTotal] = useState<string[]>();
 
+  function bookingHandler() {
+    onOpen();
+    const token = Cookies.get("token");
+    if (token) {
+      onOpen();
+    } else {
+      router.push("/login");
+    }
+  }
+
   function submitHandler() {
     onClose();
     const token = Cookies.get("token");
@@ -159,9 +169,7 @@ export default function SingleGym({
               <ContactInfo contact={fitness.contact} />
 
               <button
-                onClick={() => {
-                  onOpen();
-                }}
+                onClick={bookingHandler}
                 className="px-4 py-2 bg-main rounded-lg"
               >
                 Бүртгүүлэх
