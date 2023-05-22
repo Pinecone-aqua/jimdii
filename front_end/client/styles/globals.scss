@@ -36,6 +36,9 @@
   color: white;
 }
 .specialCarousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 580px;
   width: 80%;
   padding: 0 40px;
@@ -128,16 +131,22 @@ body {
 //     display: none;
 //   }
 // }
-
+#inputStyle {
+  border-bottom: 1px solid white;
+  transition: 0.4;
+}
 #input_Style {
-  background-color: white;
+  background-color: black;
+  border-bottom: 1px solid white;
   transition: 0.4;
   margin-bottom: 10px;
-  border: none;
-  border-radius: 21px;
-  border-bottom: 1px solid white;
 }
 #input_Style:focus {
+  outline: none;
+  border-bottom: 1px solid #4d9799;
+  transition: 0.4;
+}
+#inputStyle:focus {
   outline: none;
   border-bottom: 1px solid #4d9799;
   transition: 0.4;

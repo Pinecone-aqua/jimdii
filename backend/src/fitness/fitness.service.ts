@@ -21,7 +21,7 @@ export class FitnessService {
       .find()
       .skip(num)
       .limit(8)
-      .select({ name: 1, _id: 1, image: { $slice: 1 }, price: 1 });
+      .select({ name: 1, _id: 1, image: { $slice: 1 }, price: 1, address: 1 });
   }
 
   async getAllfitness(query): Promise<any> {
