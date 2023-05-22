@@ -36,6 +36,9 @@
   color: white;
 }
 .specialCarousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 580px;
   width: 80%;
   padding: 0 40px;
@@ -137,7 +140,6 @@ body {
   border-bottom: 1px solid white;
   transition: 0.4;
   margin-bottom: 10px;
->>>>>>> Stashed changes
 }
 #input_Style:focus {
   outline: none;
@@ -148,7 +150,6 @@ body {
   outline: none;
   border-bottom: 1px solid #4d9799;
   transition: 0.4;
->>>>>>> Stashed changes
 }
 .membership::before {
   z-index: -1;

@@ -13,10 +13,10 @@ export default function Card(props: PropsType): JSX.Element {
 
   return (
     <div className=" mx-auto w-fit border border-white rounded-xl">
-      <div className="w-[300px] h-[500px] rounded-xl">
+      <div className="sm:w-[200px] sm:h-[360px] lg:w-[240px] lg:h-[400px] 2xl:w-[280px] 2xl:h-[500px] xl:w-[230px] xl:h-[450px]  rounded-xl">
         <div className="c-card block bg-black shadow-md hover:shadow-xl overflow-hidden rounded-xl">
           <Link href={`/fitness/${fitness._id}`}>
-            <div className="relative pb-48 overflow-hidden ">
+            <div className="relative pb-32 sm:pb-28 lg:pb-32 2xl:pb-48 xl:pb-40  overflow-hidden ">
               <Image
                 src={fitness.image[0]}
                 alt={fitness.name}
@@ -26,36 +26,28 @@ export default function Card(props: PropsType): JSX.Element {
               />
             </div>
           </Link>
-          <div className="p-4 text-white">
+          <div className="p-4 sm:px-4 sm:py-2 text-white">
             <span className="inline-block px-2 py-1 leading-none bg-main text-white rounded-full font-semibold uppercase tracking-wide text-xs">
               Онцлох
             </span>
-            <h2 className="mt-2 mb-2 font-bold text-main">{fitness.name}</h2>
+            <h2 className="mt-2 mb-2 sm:text-sm font-bold text-main">
+              {fitness.name}
+            </h2>
 
-            <div className="mt-3 flex items-center">
-              <span className="text-xl font-semibold">
+            <div className="mt-3 sm:mt-1 lg:mt-2 flex items-center">
+              <span className="text-xl sm:text-sm lg:text-lg font-semibold">
                 {fitness.price?.oneMonth}₮
               </span>
-              {/* <span className="text-sm font-semibold">ab</span>&nbsp;
-                <span className="font-bold text-xl">45,00</span>&nbsp;
-                <span className="text-sm font-semibold">€</span> */}
             </div>
           </div>
-          <div className="p-2 border-t border-b border-black text-xs text-white">
+          <div className="p-2 sm:h-[70px] sm:px-2 sm:py-2 border-t border-b border-black text-xs text-white">
             <span className="flex items-center">
               <i className="far fa-clock fa-fw mr-2 text-gray-900"></i>
               {fitness.address?.description}
             </span>
-            {/* <span className="flex items-center">
-              <i className="far fa-address-card fa-fw text-gray-900 mr-2"></i>{" "}
-              Ermäßigung mit Karte
-            </span> */}
           </div>
-          {/* <div className="p-4 flex items-center text-sm text-gray-600">
-              <span className="ml-2">34 Bewertungen</span>
-            </div> */}
           <Link href={`/fitness/${fitness._id}`}>
-            <button className="bg-main w-[132px] h-[40px] my-9 text-white font-extralight rounded-r-xl">
+            <button className="bg-main w-[132px] h-[40px] my-9 lg:my-7 sm:my-4 text-white font-extralight rounded-r-xl">
               Дэлгэрэнгүй
             </button>
           </Link>
