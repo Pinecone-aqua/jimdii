@@ -15,33 +15,6 @@
 
 * {
   box-sizing: border-box;
-<<<<<<< Updated upstream
-=======
-}
-
-.c-card {
-  img {
-    transition: transform 0.3s ease-in-out;
-  }
-
-  &:hover {
-    img {
-      transform: scale(1.05);
-    }
-  }
->>>>>>> Stashed changes
-}
-
-.c-card {
-  img {
-    transition: transform 0.3s ease-in-out;
-  }
-
-  &:hover {
-    img {
-      transform: scale(1.05);
-    }
-  }
 }
 
 .slick-prev::before,
@@ -155,16 +128,6 @@ body {
 //     display: none;
 //   }
 // }
-<<<<<<< Updated upstream
-
-#input_Style {
-  background-color: white;
-  transition: 0.4;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 21px;
-  border-bottom: 1px solid white;
-=======
 #inputStyle {
   border-bottom: 1px solid white;
   transition: 0.4;
@@ -177,11 +140,9 @@ body {
 >>>>>>> Stashed changes
 }
 #input_Style:focus {
-  outline: none;
-  border-bottom: 1px solid #4d9799;
-  transition: 0.4;
-<<<<<<< Updated upstream
-=======
+	outline: none;
+	border-bottom: 1px solid #4d9799;
+	transition: 0.4;
 }
 #inputStyle:focus {
   outline: none;
