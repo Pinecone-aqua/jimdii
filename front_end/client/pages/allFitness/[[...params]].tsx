@@ -35,7 +35,7 @@ export default function AllFitness({
             equipment and machines are typically used.
           </p>
         </div>
-        <div className="flex p-4 flex-col md:flex-row">
+        <div className="w-[70%] mx-auto flex p-4 flex-col md:flex-row">
           <Category pathname={"/allFitness"} />
           <Search pathname={"/allFitness"} />
         </div>
@@ -65,7 +65,7 @@ export async function getServerSideProps(context: { query: any }) {
         query?.page
       }${query.category ? `&category=${query.category}` : ""}&search=${
         query.search ? query.search : ""
-      }`
+      }`,
     );
     if (res.status == 200) {
       return {

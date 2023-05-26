@@ -5,17 +5,17 @@ import MainResLogo from "./subcomp/MainResLogo";
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className="h-[320px] bg-black">
+    <footer className="h-fit bg-black">
       <div className="w-[70%] mx-auto py-5 h-full flex flex-col justify-between">
-        <div className="lg:flex">
-          <div className="w-1/3 py-5">
+        <div className="md:flex flex-wrap justify-start">
+          <div className="w-full md:w-1/3 py-5">
             <div>
               <MainResLogo />
             </div>
             <h3 className="text-2xl pt-3">Pinecone Academy 2023</h3>
           </div>
-          <div className="w-1/3 flex justify-between">
-            <div className="text-center">
+          <div className="w-2/3 lg:w-[550px] flex justify-between gap-[30px] lg:gap-5">
+            <div className="text-center ">
               <picture>
                 <img
                   src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
@@ -27,9 +27,9 @@ export default function Footer(): JSX.Element {
                 Batsukh
               </h5>
               <p className="text-neutral-500 dark:text-neutral-400">
-                Web developer
+                Full Stack developer
               </p>
-              <div className="pt-3 flex justify-between text-2xl">
+              <div className="pt-3 flex justify-between text-sm md:text-2xl">
                 <Link href={`https://www.facebook.com/Batsukh.Da`}>
                   <BsFacebook />
                 </Link>
@@ -47,9 +47,9 @@ export default function Footer(): JSX.Element {
               </picture>
               <h5 className="mb-2 text-xl font-medium leading-tight">Murun</h5>
               <p className="text-neutral-500 dark:text-neutral-400">
-                Web developer
+                Full Stack developer
               </p>
-              <div className="pt-3 flex justify-between text-2xl">
+              <div className="pt-3 flex justify-between text-sm md:text-2xl">
                 <Link href={`https://www.facebook.com/nuuz.az`}>
                   <BsFacebook />
                 </Link>
@@ -60,16 +60,16 @@ export default function Footer(): JSX.Element {
             <div className="text-center">
               <picture>
                 <img
-                  src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
+                  src="https://cdn.discordapp.com/attachments/1087955956832407612/1111125788364902400/IMG_2609.jpg"
                   className="mx-auto mb-4 w-20 rounded-lg"
                   alt="Avatar"
                 />
               </picture>
               <h5 className="mb-2 text-xl font-medium leading-tight">Jamie</h5>
               <p className="text-neutral-500 dark:text-neutral-400">
-                Web developer
+                Full Stack developer
               </p>
-              <div className="pt-3 flex justify-between text-2xl">
+              <div className="pt-3 flex justify-between text-sm md:text-2xl">
                 <Link href={`https://www.facebook.com/ochirjamia`}>
                   <BsFacebook />
                 </Link>
@@ -78,19 +78,20 @@ export default function Footer(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="mx-auto">
+          <div className="mx-auto lg:mx-0 inline lg:flex justify-center">
             <Link href={`/signUpGym`}>
-              <div className="w-[250px] flex justify-center items-center bg-main border h-[40px] text-black border-none rounded-lg">
+              <div className="w-[250px] flex justify-center items-center bg-main border h-[40px] text-black border-none rounded-lg mt-4">
                 Gym-ээ бүртгүүлэх
               </div>
             </Link>
           </div>
         </div>
-        <div className="flex justify-between">
-          <div className="w-1/2">
-            © 2023 by Jimdii. Powered and secured by Pinecone Aqua Team
+        <div className="md:flex justify-between mt-5">
+          <div className="mb-3 md:w-1/2 text-sm lg:text-xl">
+            © Copyright by Jimdii 2023. Powered and secured by Pinecone Aqua
+            Team
           </div>
-          <div className="w-1/2 flex gap-[40px]">
+          <div className="md:w-1/2 flex justify-center gap-[20px] md:gap-[30px] text-sm md:text-sm">
             <p>Privacy Policy</p>
             <p>Terms & Conditions</p>
           </div>
